@@ -178,7 +178,7 @@ return {
                 sync = {
                     open = true,
                     close = true,
-                    ignore = {},
+                    ignore = { "DiffviewFiles" },
                 },
             },
             notify = {
