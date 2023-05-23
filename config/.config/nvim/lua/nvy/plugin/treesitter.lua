@@ -3,8 +3,6 @@ return {
     name = "Treesitter",
     build = ":TSUpdate",
     dependencies = {
-        { "windwp/nvim-ts-autotag" },
-        { "RRethy/nvim-treesitter-endwise" },
         { "nvim-treesitter/nvim-treesitter-textobjects" },
         { "JoosepAlviste/nvim-ts-context-commentstring" },
     },
@@ -61,12 +59,6 @@ return {
         context_commentstring = {
             enable = true,
         },
-        autotag = {
-            enable = true,
-        },
-        endwise = {
-            enable = true,
-        },
         textobjects = {
             select = {
                 enable = true,
@@ -80,7 +72,7 @@ return {
                 },
                 selection_modes = {
                     ['@parameter.outer'] = 'v', -- charwise
-                    ['@function.outer'] = 'V', -- linewise
+                    ['@function.outer'] = 'V',  -- linewise
                     ['@class.outer'] = '<c-v>', -- blockwise
                 },
                 include_surrounding_whitespace = true,

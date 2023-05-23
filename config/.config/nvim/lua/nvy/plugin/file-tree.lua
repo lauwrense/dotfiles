@@ -134,7 +134,7 @@ return {
                 vim.keymap.set("n", "yy", mark_copy, opts("Copy File(s)"))
 
 
-                vim.keymap.set("n", "<leader>ft", api.tree.close, { remap = true, silent = true })
+                vim.keymap.set("n", "<leader>ftt", api.tree.close, { remap = true, silent = true })
                 vim.api.nvim_create_autocmd("QuitPre", {
                     callback = function()
                         local invalid_win = {}
