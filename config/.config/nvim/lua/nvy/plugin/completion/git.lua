@@ -1,7 +1,7 @@
 return {
     { "petertriho/cmp-git" },
     { "davidsierradz/cmp-conventionalcommits" },
-    ft = { "gitcommit", "octo" },
+    ft = { "neogitgitcommitmessage", "gitcommit", "octo" },
     config = function()
         require("cmp").setup.buffer({
             sources = require("cmp").config.sources(

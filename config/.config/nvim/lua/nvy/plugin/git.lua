@@ -3,6 +3,7 @@ return {
     { "sindrets/diffview.nvim",  config = true },
     {
         "TimUntersberger/neogit",
+        cmd = "Neogit",
         config = function()
             require("neogit").setup({
                 integrations = {
