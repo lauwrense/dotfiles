@@ -347,6 +347,27 @@ return {
                 Space
             }
 
+            local LSPActive = {
+                condition = conditions.lsp_attached,
+                update = { "LspAttach", "LspDetach" },
+                {
+                    provider = " LSP ~ ",
+                    hl = { fg = "orange", bg = "bg", bold = true },
+                },
+                {
+                    provider = function()
+                        local names = {}
+                        for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+                            table.insert(names, server.name)
+                        end
+                        return table.concat(names, " ")
+                    end,
+                    hl = { fg = "green", bg = "bg", bold = true },
+                },
+                Space,
+                LeftSep,
+            }
+
             local Ruler = {
                 { provider = " %(%l/%L%):%2c " },
                 hl = {
@@ -406,6 +427,7 @@ return {
                 Git,
                 Align,
                 Diagnostics,
+                LSPActive,
                 FileEncoding,
                 FileType,
                 Ruler,
