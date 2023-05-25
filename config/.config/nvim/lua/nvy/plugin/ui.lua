@@ -347,27 +347,6 @@ return {
                 Space
             }
 
-            local LSPActive = {
-                condition = conditions.lsp_attached,
-                update = { "LspAttach", "LspDetach" },
-                {
-                    provider = " LSP ~ ",
-                    hl = { fg = "orange", bg = "bg", bold = true },
-                },
-                {
-                    provider = function()
-                        local names = {}
-                        for i, server in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
-                            table.insert(names, server.name)
-                        end
-                        return table.concat(names, " ")
-                    end,
-                    hl = { fg = "green", bg = "bg", bold = true },
-                },
-                Space,
-                LeftSep,
-            }
-
             local Ruler = {
                 { provider = " %(%l/%L%):%2c " },
                 hl = {
@@ -418,72 +397,6 @@ return {
                 hl = { fg = "blue", bold = true },
             }
 
-            local DAPMessages = {
-                condition = function()
-                    if not pcall(require, "dap") then return end
-                    local session = require("dap").session()
-                    return session ~= nil
-                end,
-                provider = function()
-                    return " " .. require("dap").status() .. " "
-                end,
-                hl = "Debug",
-                {
-                    provider = "",
-                    on_click = {
-                        callback = function()
-                            require("dap").step_into()
-                        end,
-                        name = "heirline_dap_step_into",
-
-                    },
-                },
-
-                { provider = " " },
-                {
-                    provider = "",
-                    on_click = {
-                        callback = function()
-                            require("dap").step_out()
-                        end,
-
-                        name = "heirline_dap_step_out",
-                    },
-                },
-                { provider = " " },
-                {
-                    provider = " ",
-                    on_click = {
-                        callback = function()
-                            require("dap").step_over()
-                        end,
-                        name = "heirline_dap_step_over",
-                    },
-                },
-                { provider = " " },
-                {
-                    provider = "ﰇ",
-                    on_click = {
-                        callback = function()
-                            require("dap").run_last()
-                        end,
-                        name = "heirline_dap_run_last",
-                    },
-                },
-                { provider = " " },
-                {
-                    provider = "",
-                    on_click = {
-                        callback = function()
-                            require("dap").terminate()
-                            require("dapui").close({})
-                        end,
-                        name = "heirline_dap_close",
-
-                    },
-                },
-                { provider = " " },
-            }
 
             local DefaultStatusline = {
                 ViModeName,
@@ -492,10 +405,7 @@ return {
                 Space,
                 Git,
                 Align,
-                DAPMessages,
-                Align,
                 Diagnostics,
-                LSPActive,
                 FileEncoding,
                 FileType,
                 Ruler,
