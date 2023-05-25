@@ -1,6 +1,7 @@
 return {
-    { "petertriho/cmp-git" },
-    { "davidsierradz/cmp-conventionalcommits" },
+    "petertriho/cmp-git",
+    "davidsierradz/cmp-conventionalcommits",
+    event = "VeryLazy",
     ft = { "neogitgitcommitmessage", "gitcommit", "octo" },
     config = function()
         require("cmp").setup.buffer({
