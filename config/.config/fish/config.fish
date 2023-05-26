@@ -4,6 +4,7 @@ end
 
 fish_vi_key_bindings
 set -gx EDITOR nvim
+set -g fish_autosuggestion_enabled 0
 
 # Remove underlines
 set fish_color_valid_path
