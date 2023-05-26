@@ -133,8 +133,6 @@ return {
                 vim.keymap.set("n", "dF", mark_remove, opts("Remove File(s)"))
                 vim.keymap.set("n", "yy", mark_copy, opts("Copy File(s)"))
 
-
-                vim.keymap.set("n", "<leader>ftt", api.tree.close, { remap = true, silent = true })
                 vim.api.nvim_create_autocmd("QuitPre", {
                     callback = function()
                         local invalid_win = {}
@@ -193,15 +191,7 @@ return {
         }
 
         local api = require('nvim-tree.api')
-        local function open_or_focus_tree()
-            if api.tree.is_visible() then
-                api.tree.focus()
-            else
-                api.tree.open()
-            end
-        end
 
-        vim.keymap.set("n", "<leader>ftt", api.tree.toggle, { remap = true, silent = true })
-        vim.keymap.set("n", "<leader>ftf", open_or_focus_tree, { remap = true, silent = true })
+        vim.keymap.set("n", "<leader>ft", api.tree.toggle, { remap = true, silent = true })
     end
 }
