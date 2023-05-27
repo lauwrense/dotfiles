@@ -55,21 +55,9 @@ return {
             },
         }
 
-        local TelescopeKeymaps = {}
-
-        TelescopeKeymaps.find_files = function()
-            builtin.find_files({
-                layout_config = {
-                    preview_width = 0.6,
-                    preview_cutoff = 50,
-                },
-            })
-        end
 
         require("telescope").setup(telescope_config)
         require("telescope").load_extension("fzf")
         require("telescope").load_extension("heading")
-
-        vim.keymap.set("n", "<leader>ff", TelescopeKeymaps.find_files, { remap = true })
     end,
 }

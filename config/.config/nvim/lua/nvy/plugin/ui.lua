@@ -27,6 +27,7 @@ return {
             },
         },
     },
+    { "rcarriga/nvim-notify" },
 
     {
         "lukas-reineke/indent-blankline.nvim",
