@@ -9,6 +9,8 @@ return {
         { "FelipeLema/cmp-async-path" },
         { "kdheepak/cmp-latex-symbols" },
         { "hrsh7th/cmp-cmdline" },
+        { "petertriho/cmp-git" },
+        { "davidsierradz/cmp-conventionalcommits" },
         {
             "L3MON4D3/LuaSnip",
             version = "1.*",
@@ -143,6 +145,8 @@ return {
             { name = "latex_symbols" },
             { name = "buffer" },
             { name = "async_path" },
+            { name = "git" },
+            { name = 'conventionalcommits' },
         })
 
         -- Setting up cmp for Command mode
@@ -189,6 +193,7 @@ return {
 
         -- Setup up cmp
         cmp.setup(cmp_config)
+        require("cmp_git").setup({})
 
         -- Load snippets
         require("luasnip.loaders.from_vscode").lazy_load()

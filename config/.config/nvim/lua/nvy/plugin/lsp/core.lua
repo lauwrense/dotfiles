@@ -3,7 +3,7 @@ return {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
         dependencies = {
-            { "hrsh7th/cmp-nvim-lsp", priority = 1000, lazy = false },
+            { "hrsh7th/cmp-nvim-lsp",             priority = 1000, lazy = false },
             { "williamboman/mason-lspconfig.nvim" },
             { "neovim/nvim-lspconfig" },
             { "jay-babu/mason-null-ls.nvim" },
