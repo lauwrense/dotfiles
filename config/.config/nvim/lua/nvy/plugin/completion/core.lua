@@ -10,7 +10,7 @@ return {
         { "kdheepak/cmp-latex-symbols" },
         { "hrsh7th/cmp-cmdline" },
         { "petertriho/cmp-git" },
-        { "davidsierradz/cmp-conventionalcommits" },
+        { "kdheepak/cmp-latex-symbols" },
         {
             "L3MON4D3/LuaSnip",
             version = "1.*",
@@ -146,7 +146,6 @@ return {
             { name = "buffer" },
             { name = "async_path" },
             { name = "git" },
-            { name = 'conventionalcommits' },
         })
 
         -- Setting up cmp for Command mode
