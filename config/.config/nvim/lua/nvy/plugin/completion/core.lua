@@ -132,6 +132,7 @@ return {
 
         -- Cmp sources
         cmp_config.sources = cmp.config.sources({
+            { name = "git" },
             { name = "nvim_lsp" },
             { name = "nvim_lsp_signature_help" },
         }, {
@@ -145,7 +146,6 @@ return {
             { name = "latex_symbols" },
             { name = "buffer" },
             { name = "async_path" },
-            { name = "git" },
         })
 
         -- Setting up cmp for Command mode
