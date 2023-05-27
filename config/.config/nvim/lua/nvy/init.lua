@@ -37,6 +37,6 @@ local lazy_config = {
 require("lazy").setup({
     { import = "nvy.plugin" },
     { import = "nvy.plugin.lsp" },
-    { import = "nvy.plugin.lsp.ft" },
+    { import = "nvy.plugin.ft" },
     { import = "nvy.plugin.completion" },
 }, lazy_config)

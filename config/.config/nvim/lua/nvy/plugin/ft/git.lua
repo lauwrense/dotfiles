@@ -2,9 +2,9 @@ return {
     "petertriho/cmp-git",
     "davidsierradz/cmp-conventionalcommits",
     event = "VeryLazy",
-    ft = { "neogitgitcommitmessage", "gitcommit", "octo" },
+    ft = { "neogitcommitmessage", "gitcommit", "octo" },
     config = function()
-        require("cmp").setup.buffer({
+        require("cmp").setup.filetype({ "gitcommit", "octo", "neogitcommitmessage" }, {
             sources = require("cmp").config.sources(
                 { { name = "conventionalcommits" }, { name = "git" } },
                 { { name = "buffer" } }
