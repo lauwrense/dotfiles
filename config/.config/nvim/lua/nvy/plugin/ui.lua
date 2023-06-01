@@ -1,19 +1,17 @@
-return {
-    {
-        "RRethy/vim-illuminate",
-        config = function()
-            require("illuminate").configure({
-                filetypes_denylist = {
-                    'dirvish',
-                    'fugitive',
-                    "NvimTree",
-                    "TelescopePrompt"
-                },
-            })
-        end
-    },
-    { "nvim-tree/nvim-web-devicons" },
+local signs = {
+    Error = "",
+    Warn = "",
+    Info = "",
+    Hint = "",
+}
 
+
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+return {
+    { "nvim-tree/nvim-web-devicons" },
     -- Colorschemes
     {
         "catppuccin/nvim",
@@ -110,10 +108,37 @@ return {
                             },
                             DiffviewFilePanelCounter = {
                                 fg = colors.sky
-                            }
+                            },
+
+                            SagaNormal = {
+                                bg = colors.mantle
+                            },
+                            SagaBorder = {
+                                bg = colors.mantle,
+                                fg = colors.mantle,
+                            },
+                            TitleString = {
+                                bg = colors.mantle
+                            },
+                            TitleIcon = {
+                                bg = colors.mantle
+                            },
                         }
                     end
                 }
+            })
+        end
+    },
+    {
+        "RRethy/vim-illuminate",
+        config = function()
+            require("illuminate").configure({
+                filetypes_denylist = {
+                    'dirvish',
+                    'fugitive',
+                    "NvimTree",
+                    "TelescopePrompt"
+                },
             })
         end
     },
@@ -129,7 +154,6 @@ return {
         },
     },
     { "rcarriga/nvim-notify" },
-
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
@@ -439,14 +463,10 @@ return {
             local Diagnostics = {
                 condition = conditions.has_diagnostics,
                 static = {
-                    -- error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
-                    -- warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
-                    -- info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
-                    -- hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
-                    error_icon = "",
-                    warn_icon = "",
-                    info_icon = "",
-                    hint_icon = "",
+                    error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
+                    warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
+                    info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
+                    hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
                 },
 
                 init = function(self)
