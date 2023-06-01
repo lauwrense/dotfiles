@@ -4,7 +4,8 @@ return {
         config = function()
             require("hardtime").setup({
                 hint = true,
-                disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "NeogitStatus" }
+                disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "NeogitStatus", "crates.nvim",
+                    "lspsagaoutline" }
             })
         end
     },
