@@ -192,7 +192,9 @@ return {
 
         -- Setup up cmp
         cmp.setup(cmp_config)
-        require("cmp_git").setup({})
+        require("cmp_git").setup({
+            filetypes = { "gitcommit", "octo", "neogitcommitmessage" }
+        })
 
         -- Load snippets
         require("luasnip.loaders.from_vscode").lazy_load()
