@@ -18,4 +18,5 @@ abbr -a ls exa -la --icons --git -s type
 abbr -a ll exa -la --icons --git --ignore-glob .git -s type -T
 abbr -a v nvim
 
+bind --erase -a 
 z ~
