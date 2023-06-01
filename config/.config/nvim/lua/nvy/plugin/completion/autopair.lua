@@ -3,7 +3,6 @@ return {
     event = "InsertEnter",
     config = function()
         local cmp = require("cmp")
-        -- Configuration for Autopairs
         local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
         local npair_config = {
