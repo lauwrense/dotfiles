@@ -6,22 +6,123 @@ return {
                 filetypes_denylist = {
                     'dirvish',
                     'fugitive',
-                    "NvimTree"
+                    "NvimTree",
+                    "TelescopePrompt"
                 },
             })
         end
     },
-    { "stevearc/dressing.nvim" },
     { "nvim-tree/nvim-web-devicons" },
 
     -- Colorschemes
     {
-        "EdenEast/nightfox.nvim",
+        "catppuccin/nvim",
+        name = "catppuccin",
         priority = 10000,
+        config = function()
+            require("catppuccin").setup({
+                flavour = "frappe",
+                no_underline = true,
+                integrations = {
+                    cmp = true,
+                    fidget = true,
+                    gitsigns = true,
+                    illuminate = true,
+                    leap = true,
+                    mason = true,
+                    neogit = true,
+                    neotest = true,
+                },
+                highlight_overrides = {
+                    all = function(colors)
+                        return {
+                            TelescopeSelection = {
+                                bg = colors.base,
+                                fg = colors.text,
+                            },
+                            TelescopeSelectionCaret = {
+                                bg = colors.base,
+                            },
+
+                            TelescopePromptPrefix = {
+                                fg = colors.yellow
+                            },
+                            TelescopePromptTitle = {
+                                fg = colors.mantle,
+                                bg = colors.mantle,
+                            },
+                            TelescopePromptBorder = {
+                                bg = colors.mantle,
+                                fg = colors.mantle,
+                            },
+                            TelescopePromptNormal = {
+                                bg = colors.mantle,
+                            },
+
+
+                            TelescopePreviewTitle = {
+                                fg = colors.crust,
+                                bg = colors.crust,
+                            },
+                            TelescopePreviewBorder = {
+                                fg = colors.crust,
+                                bg = colors.crust,
+                            },
+                            TelescopePreviewNormal = {
+                                bg = colors.crust,
+                            },
+
+
+
+                            TelescopeResultsTitle = {
+                                fg = colors.crust,
+                                bg = colors.crust,
+                            },
+                            TelescopeResultsBorder = {
+                                fg = colors.crust,
+                                bg = colors.crust,
+                            },
+                            TelescopeResultsNormal = {
+                                bg = colors.crust,
+                            },
+
+                            LeapBackdrop = {
+                                fg = colors.surface2
+                            },
+
+
+                            TabLineTab = {
+                                bg = colors.mantle
+                            },
+                            TabLineFill = {
+                                bg = colors.crust
+                            },
+                            TabLineSel = {
+                                fg = colors.blue,
+                                bg = colors.base
+                            },
+
+                            DiffviewFilePanelRootPath = {
+                                fg = colors.yellow
+                            },
+                            DiffviewFilePanelTitle = {
+                                fg = colors.yellow
+                            },
+                            DiffviewFilePanelCounter = {
+                                fg = colors.sky
+                            }
+                        }
+                    end
+                }
+            })
+        end
     },
     {
         "j-hui/fidget.nvim",
         opts = {
+            window = {
+                belnd = 0
+            },
             text = {
                 spinner = "dots",
             },
@@ -53,6 +154,51 @@ return {
         end,
     },
 
+    {
+        'nanozuki/tabby.nvim',
+        config = function()
+            local theme = {
+                fill = 'TabLineFill',
+                head = 'TabLine',
+                current_tab = 'TabLineSel',
+                tab = 'TabLineTab',
+                win = 'TabLineTab',
+                tail = 'TabLine',
+            }
+            require('tabby.tabline').set(function(line)
+                return {
+                    line.tabs().foreach(function(tab)
+                        local hl = tab.is_current() and theme.current_tab or theme.tab
+                        return {
+                            line.sep(' ', hl, hl),
+                            tab.is_current() and '' or '󰆣',
+
+                            tab.number(),
+                            tab.name(),
+                            line.sep(' ', hl, hl),
+                            hl = hl,
+                            margin = ' ',
+                        }
+                    end),
+                    line.spacer(),
+
+                    line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+                        return {
+                            line.sep(' ', theme.fill, theme.win),
+
+                            win.is_current() and '' or '',
+                            win.buf_name(),
+                            line.sep(' ', theme.fill, theme.win),
+                            hl = theme.win,
+                            margin = ' ',
+                        }
+                    end),
+                    hl = theme.fill,
+
+                }
+            end)
+        end
+    },
     {
         "rebelot/heirline.nvim",
         config = function()
@@ -250,7 +396,7 @@ return {
                 {
                     -- git branch name
                     provider = function(self)
-                        return " " .. self.status_dict.head
+                        return " " .. self.status_dict.head .. " "
                     end,
                     hl = { bold = true },
                 },
@@ -258,19 +404,19 @@ return {
                     condition = function(self)
                         return self.has_changes
                     end,
-                    provider = "(",
+                    provider = "( ",
                 },
                 {
                     provider = function(self)
                         local count = self.status_dict.added or 0
-                        return count > 0 and ("+" .. count)
+                        return count > 0 and ("+" .. count .. " ")
                     end,
                     hl = { fg = "git_add" },
                 },
                 {
                     provider = function(self)
                         local count = self.status_dict.removed or 0
-                        return count > 0 and ("-" .. count)
+                        return count > 0 and ("-" .. count .. " ")
                     end,
                     hl = { fg = "git_del" },
                 },
@@ -278,7 +424,7 @@ return {
                     provider = function(self)
                         local count = self.status_dict.changed or 0
 
-                        return count > 0 and ("~" .. count)
+                        return count > 0 and ("~" .. count .. " ")
                     end,
                     hl = { fg = "git_change" },
                 },
@@ -488,12 +634,12 @@ return {
                 statusline = StatusLines,
             })
 
-            vim.api.nvim_create_augroup("Heirline", { clear = true })
+            local group = vim.api.nvim_create_augroup("Heirline", { clear = true })
             vim.api.nvim_create_autocmd("ColorScheme", {
                 callback = function()
                     utils.on_colorscheme(setup_colors)
                 end,
-                group = "Heirline",
+                group = group,
             })
         end,
     }
