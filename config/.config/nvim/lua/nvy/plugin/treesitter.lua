@@ -3,6 +3,10 @@ return {
     name = "Treesitter",
     build = ":TSUpdate",
     dependencies = {
+        {
+            "LiadOz/nvim-dap-repl-highlights",
+            config = true,
+        },
         { "nvim-treesitter/nvim-treesitter-textobjects" },
         { "JoosepAlviste/nvim-ts-context-commentstring" },
     },
@@ -41,6 +45,8 @@ return {
             "gitignore",
             "git_rebase",
             "git_config",
+            -- DAP
+            "dap_repl",
         },
         sync_install = false,
         auto_install = true,
@@ -71,9 +77,9 @@ return {
                     ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
                 },
                 selection_modes = {
-                    ['@parameter.outer'] = 'v', -- charwise
-                    ['@function.outer'] = 'V',  -- linewise
-                    ['@class.outer'] = '<c-v>', -- blockwise
+                    ["@parameter.outer"] = "v", -- charwise
+                    ["@function.outer"] = "V", -- linewise
+                    ["@class.outer"] = "<c-v>", -- blockwise
                 },
                 include_surrounding_whitespace = true,
             },

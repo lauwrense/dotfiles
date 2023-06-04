@@ -193,7 +193,7 @@ return {
         -- Setup up cmp
         cmp.setup(cmp_config)
         require("cmp_git").setup({
-            filetypes = { "gitcommit", "octo", "neogitcommitmessage" }
+            filetypes = { "gitcommit", "octo", "neogitcommitmessage" },
         })
 
         -- Load snippets

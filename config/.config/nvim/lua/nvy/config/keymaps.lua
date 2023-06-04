@@ -2,8 +2,6 @@ vim.keymap.set("", "<Space>", "<Nop>", { silent = true, remap = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
-
 local Telescope = {}
 local Neogit = {}
 

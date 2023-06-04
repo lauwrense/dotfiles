@@ -9,6 +9,7 @@ return {
             build = "make",
         },
     },
+    keys = {},
     config = function()
         local builtin = require("telescope.builtin")
         local action = require("telescope.actions")
@@ -72,7 +73,6 @@ return {
                 },
             },
         }
-
 
         require("telescope").setup(telescope_config)
         require("telescope").load_extension("fzf")
