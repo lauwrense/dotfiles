@@ -16,113 +16,111 @@ return {
         "catppuccin/nvim",
         name = "catppuccin",
         priority = 10000,
-        config = function()
-            require("catppuccin").setup({
-                flavour = "frappe",
-                no_underline = true,
-                integrations = {
-                    cmp = true,
-                    fidget = true,
-                    gitsigns = true,
-                    illuminate = true,
-                    leap = true,
-                    mason = true,
-                    neogit = true,
-                    neotest = true,
-                },
-                highlight_overrides = {
-                    all = function(colors)
-                        return {
-                            TelescopeSelection = {
-                                bg = colors.base,
-                                fg = colors.text,
-                            },
-                            TelescopeSelectionCaret = {
-                                bg = colors.base,
-                            },
+        opts = {
+            flavour = "frappe",
+            no_underline = true,
+            integrations = {
+                cmp = true,
+                fidget = true,
+                gitsigns = true,
+                illuminate = true,
+                leap = true,
+                mason = true,
+                neogit = true,
+                neotest = true,
+            },
+            highlight_overrides = {
+                all = function(colors)
+                    return {
+                        TelescopeSelection = {
+                            bg = colors.base,
+                            fg = colors.text,
+                        },
+                        TelescopeSelectionCaret = {
+                            bg = colors.base,
+                        },
 
-                            TelescopePromptPrefix = {
-                                fg = colors.yellow,
-                            },
-                            TelescopePromptTitle = {
-                                fg = colors.mantle,
-                                bg = colors.mantle,
-                            },
-                            TelescopePromptBorder = {
-                                bg = colors.mantle,
-                                fg = colors.mantle,
-                            },
-                            TelescopePromptNormal = {
-                                bg = colors.mantle,
-                            },
+                        TelescopePromptPrefix = {
+                            fg = colors.yellow,
+                        },
+                        TelescopePromptTitle = {
+                            fg = colors.mantle,
+                            bg = colors.mantle,
+                        },
+                        TelescopePromptBorder = {
+                            bg = colors.mantle,
+                            fg = colors.mantle,
+                        },
+                        TelescopePromptNormal = {
+                            bg = colors.mantle,
+                        },
 
-                            TelescopePreviewTitle = {
-                                fg = colors.crust,
-                                bg = colors.crust,
-                            },
-                            TelescopePreviewBorder = {
-                                fg = colors.crust,
-                                bg = colors.crust,
-                            },
-                            TelescopePreviewNormal = {
-                                bg = colors.crust,
-                            },
+                        TelescopePreviewTitle = {
+                            fg = colors.crust,
+                            bg = colors.crust,
+                        },
+                        TelescopePreviewBorder = {
+                            fg = colors.crust,
+                            bg = colors.crust,
+                        },
+                        TelescopePreviewNormal = {
+                            bg = colors.crust,
+                        },
 
-                            TelescopeResultsTitle = {
-                                fg = colors.crust,
-                                bg = colors.crust,
-                            },
-                            TelescopeResultsBorder = {
-                                fg = colors.crust,
-                                bg = colors.crust,
-                            },
-                            TelescopeResultsNormal = {
-                                bg = colors.crust,
-                            },
+                        TelescopeResultsTitle = {
+                            fg = colors.crust,
+                            bg = colors.crust,
+                        },
+                        TelescopeResultsBorder = {
+                            fg = colors.crust,
+                            bg = colors.crust,
+                        },
+                        TelescopeResultsNormal = {
+                            bg = colors.crust,
+                        },
 
-                            LeapBackdrop = {
-                                fg = colors.surface2,
-                            },
+                        LeapBackdrop = {
+                            fg = colors.surface2,
+                        },
 
-                            TabLineTab = {
-                                bg = colors.mantle,
-                            },
-                            TabLineFill = {
-                                bg = colors.crust,
-                            },
-                            TabLineSel = {
-                                fg = colors.blue,
-                                bg = colors.base,
-                            },
+                        TabLineTab = {
+                            bg = colors.mantle,
+                        },
+                        TabLineFill = {
+                            bg = colors.crust,
+                        },
+                        TabLineSel = {
+                            fg = colors.blue,
+                            bg = colors.base,
+                        },
 
-                            DiffviewFilePanelRootPath = {
-                                fg = colors.yellow,
-                            },
-                            DiffviewFilePanelTitle = {
-                                fg = colors.yellow,
-                            },
-                            DiffviewFilePanelCounter = {
-                                fg = colors.sky,
-                            },
+                        DiffviewFilePanelRootPath = {
+                            fg = colors.yellow,
+                        },
+                        DiffviewFilePanelTitle = {
+                            fg = colors.yellow,
+                        },
+                        DiffviewFilePanelCounter = {
+                            fg = colors.sky,
+                        },
 
-                            SagaNormal = {
-                                bg = colors.mantle,
-                            },
-                            SagaBorder = {
-                                bg = colors.mantle,
-                                fg = colors.mantle,
-                            },
-                            TitleString = {
-                                bg = colors.mantle,
-                            },
-                            TitleIcon = {
-                                bg = colors.mantle,
-                            },
-                        }
-                    end,
-                },
-            })
-        end,
+                        SagaNormal = {
+                            bg = colors.mantle,
+                        },
+                        SagaBorder = {
+                            bg = colors.mantle,
+                            fg = colors.mantle,
+                        },
+                        TitleString = {
+                            bg = colors.mantle,
+                        },
+                        TitleIcon = {
+                            bg = colors.mantle,
+                        },
+                    }
+                end,
+            },
+        }
     },
     {
         "RRethy/vim-illuminate",

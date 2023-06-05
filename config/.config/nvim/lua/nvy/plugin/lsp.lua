@@ -1,4 +1,3 @@
----@diagnostic disable: redefined-local
 return {
     {
         "williamboman/mason-lspconfig.nvim",
