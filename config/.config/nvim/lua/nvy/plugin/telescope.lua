@@ -9,7 +9,54 @@ return {
             build = "make",
         },
     },
-    keys = {},
+    keys = {
+
+        {
+            "<leader>ff",
+            function()
+                require("telescope.builtin").find_files({
+                    layout_config = {
+                        preview_width = 0.6,
+                        preview_cutoff = 50,
+                    },
+                })
+            end,
+            remap = true,
+            desc = "Find Files",
+        },
+        {
+            "<leader>fs",
+            function()
+                require("telescope.builtin").grep_string()
+            end,
+            remap = true,
+            desc = "Grep String",
+        },
+        {
+            "<leader>fg",
+            function()
+                require("telescope.builtin").live_grep()
+            end,
+            remap = true,
+            desc = "Live Grep",
+        },
+        {
+            "<leader>fh",
+            function()
+                require("telescope.builtin").help_tags()
+            end,
+            remap = true,
+            desc = "Help Tags",
+        },
+        {
+            "<leader>fm",
+            function()
+                require("telescope.builtin").man_pages()
+            end,
+            remap = true,
+            desc = "Man Pages",
+        },
+    },
     config = function()
         local builtin = require("telescope.builtin")
         local action = require("telescope.actions")
