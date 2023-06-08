@@ -34,6 +34,14 @@ local lazy_config = {
     },
 }
 
+if os.getenv("NVIM") ~= nil then
+    require('lazy').setup {
+        { 'willothy/flatten.nvim', config = true },
+    }
+    return
+end
+
+
 require("lazy").setup({
     { import = "nvy.plugin" },
     { import = "nvy.plugin.lang" },

@@ -10,7 +10,6 @@ return {
         },
     },
     keys = {
-
         {
             "<leader>ff",
             function()

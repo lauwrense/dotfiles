@@ -5,6 +5,7 @@ local options = {
     smartindent = true,
     shiftwidth = 4,
     tabstop = 4,
+    colorcolumn = "80",
 
     number = true,
     relativenumber = true,
