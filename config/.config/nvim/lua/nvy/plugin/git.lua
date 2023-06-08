@@ -65,6 +65,7 @@ return {
         "TimUntersberger/neogit",
         cmd = "Neogit",
         opts = {
+            disable_builtin_notifications = true,
             integrations = {
                 diffview = true,
             },
