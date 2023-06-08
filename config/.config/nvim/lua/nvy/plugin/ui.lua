@@ -18,11 +18,8 @@ return {
         priority = 10000,
         opts = {
             flavour = "frappe",
-            no_underline = true,
             integrations = {
-                cmp = true,
                 fidget = true,
-                gitsigns = true,
                 illuminate = true,
                 leap = true,
                 mason = true,
@@ -146,7 +143,12 @@ return {
             },
         },
     },
-    { "rcarriga/nvim-notify" },
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            vim.notify = require("notify")
+        end
+    },
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
@@ -222,6 +224,7 @@ return {
             local utils = require("heirline.utils")
             local function setup_colors()
                 return {
+                    term_bg = utils.get_highlight("ToggleTerm1StatusLineNC").bg,
                     bg = utils.get_highlight("StatusLine").bg,
                     bright_bg = utils.get_highlight("Folded").bg,
                     bright_fg = utils.get_highlight("Folded").fg,
@@ -610,6 +613,9 @@ return {
                 FileType,
                 TerminalName,
                 Align,
+                hl = {
+                    bg = "bg"
+                }
             }
 
             local SpecialStatusline = {
