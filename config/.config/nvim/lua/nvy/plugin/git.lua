@@ -51,7 +51,11 @@ return {
                 map("n", "<leader>tb", gs.toggle_current_line_blame)
                 map("n", "<leader>hd", gs.diffthis)
                 map("n", "<leader>hD", function()
-                    gs.diffthis("~")
+                    if vim.wo.diff then
+                        vim.wo.diff = false
+                    else
+                        gs.diffthis("~")
+                    end
                 end)
                 map("n", "<leader>td", gs.toggle_deleted)
 
@@ -62,7 +66,7 @@ return {
     },
     { "sindrets/diffview.nvim", config = true },
     {
-        "TimUntersberger/neogit",
+        "NeogitOrg/neogit",
         cmd = "Neogit",
         opts = {
             disable_builtin_notifications = true,

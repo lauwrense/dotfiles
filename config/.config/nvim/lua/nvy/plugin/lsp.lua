@@ -130,6 +130,8 @@ return {
         "glepnir/lspsaga.nvim",
         event = "LspAttach",
         opts = {
+            hover = {
+            },
             symbol_in_winbar = {
                 enable = false,
             },

@@ -3,7 +3,15 @@ return {
         "akinsho/toggleterm.nvim",
         config = function()
             require("toggleterm").setup({
-                on_create = function(t)
+                size = function(term)
+                    if term.direction == "horizontal" then
+                        return 15
+                    elseif term.direction == "vertical" then
+                        return vim.o.columns * 0.4
+                    end
+                end,
+                on_create = function(term)
+                    term.cmd = "clear"
                     local opts = { buffer = 0 }
                     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
                     vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
@@ -33,6 +41,8 @@ return {
 
             local function cycle_term()
                 local is_term_open = terminal_list[current_term]:is_open()
+                local is_term_focused = terminal_list[current_term]:is_focused()
+
                 if is_term_open then
                     terminal_list[current_term]:close()
 
@@ -43,8 +53,9 @@ return {
                     end
                 end
 
-                terminal_list[current_term]:open()
+                terminal_list[current_term]:open(nil, recent_direction)
             end
+
 
             local function cycle_hor_ver()
                 if recent_direction == "horizontal" then
@@ -62,12 +73,17 @@ return {
             end
 
             local function new_term()
-                if not #terminal_list >= max_term then
+                if not (#terminal_list >= max_term) then
                     local new_term_idx = #terminal_list + 1
                     terminal_list[new_term_idx] = Terminal:new({
                         count = new_term_idx,
                         direction = recent_direction
                     })
+                    if terminal_list[current_term]:is_open() then
+                        terminal_list[current_term]:close()
+                    end
+                    current_term = new_term_idx
+                    terminal_list[current_term]:open()
                 end
             end
 

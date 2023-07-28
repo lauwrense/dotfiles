@@ -11,6 +11,10 @@ for type, icon in pairs(signs) do
 end
 return {
     { "nvim-tree/nvim-web-devicons" },
+    {
+        "uga-rosa/ccc.nvim",
+        config = true
+    },
     -- Colorschemes
     {
         "catppuccin/nvim",
@@ -29,91 +33,56 @@ return {
             highlight_overrides = {
                 all = function(colors)
                     return {
-                        TelescopeSelection = {
-                            bg = colors.base,
-                            fg = colors.text,
-                        },
-                        TelescopeSelectionCaret = {
-                            bg = colors.base,
-                        },
+                        TelescopeSelection        = { bg = colors.base, fg = colors.text },
+                        TelescopeSelectionCaret   = { bg = colors.base },
+                        TelescopePromptPrefix     = { fg = colors.yellow },
+                        TelescopePromptTitle      = { fg = colors.mantle, bg = colors.mantle },
+                        TelescopePromptBorder     = { bg = colors.mantle, fg = colors.mantle },
+                        TelescopePromptNormal     = { bg = colors.mantle },
+                        TelescopePreviewTitle     = { fg = colors.crust, bg = colors.crust },
+                        TelescopePreviewBorder    = { fg = colors.crust, bg = colors.crust },
+                        TelescopePreviewNormal    = { bg = colors.crust },
+                        TelescopeResultsTitle     = { fg = colors.crust, bg = colors.crust },
+                        TelescopeResultsBorder    = { fg = colors.crust, bg = colors.crust },
+                        TelescopeResultsNormal    = { bg = colors.crust },
 
-                        TelescopePromptPrefix = {
-                            fg = colors.yellow,
-                        },
-                        TelescopePromptTitle = {
-                            fg = colors.mantle,
-                            bg = colors.mantle,
-                        },
-                        TelescopePromptBorder = {
-                            bg = colors.mantle,
-                            fg = colors.mantle,
-                        },
-                        TelescopePromptNormal = {
-                            bg = colors.mantle,
-                        },
+                        LeapBackdrop              = { fg = colors.surface2 },
 
-                        TelescopePreviewTitle = {
-                            fg = colors.crust,
-                            bg = colors.crust,
-                        },
-                        TelescopePreviewBorder = {
-                            fg = colors.crust,
-                            bg = colors.crust,
-                        },
-                        TelescopePreviewNormal = {
-                            bg = colors.crust,
-                        },
+                        TabLineTab                = { bg = colors.mantle },
+                        TabLineFill               = { bg = colors.crust },
+                        TabLineSel                = { fg = colors.blue, bg = colors.base },
 
-                        TelescopeResultsTitle = {
-                            fg = colors.crust,
-                            bg = colors.crust,
-                        },
-                        TelescopeResultsBorder = {
-                            fg = colors.crust,
-                            bg = colors.crust,
-                        },
-                        TelescopeResultsNormal = {
-                            bg = colors.crust,
-                        },
+                        DiffviewFilePanelRootPath = { fg = colors.yellow },
+                        DiffviewFilePanelTitle    = { fg = colors.yellow },
+                        DiffviewFilePanelCounter  = { fg = colors.sky },
 
-                        LeapBackdrop = {
-                            fg = colors.surface2,
-                        },
+                        SagaNormal                = { bg = colors.mantle },
+                        SagaBorder                = { bg = colors.mantle, fg = colors.mantle },
+                        TitleString               = { bg = colors.mantle },
+                        TitleIcon                 = { bg = colors.mantle },
 
-                        TabLineTab = {
-                            bg = colors.mantle,
-                        },
-                        TabLineFill = {
-                            bg = colors.crust,
-                        },
-                        TabLineSel = {
-                            fg = colors.blue,
-                            bg = colors.base,
-                        },
+                        NotifyERRORBorder         = { fg = colors.mantle, bg = colors.mantle },
+                        NotifyWARNBorder          = { fg = colors.mantle, bg = colors.mantle },
+                        NotifyINFOBorder          = { fg = colors.mantle, bg = colors.mantle },
+                        NotifyDEBUGBorder         = { fg = colors.mantle, bg = colors.mantle },
+                        NotifyTRACEBorder         = { fg = colors.mantle, bg = colors.mantle },
+                        NotifyERRORIcon           = { fg = colors.red },
+                        NotifyWARNIcon            = { fg = colors.peach },
+                        NotifyINFOIcon            = { fg = colors.green },
+                        NotifyDEBUGIcon           = { fg = colors.blue },
+                        NotifyTRACEIcon           = { fg = colors.pink },
+                        NotifyERRORTitle          = { fg = "#F70067" },
+                        NotifyWARNTitle           = { fg = "#F79000" },
+                        NotifyINFOTitle           = { fg = "#A9FF68" },
+                        NotifyDEBUGTitle          = { fg = "#8B8B8B" },
+                        NotifyTRACETitle          = { fg = "#D484FF" },
+                        NotifyERRORBody           = { bg = colors.mantle },
+                        NotifyWARNBody            = { bg = colors.mantle },
+                        NotifyINFOBody            = { bg = colors.mantle },
+                        NotifyDEBUGBody           = { bg = colors.mantle },
+                        NotifyTRACEBody           = { bg = colors.mantle },
 
-                        DiffviewFilePanelRootPath = {
-                            fg = colors.yellow,
-                        },
-                        DiffviewFilePanelTitle = {
-                            fg = colors.yellow,
-                        },
-                        DiffviewFilePanelCounter = {
-                            fg = colors.sky,
-                        },
-
-                        SagaNormal = {
-                            bg = colors.mantle,
-                        },
-                        SagaBorder = {
-                            bg = colors.mantle,
-                            fg = colors.mantle,
-                        },
-                        TitleString = {
-                            bg = colors.mantle,
-                        },
-                        TitleIcon = {
-                            bg = colors.mantle,
-                        },
+                        MasonNormal               = { bg = colors.crust },
                     }
                 end,
             },
@@ -134,6 +103,7 @@ return {
     },
     {
         "j-hui/fidget.nvim",
+        tag = "legacy",
         opts = {
             window = {
                 belnd = 0,
@@ -146,6 +116,9 @@ return {
     {
         "rcarriga/nvim-notify",
         config = function()
+            require("notify").setup({
+                render = "compact"
+            })
             vim.notify = require("notify")
         end
     },
@@ -171,6 +144,14 @@ return {
                 end,
             })
         end,
+    },
+    {
+        'goolord/alpha-nvim',
+        event = "VimEnter",
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+        end
     },
 
     {

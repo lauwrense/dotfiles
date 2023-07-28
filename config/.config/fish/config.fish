@@ -2,7 +2,12 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-fish_vi_key_bindings
+set os (uname)
+
+if test $os != "Nvim"
+    fish_vi_key_bindings
+end
+
 set -gx EDITOR nvim
 set -g fish_autosuggestion_enabled 0
 

@@ -51,7 +51,7 @@ local options = {
     foldenable = true,
 
     fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
-    laststatus = 2,
+    laststatus = 3,
 }
 
 for k, v in pairs(options) do
