@@ -88,5 +88,12 @@ return {
     },
     config = function(_, opts)
         require("nvim-treesitter.configs").setup(opts)
+
+        vim.filetype.add({
+            extension = {
+                zon = "zon"
+            }
+        })
+        vim.treesitter.language.register("zig", "zon")
     end,
 }

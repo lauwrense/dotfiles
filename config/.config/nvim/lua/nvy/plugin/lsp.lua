@@ -2,11 +2,10 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         opts = {
-            automatic_installation = true,
+            automatic_installation = false,
             ensure_installed = {
                 "lua_ls",
                 "bashls",
-                "zls",
                 "rust_analyzer",
                 "texlab",
                 "pylsp",
@@ -34,6 +33,7 @@ return {
                         dynamicRegistration = false,
                         lineFoldingOnly = true,
                     }
+                    require("nvy.plugin.lsp.zls")
                     require("lspconfig")[server_name].setup({
                         capabilities = capabilities,
                         on_attach = function(client, bufnr)
@@ -150,7 +150,6 @@ return {
                     automatic_installation = false,
                     ensure_installed = {
                         "stylua",
-                        "rustfmt",
                         "commitlint",
                         "latexindent",
                         "black",

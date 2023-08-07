@@ -65,7 +65,7 @@ return {
         local telescope_config = {
             defaults = {
                 file_sorter = require("telescope.sorters").get_fuzzy_file,
-                file_ignore_patterns = { "target", "build" },
+                file_ignore_patterns = { "target" },
                 prompt_prefix = "   ",
                 selection_caret = "  ",
                 entry_prefix = "  ",
@@ -104,7 +104,7 @@ return {
             },
             pickers = {
                 find_files = {
-                    find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                    find_command = { "rg", "--hidden", "--files", "--glob", "!**/.git/**", "--ignore" },
                 },
             },
             extensions = {
