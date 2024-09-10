@@ -11,10 +11,15 @@ return {
             integrations = {
                 cmp = true,
                 fidget = true,
-                illuminate = true,
+                illuminate = {
+                    enabled = true,
+                    lsp = true,
+                },
                 mason = true,
-                neogit = true,
+                notify = true,
                 neotest = true,
+                lsp_trouble = true,
+                which_key = true,
                 indent_backline = {
                     colored_indent_levels = false,
                 },

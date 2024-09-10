@@ -6,97 +6,79 @@ return {
                 local gs = package.loaded.gitsigns
                 local wk = require("which-key")
 
-                wk.register({
-                    ["]c"] = {
+                wk.add({
+                    {
+                        "]c",
                         function()
                             if vim.wo.diff then
-                                return "]c"
+                                vim.cmd.normal({ ']c', bang = true })
                             end
-                            vim.schedule(function()
-                                gs.next_hunk()
-                            end)
-                            return "<Ignore>"
+                            gs.nav_hunk("next")
                         end,
-                        "Next hunk",
+                        desc = "Next Hunk",
+                        expr = true,
                     },
-                    ["[c"] = {
+                    {
+                        "[c",
                         function()
                             if vim.wo.diff then
-                                return "[c"
+                                vim.cmd.normal({ '[c', bang = true })
+                            else
+                                gs.nav_hunk("prev")
                             end
-
-                            vim.schedule(function()
-                                gs.prev_hunk()
-                            end)
-                            return "<Ignore>"
                         end,
 
-                        "Prev hunk",
+                        desc = "Previous hunk",
+                        expr = true,
                     },
-                }, { expr = true })
+                })
 
-                wk.register({
-                    name = "+git",
-                    s = { gs.stage_hunk, "Stage hunk" },
-                    r = { gs.reset_hunk, "Reset hunk" },
-                    S = { gs.stage_buffer, "Stage buffer" },
-                    u = { gs.undo_stage_hunk, "Undo stage hunk" },
-                    R = { gs.reset_hunk, "Reset buffer" },
-                    p = { gs.preview_hunk, "Preview hunk" },
-                    b = {
+                wk.add({
+                    mode = "n",
+                    { "<leader>h",  group = "+git" },
+                    { "<leader>hs", gs.stage_hunk,      desc = "Stage Hunk" },
+                    { "<leader>hS", gs.stage_buffer,    desc = "Stage Buffer" },
+                    { "<leader>hr", gs.reset_hunk,      desc = "Reset Hunk" },
+                    { "<leader>hR", gs.reset_buffer,    desc = "Reset Buffer" },
+                    { "<leader>hu", gs.undo_stage_hunk, desc = "Undo Stage Hunk" },
+                    { "<leader>hp", gs.preview_hunk,    desc = "Preview Hunk" },
+                    {
+                        "<leader>hb",
                         function()
                             gs.blame_line({ full = true })
                         end,
-                        "Blame line",
-
+                        desc = "Blame Line"
                     },
-                    t = {
-                        name = "+toggle",
-                        b = { gs.toggle_current_line_blame, "Blame line" },
-                        d = { gs.toggle_deleted, "Deleted" },
-                    },
-                    d = { gs.diffthis, "Diff" },
-
-                    D = {
+                    { "<leader>ht",  group = "+toggle" },
+                    { "<leader>htb", gs.toggle_current_line_blame, desc = "Blame line" },
+                    { "<leader>htd", gs.toggle_deleted,            desc = "Deleted" },
+                    {
+                        "<leader>hd",
                         function()
-                            if vim.wo.diff then
-                                vim.wo.diff = false
-                            else
-                                gs.diffthis("~")
-                            end
+                            gs.diffthis("~")
                         end,
-                        "Diff",
+                        desc = "Diff"
                     },
-                }, { prefix = "<leader>h" })
-
-                wk.register({
-                    name = "+git",
-
-                    s = {
-                        function()
-                            gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                        end,
-                        "Stage hunk",
+                    {
+                        mode = "v",
+                        { "<leader>hs", function() gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, desc = "Stage Hunk" },
+                        { "<leader>hr", function() gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end, desc = "Reset Hunk" },
                     },
-                    r = {
-                        function()
-                            gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                        end,
-                        "Reset hunk",
-                    },
-                }, { prefix = "<leader>h", mode = "v" })
-
-                wk.register(
-                    { ["ih"] = { ":<c-u>Gitsigns select_hunk<cr>", "Select hunk" } },
-
-                    { mode = { "o", "x" } }
-                )
+                    {
+                        { "ih", ":<c-u>Gitsigns select_hunk<cr>", desc = "Select hunk", mode = { "o", "x" } },
+                    }
+                })
             end,
 
         },
     },
-
-    { "sindrets/diffview.nvim", config = true },
+    {
+        "sindrets/diffview.nvim",
+        config = true,
+        keys = {
+            { "<leader>hD", "<cmd>DiffviewOpen<cr>", desc = "Diff View" },
+        },
+    },
     {
 
         "NeogitOrg/neogit",

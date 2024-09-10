@@ -13,16 +13,18 @@ return {
 
             local wk = require("which-key")
 
-            wk.register(
-                { ["t"] = { ":<c-u>tabnext<cr>", "Next tab" } },
 
-                { mode = { "n" }, prefix = "]", name = "+next" }
-            )
-
-            wk.register(
-                { ["t"] = { ":<c-u>tabnext<cr>", "Prev tab" } },
-                { mode = { "n" }, prefix = "[", name = "+prev" }
-            )
+            wk.add({
+                {"<leader>f", group = "+find"},
+                {
+                    { "]",  group = "+next" },
+                    { "]t", "<cmd>tabnext<cr>", desc = "Next tab" },
+                },
+                {
+                    { "[",  group = "+prev" },
+                    { "[t", "<cmd>tabprev<cr>", desc = "Prev tab" },
+                }
+            })
         end
     },
 }
