@@ -7,7 +7,9 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = {},
+        opts = {
+            preset = "helix"
+        },
         config = function(_, opts)
             require("which-key").setup(opts)
 

@@ -39,12 +39,15 @@ return {
                         -- Check mason for lsp
                         if
                             mapping[lsp_name] ~= nil
-                            and registry
+                            and not registry
                                 .get_package(mapping[lsp_name])
                                 :is_installed()
-                            and spec.lsp["autoinstall"] ~= false
+                            and spec.lsp[lsp_name]["autoinstall"] ~= false
                         then
-                            registry.get_package(mapping[lsp_name]):install()
+                            local package = registry.get_package(mapping[lsp_name])
+                            package:on("install:success", vim.schedule_wrap(function()
+                                vim.cmd("LspStart")
+                            end))
                         end
 
                         if spec.lsp[lsp_name].setup ~= nil then
@@ -75,7 +78,9 @@ return {
     },
     {
         "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        opts = {
+            auto_close = true
+        },
         cmd = "Trouble",
         keys = {
             {

@@ -12,11 +12,12 @@ for _, file_name in pairs(vim.fn.globpath(lang_path, "*.lua", true, true)) do
     end
 end
 
+---@return table<string, LanguagePlugin>
 M.get_lang_specs = function()
     return langs
 end
 
----@param fields string[]
+---@param fields ("lsp" | "dap" | "fmt" | "lint" | "test" | "spec")[]
 ---@return LanguagePlugin[]
 M.get_langs_with_fields = function(fields)
     fields = fields or {}

@@ -31,6 +31,8 @@ return {
                 "markdown",
                 "markdown_inline",
 
+                "latex",
+
                 -- Git
                 "diff",
                 "gitcommit",
@@ -82,6 +84,9 @@ return {
                 },
             },
         },
-        config = true,
+        config = function (self, opts)
+            -- Dont remove this
+            require("nvim-treesitter.configs").setup(opts)
+        end,
     },
 }

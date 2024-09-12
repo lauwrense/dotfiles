@@ -9,21 +9,12 @@ return {
         opts = {
             flavour = "frappe",
             integrations = {
-                cmp = true,
                 fidget = true,
-                illuminate = {
-                    enabled = true,
-                    lsp = true,
-                },
                 mason = true,
                 notify = true,
                 neotest = true,
                 lsp_trouble = true,
                 which_key = true,
-                indent_backline = {
-                    colored_indent_levels = false,
-                },
-
             },
         },
     },
