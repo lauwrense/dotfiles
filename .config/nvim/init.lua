@@ -31,9 +31,6 @@ local lazy_config = {
             },
         },
     },
-    ui = {
-        backdrop = 100,
-    },
 }
 
 if os.getenv("NVIM") ~= nil then

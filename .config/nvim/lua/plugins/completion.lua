@@ -12,6 +12,7 @@ return {
                 version = "v2.*",
                 build = "make install_jsregexp",
             },
+            { "nvim-lua/plenary.nvim"  }
         },
         config = function()
             local cmp = require("cmp")

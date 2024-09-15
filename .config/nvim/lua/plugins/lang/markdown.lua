@@ -3,8 +3,11 @@ return {
     spec = {
         {
             "MeanderingProgrammer/render-markdown.nvim",
-            ft = "markdown",
+            ft = "md",
             dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+            opts = {
+
+            }
         }
     },
     lsp = {

@@ -47,12 +47,32 @@ return {
     {
         "rcarriga/nvim-notify",
         config = function()
+            local stages = require("notify.stages.fade_in_slide_out")("top_down")
             ---@diagnostic disable-next-line:missing-fields
             require("notify").setup({
                 max_width = 40,
+                stages = {
+                    function(...)
+                        local opts = stages[1](...)
+                        if opts then
+                            opts.border = "single"
+                            opts.row = opts.row + 1
+                        end
+
+                        return opts
+                    end,
+
+                    ---@diagnostic disable-next-line: param-type-mismatch
+                    unpack(stages, 2),
+                },
+                on_open = function(window)
+                    vim.api.nvim_win_set_config(window, {
+                        zindex = 1000,
+                    })
+                end
             })
 
-            vim.notify = require("notify")
+            vim.notify = require("notify").notify
         end,
     },
     {
