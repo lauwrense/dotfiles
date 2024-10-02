@@ -129,5 +129,7 @@ return {
         dependencies = {
             "MunifTanjim/nui.nvim",
         }
-    }
+    },
+    {dir = "~/projects/navy"},
+    {"rebelot/heirline.nvim"},
 }

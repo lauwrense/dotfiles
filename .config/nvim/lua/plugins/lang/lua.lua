@@ -7,6 +7,7 @@ return {
             opts = {
                 library = {
                     "luvit-meta/library",
+                    "~/projects/navy",
                 },
             },
         },

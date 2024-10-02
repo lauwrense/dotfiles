@@ -59,3 +59,5 @@ vim.opt.laststatus = 3
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true, remap = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+vim.g.exrc = true
