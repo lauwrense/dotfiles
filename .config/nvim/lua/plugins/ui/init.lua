@@ -45,37 +45,6 @@ return {
         end,
     },
     {
-        "rcarriga/nvim-notify",
-        config = function()
-            local stages = require("notify.stages.fade_in_slide_out")("top_down")
-            ---@diagnostic disable-next-line:missing-fields
-            require("notify").setup({
-                max_width = 40,
-                stages = {
-                    function(...)
-                        local opts = stages[1](...)
-                        if opts then
-                            opts.border = "single"
-                            opts.row = opts.row + 1
-                        end
-
-                        return opts
-                    end,
-
-                    ---@diagnostic disable-next-line: param-type-mismatch
-                    unpack(stages, 2),
-                },
-                on_open = function(window)
-                    vim.api.nvim_win_set_config(window, {
-                        zindex = 1000,
-                    })
-                end
-            })
-
-            vim.notify = require("notify").notify
-        end,
-    },
-    {
         "j-hui/fidget.nvim",
         opts = {
             notification = {
@@ -84,51 +53,6 @@ return {
                 },
             }
         },
-    },
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        opts = {
-            ---@module "noice.nvim"
-            cmdline = {
-                enabled = false
-            },
-            messages = {
-                enabled = false,
-            },
-            popupmenu = {
-                enabled = false,
-            },
-            lsp = {
-                progress = {
-                    enabled = false,
-                },
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true,
-                },
-                hover = {
-                    opts = {
-                        size = {
-                            max_height = 20,
-                            max_width = 80,
-                        },
-                    },
-                },
-                signature = {
-                    opts = {
-                        size = {
-                            max_height = 20,
-                            max_width = 80,
-                        },
-                    },
-                },
-            },
-        },
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-        }
     },
     {dir = "~/projects/navy"},
     {"rebelot/heirline.nvim"},
