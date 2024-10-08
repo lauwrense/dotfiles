@@ -1,7 +1,6 @@
 return {
     {
         "williamboman/mason-lspconfig.nvim",
-        event = "VeryLazy",
         dependencies = {
             { "williamboman/mason.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
@@ -24,7 +23,6 @@ return {
             local mapping =
                 require("mason-lspconfig").get_mappings().lspconfig_to_mason
             local lspconfig = require("lspconfig")
-
             local langs = require("util").get_langs_with_field("lsp")
 
             opts.handlers = {}
@@ -44,10 +42,15 @@ return {
                                 :is_installed()
                             and spec.lsp[lsp_name]["autoinstall"] ~= false
                         then
-                            local package = registry.get_package(mapping[lsp_name])
-                            package:on("install:success", vim.schedule_wrap(function()
-                                vim.cmd("LspStart")
-                            end))
+                            local package =
+                                registry.get_package(mapping[lsp_name])
+                            package:install()
+                            package:on(
+                                "install:success",
+                                vim.schedule_wrap(function()
+                                    vim.cmd("LspStart")
+                                end)
+                            )
                         end
 
                         if spec.lsp[lsp_name].setup ~= nil then
@@ -60,7 +63,6 @@ return {
             end
 
             vim.api.nvim_exec_autocmds("FileType", {})
-
         end,
     },
     {
@@ -79,7 +81,7 @@ return {
     {
         "folke/trouble.nvim",
         opts = {
-            auto_close = true
+            auto_close = true,
         },
         cmd = "Trouble",
         keys = {

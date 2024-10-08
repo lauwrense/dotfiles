@@ -27,6 +27,7 @@ return {
                 "c",
                 "cpp",
                 "make",
+                "cmake",
                 -- MD
                 "markdown",
                 "markdown_inline",
@@ -73,7 +74,6 @@ return {
                             query_group = "locals",
                             desc = "Select language scope",
                         },
-
                     },
                     selection_modes = {
                         ["@parameter.outer"] = "v", -- charwise
@@ -84,7 +84,7 @@ return {
                 },
             },
         },
-        config = function (self, opts)
+        config = function(self, opts)
             -- Dont remove this
             require("nvim-treesitter.configs").setup(opts)
         end,

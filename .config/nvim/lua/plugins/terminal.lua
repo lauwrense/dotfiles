@@ -3,8 +3,8 @@ return {
         "willothy/flatten.nvim",
         opts = {
             window = {
-                open = "alternate"
-            }
+                open = "alternate",
+            },
         },
         config = true,
         lazy = false,
@@ -13,13 +13,13 @@ return {
     {
         "akinsho/toggleterm.nvim",
         version = "*",
-        cmd = {"ToggleTerm"},
+        cmd = { "ToggleTerm" },
         opts = {
             shade_terminals = false,
-            on_open = function ()
-                vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], {})
-            end
+            on_open = function()
+                vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], {})
+            end,
         },
-        config = true
-    }
+        config = true,
+    },
 }

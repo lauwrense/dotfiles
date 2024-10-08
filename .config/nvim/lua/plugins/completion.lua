@@ -1,9 +1,9 @@
 return {
     {
         "hrsh7th/nvim-cmp",
-        event = "BufRead",
+        event = "VeryLazy",
         dependencies = {
-            { "hrsh7th/cmp-nvim-lsp" },
+            { "hrsh7th/cmp-buffer" },
             { "saadparwaiz1/cmp_luasnip" },
             { "FelipeLema/cmp-async-path" },
             { "petertriho/cmp-git" },
@@ -12,7 +12,7 @@ return {
                 version = "v2.*",
                 build = "make install_jsregexp",
             },
-            { "nvim-lua/plenary.nvim"  }
+            { "nvim-lua/plenary.nvim" },
         },
         config = function()
             local cmp = require("cmp")
@@ -23,10 +23,10 @@ return {
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0
                     and vim.api
-                    .nvim_buf_get_lines(0, line - 1, line, true)[1]
-                    :sub(col, col)
-                    :match("%s")
-                    == nil
+                            .nvim_buf_get_lines(0, line - 1, line, true)[1]
+                            :sub(col, col)
+                            :match("%s")
+                        == nil
             end
 
             local config = {
@@ -34,10 +34,9 @@ return {
                     completeopt = vim.o.completeopt,
                 },
                 preselect = {
-                    cmp.PreselectMode.None
+                    cmp.PreselectMode.None,
                 },
             }
-
 
             -- Looks for completion window
             config.window = {
@@ -96,11 +95,11 @@ return {
                         async_path = "[Path]",
                         neorg = "[Norg]",
                         git = "[Git]",
+                        buffer = "[Buf]",
                     })[entry.source.name]
                     return vim_item
                 end,
             }
-
 
             -- Keybindings
             config.mapping = cmp.mapping.preset.insert({
@@ -157,8 +156,6 @@ return {
             -- Cmp sources
             config.sources = cmp.config.sources({
                 { name = "git" },
-                { name = "nvim_lsp" },
-            }, {
                 {
                     name = "luasnip",
                     option = {
@@ -167,9 +164,8 @@ return {
                     },
                 },
                 { name = "async_path" },
-                { name="lazydev", group_index = 0 },
+                { name = "buffer" },
             })
-
 
             -- Setup snippets
             config.snippet = {
@@ -181,7 +177,8 @@ return {
             -- Function to determine whether cmp should be enabled or not
             config.enabled = function()
                 local context = require("cmp.config.context")
-                local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+                local buftype =
+                    vim.api.nvim_get_option_value("buftype", { buf = 0 })
 
                 if buftype == "prompt" then
                     return false

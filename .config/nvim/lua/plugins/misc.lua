@@ -7,8 +7,7 @@ return {
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = {
-        },
+        opts = {},
         config = function(_, opts)
             require("which-key").setup(opts)
 
@@ -17,14 +16,18 @@ return {
             wk.add({
                 { "<leader>f", group = "+fzf" },
                 {
-                    { "]",  group = "+next" },
-                    { "]t", "<cmd>tabnext<cr>", desc = "Next tab" },
+                    { "]", group = "+next" },
+                    { "]a", "<cmd>tabnext<cr>", desc = "Next tab" },
                 },
                 {
-                    { "[",  group = "+prev" },
-                    { "[t", "<cmd>tabprev<cr>", desc = "Prev tab" },
-                }
+                    { "[", group = "+prev" },
+                    { "[a", "<cmd>tabprev<cr>", desc = "Prev tab" },
+                },
             })
-        end
+        end,
+    },
+    {
+        "stevearc/overseer.nvim",
+        config = true,
     },
 }

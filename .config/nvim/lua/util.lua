@@ -1,4 +1,4 @@
-local path = vim.fn.stdpath('config')
+local path = vim.fn.stdpath("config")
 local lang_path = path .. "/lua/plugins/lang"
 
 local M = {}
@@ -27,7 +27,7 @@ M.get_langs_with_fields = function(fields)
         for _, spec_name in ipairs(fields) do
             if spec[spec_name] ~= nil then
                 langs_with_spec[lang_name] = {
-                    [spec_name] = spec[spec_name]
+                    [spec_name] = spec[spec_name],
                 }
             end
         end
@@ -44,7 +44,7 @@ M.get_langs_with_field = function(field)
     for lang_name, spec in pairs(langs) do
         if spec[field] ~= nil then
             langs_with_spec[lang_name] = {
-                [field] = spec[field]
+                [field] = spec[field],
             }
         end
     end

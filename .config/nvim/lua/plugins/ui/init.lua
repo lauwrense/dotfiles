@@ -26,8 +26,8 @@ return {
             whitespace = { remove_blankline_trail = false },
             scope = {
                 enabled = false,
-            }
-        }
+            },
+        },
     },
     { "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
     {
@@ -51,9 +51,15 @@ return {
                 window = {
                     winblend = 0,
                 },
-            }
+            },
         },
+        config = function(self, opts)
+            local fidget = require("fidget")
+            fidget.setup(opts)
+
+            vim.notify = fidget.notify
+        end,
     },
-    {dir = "~/projects/navy"},
-    {"rebelot/heirline.nvim"},
+    { dir = "~/projects/navy" },
+    { "rebelot/heirline.nvim" },
 }

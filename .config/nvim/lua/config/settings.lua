@@ -33,20 +33,18 @@ vim.opt.autochdir = false
 vim.opt.hidden = true
 vim.opt.fileencoding = "utf-8"
 vim.opt.cmdheight = 1
-vim.opt.completeopt = { "menu", "menuone", "preview", "noselect", "noinsert"}
+vim.opt.completeopt = { "menu", "menuone", "preview", "noselect", "noinsert" }
 
 vim.opt.pumheight = 10
 vim.opt.showtabline = 1
 
 vim.opt.showmode = false
 vim.opt.updatetime = 200
-
 vim.opt.timeoutlen = 1000
 
 vim.opt.undofile = true
 vim.opt.swapfile = true
 vim.opt.backup = false
-
 
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99

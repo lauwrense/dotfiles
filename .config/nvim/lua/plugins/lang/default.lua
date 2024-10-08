@@ -19,10 +19,14 @@
 ---| "fmt"
 
 local function make_capabilities()
+    ---@type lsp.ClientCapabilities
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
+
+    capabilities.textDocument = {
+        foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true,
+        },
     }
 
     return capabilities
@@ -38,5 +42,5 @@ return {
         require("lspconfig")[server_name].setup({
             capabilities = make_capabilities(),
         })
-    end
+    end,
 }
