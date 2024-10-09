@@ -1,6 +1,7 @@
 return {
     {
         "m4xshen/hardtime.nvim",
+        event = "VeryLazy",
         opts = {
             max_count = 1,
             notification = false,
@@ -19,7 +20,6 @@ return {
     },
     {
         "folke/flash.nvim",
-        event = "VeryLazy",
         opts = {
             modes = {
                 search = {

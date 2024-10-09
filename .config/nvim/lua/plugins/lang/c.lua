@@ -10,7 +10,9 @@ return {
 
                 local group =
                     vim.api.nvim_create_augroup("setup_cmp_sources_cmake", {})
-                vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "FileType" }, {
+                vim.api.nvim_create_autocmd(
+                    { "BufRead", "BufNew", "FileType" },
+                    {
                         pattern = { "CMakeLists.txt" },
                         group = group,
                         callback = function()

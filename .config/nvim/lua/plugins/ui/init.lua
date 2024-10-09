@@ -21,7 +21,7 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        event = "VeryLazy",
+        event = "UIEnter",
         opts = {
             whitespace = { remove_blankline_trail = false },
             scope = {
@@ -32,7 +32,7 @@ return {
     { "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
     {
         "RRethy/vim-illuminate",
-        event = "VeryLazy",
+        event = "UIEnter",
         config = function()
             require("illuminate").configure({
                 filetypes_denylist = {
@@ -46,6 +46,7 @@ return {
     },
     {
         "j-hui/fidget.nvim",
+        event = { "UIEnter" },
         opts = {
             notification = {
                 window = {
@@ -60,6 +61,5 @@ return {
             vim.notify = fidget.notify
         end,
     },
-    { dir = "~/projects/navy" },
     { "rebelot/heirline.nvim" },
 }

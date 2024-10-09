@@ -40,6 +40,7 @@ vim.opt.showtabline = 1
 
 vim.opt.showmode = false
 vim.opt.updatetime = 200
+vim.opt.timeout = true
 vim.opt.timeoutlen = 1000
 
 vim.opt.undofile = true

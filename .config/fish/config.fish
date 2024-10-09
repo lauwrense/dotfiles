@@ -21,7 +21,6 @@ starship init fish | source
 fzf --fish | source
 
 fish_config theme choose Catppuccin\ Frappe
-fish_add_path /home/lauw/.cargo/bin
 
 # Theme
 set -Ux FZF_DEFAULT_OPTS "\
