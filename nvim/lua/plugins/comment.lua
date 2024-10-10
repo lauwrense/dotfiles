@@ -1,14 +1,14 @@
 return {
     {
         "JoosepAlviste/nvim-ts-context-commentstring",
-        events = "VeryLazy",
+        event = "VeryLazy",
         opts = {
             enable_autocmd = false,
         },
     },
     {
         "numToStr/Comment.nvim",
-        events = "VeryLazy",
+        event = "VeryLazy",
         config = function()
             ---@diagnostic disable-next-line:missing-fields
             require("Comment").setup({
