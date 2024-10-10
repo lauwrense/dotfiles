@@ -2,7 +2,7 @@
 return {
     spec = {
         {
-            "MeanderingProgrammer/render-markdown.nvim",
+            "OXY2DEV/markview.nvim",
             ft = "md",
             dependencies = {
                 "nvim-treesitter/nvim-treesitter",

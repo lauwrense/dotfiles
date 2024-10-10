@@ -1,7 +1,8 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        name = "Treesitter",
+        name = "treesitter",
+        event = "UIEnter",
         build = ":TSUpdate",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -24,6 +25,7 @@ return {
 
                 "python",
                 -- C
+                "doxygen",
                 "c",
                 "cpp",
                 "make",
