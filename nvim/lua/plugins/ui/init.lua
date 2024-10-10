@@ -29,7 +29,10 @@ return {
             },
         },
     },
-    { "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
+    {
+        "HiPhish/rainbow-delimiters.nvim",
+        event = { "BufNew", "BufRead" },
+    },
     {
         "RRethy/vim-illuminate",
         event = "UIEnter",
