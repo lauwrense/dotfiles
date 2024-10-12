@@ -14,11 +14,9 @@ return {
             local lspconfig = require("lspconfig")
             local langs = require("util").get_langs_with_field("lsp")
 
-            opts.handlers = {}
-
             --- list of lsps
             --- TODO: Move this to util.lua
-            ---@type [string, LanguagePluginLSP[]][]
+            ---@type LanguagePluginLSP[]
             local lsp_list = vim
                 .iter(langs)
                 ---@param spec LanguagePlugin
@@ -31,57 +29,58 @@ return {
                     end)
                 ---@param spec LanguagePlugin
                 :fold({}, function(acc, spec)
-                    vim.iter(spec):each(function(e) 
-                        acc[#acc + 1] = e
+                    vim.iter(spec):each(function(lsp)
+                        acc[#acc + 1] = lsp
                     end)
                     return acc
                 end)
 
             -- lsp installed by mason
             local installed_by_mason = vim.iter(lsp_list)
-                :filter(function(spec)
-                    return mapping[spec.name] ~= nil
+                :filter(function(lsp)
+                    return mapping[lsp.name] ~= nil
                         and not registry
-                            .get_package(mapping[spec.name])
+                            .get_package(mapping[lsp.name])
                             :is_installed()
-                        and spec["autoinstall"] ~= false
+                        and lsp["autoinstall"] ~= false
                 end)
-                :map(function (spec)
-                    local package = registry.get_package(mapping[spec.name])
-                    package:install()
-                    package:on(
+                :map(function (lsp)
+                    local pkg = registry.get_package(mapping[lsp.name])
+                    pkg:install()
+                    pkg:on(
                         "install:success",
                         vim.schedule_wrap(function()
                             vim.cmd("LspStart")
                         end)
                     )
 
-                    return spec
+                    return lsp
                 end)
+                :totable()
 
             --- setup the servers
-            vim.iter(lsp_list):each(function (spec)
-                if spec.setup ~= nil then
-                    spec.setup()
+            vim.iter(lsp_list):each(function (lsp)
+                if lsp.setup ~= nil then
+                    lsp.setup()
                 else
-                    require("plugins.lang.default").lsp(spec.name)
+                    require("plugins.lang.default").lsp(lsp.name)
                 end
             end)
 
             --- setup autocommand for attaching cmp sources
             vim.iter(lsp_list)
-                :filter(function(spec)
-                        return spec.cmp_enabled
+                :filter(function(lsp)
+                        return lsp.cmp_enabled
                     end)
-                :each(function (spec)
+                :each(function (lsp)
                     local cmp = require("cmp")
 
                     local sources = cmp.get_config().sources or {}
 
                     local group =
-                        vim.api.nvim_create_augroup("SetupCmpSources" .. string.upper(spec.name), {})
+                        vim.api.nvim_create_augroup("SetupCmpSources" .. string.upper(lsp.name), {})
                     vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "FileType" }, {
-                            pattern = require("lspconfig")[spec.name].config_def.filetypes,
+                            pattern = lspconfig[lsp.name].config_def.filetypes,
                             group = group,
                             callback = function(ev)
                                 if

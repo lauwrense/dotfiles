@@ -4,13 +4,19 @@
 ---@field dap fun()?
 ---@field test fun()?
 ---@field lint fun()?
----@field fmt nil | string[] | string
+---@field fmt nil | LanguagePluginFmt[]
 
 ---@class LanguagePluginLSP
 ---@field name string
 ---@field setup fun(server_name: string)
 ---@field cmp_enabled boolean? default: false if cmp sources are enabled
 ---@field automatic_install boolean? default: true
+
+---@class LanguagePluginFmtBase
+---@field [1] string
+---@field automatic_install boolean? default: true
+
+---@alias LanguagePluginFmt LanguagePluginFmtBase | string
 
 ---@alias LanguagePluginSpecName
 ---| "spec"
