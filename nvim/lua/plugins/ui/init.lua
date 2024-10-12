@@ -21,7 +21,7 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
-        event = "UIEnter",
+        event = "VeryLazy",
         opts = {
             whitespace = { remove_blankline_trail = false },
             scope = {
@@ -32,10 +32,13 @@ return {
     {
         "HiPhish/rainbow-delimiters.nvim",
         event = { "BufNew", "BufRead" },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+        },
     },
     {
         "RRethy/vim-illuminate",
-        event = "UIEnter",
+        event = "VeryLazy",
         config = function()
             require("illuminate").configure({
                 filetypes_denylist = {
@@ -49,7 +52,7 @@ return {
     },
     {
         "j-hui/fidget.nvim",
-        event = { "UIEnter" },
+        event = { "VeryLazy" },
         opts = {
             notification = {
                 window = {

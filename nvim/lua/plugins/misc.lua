@@ -10,6 +10,7 @@ return {
 
             wk.add({
                 { "<leader>f", group = "+fzf" },
+                { "<leader>l", group = "+list" },
                 {
                     { "]", group = "+next" },
                     { "]a", "<cmd>tabnext<cr>", desc = "Next tab" },

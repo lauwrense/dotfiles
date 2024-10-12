@@ -5,13 +5,6 @@ local M = {}
 
 local langs = {}
 
--- for _, file_name in pairs(vim.fn.globpath(lang_path, "*.lua", true, true)) do
---     local lang = file_name:gsub(lang_path .. "/", ""):gsub("%.lua$", "")
---     if not vim.tbl_contains({ "default", "init" }, lang) then
---         langs[lang] = require("plugins.lang." .. lang)
---     end
--- end
-
 vim.iter(vim.fn.globpath(lang_path, "*.lua", true, true))
     :map(function(file_name)
         local lang = file_name:gsub(lang_path .. "/", ""):gsub("%.lua$", "")
@@ -28,6 +21,10 @@ end
 ---@param fields ("lsp" | "dap" | "fmt" | "lint" | "test" | "spec")[]
 ---@return LanguagePlugin[]
 M.get_langs_with_fields = function(fields)
+    if #fields < 1 then
+        return {}
+    end
+
     fields = fields or {}
 
     local langs_with_spec = {}
@@ -49,13 +46,6 @@ end
 M.get_langs_with_field = function(field)
     local langs_with_spec = {}
 
-    -- for lang_name, spec in pairs(langs) do
-    --     if spec[field] ~= nil then
-    --         langs_with_spec[lang_name] = {
-    --             [field] = spec[field],
-    --         }
-    --     end
-    -- end
     vim.iter(pairs(langs))
         :filter(function(name, spec)
             return spec[field] ~= nil

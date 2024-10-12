@@ -1,13 +1,15 @@
 ---@class LanguagePlugin
----@field spec LazySpec
----@field lsp table<string, LanguagePluginLSP>? A table of lsp names
+---@field spec LazySpec[]
+---@field lsp LanguagePluginLSP[]?
 ---@field dap fun()?
 ---@field test fun()?
 ---@field lint fun()?
----@field fmt fun()?
+---@field fmt nil | string[] | string
 
 ---@class LanguagePluginLSP
+---@field name string
 ---@field setup fun(server_name: string)
+---@field cmp_enabled boolean? default: false if cmp sources are enabled
 ---@field automatic_install boolean? default: true
 
 ---@alias LanguagePluginSpecName

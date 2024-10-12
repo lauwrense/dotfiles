@@ -60,3 +60,4 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.exrc = true
+vim.g.shortmess = "ltToOCFI"

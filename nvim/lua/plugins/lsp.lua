@@ -1,7 +1,7 @@
 return {
     {
         "williamboman/mason-lspconfig.nvim",
-        event = { "BufEnter", "BufNewFile" },
+        -- event = { "BufEnter", "BufNewFile" },
         dependencies = {
             { "williamboman/mason.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
@@ -16,36 +16,87 @@ return {
 
             opts.handlers = {}
 
-            vim.iter(langs):each(function(_, specs)
-                vim.iter(specs.lsp)
-                    :filter(function(name, _)
-                        return lspconfig[name] ~= nil
+            --- list of lsps
+            --- TODO: Move this to util.lua
+            ---@type [string, LanguagePluginLSP[]][]
+            local lsp_list = vim
+                .iter(langs)
+                ---@param spec LanguagePlugin
+                :filter(function(_, spec)
+                        return spec.lsp ~= nil
                     end)
-                    :each(function(name, spec)
-                        if
-                            mapping[name] ~= nil
-                            and not registry
-                                .get_package(mapping[name])
-                                :is_installed()
-                            and spec["autoinstall"] ~= false
-                        then
-                            local package = registry.get_package(mapping[name])
-                            package:install()
-                            package:on(
-                                "install:success",
-                                vim.schedule_wrap(function()
-                                    vim.cmd("LspStart")
-                                end)
-                            )
-                        end
+                ---@param spec LanguagePlugin
+                :map(function(_, spec)
+                        return spec.lsp
+                    end)
+                ---@param spec LanguagePlugin
+                :fold({}, function(acc, spec)
+                    vim.iter(spec):each(function(e) 
+                        acc[#acc + 1] = e
+                    end)
+                    return acc
+                end)
 
-                        if spec.setup ~= nil then
-                            spec.setup("")
-                        else
-                            require("plugins.lang.default").lsp(name)
-                        end
-                    end)
+            -- lsp installed by mason
+            local installed_by_mason = vim.iter(lsp_list)
+                :filter(function(spec)
+                    return mapping[spec.name] ~= nil
+                        and not registry
+                            .get_package(mapping[spec.name])
+                            :is_installed()
+                        and spec["autoinstall"] ~= false
+                end)
+                :map(function (spec)
+                    local package = registry.get_package(mapping[spec.name])
+                    package:install()
+                    package:on(
+                        "install:success",
+                        vim.schedule_wrap(function()
+                            vim.cmd("LspStart")
+                        end)
+                    )
+
+                    return spec
+                end)
+
+            --- setup the servers
+            vim.iter(lsp_list):each(function (spec)
+                if spec.setup ~= nil then
+                    spec.setup()
+                else
+                    require("plugins.lang.default").lsp(spec.name)
+                end
             end)
+
+            --- setup autocommand for attaching cmp sources
+            vim.iter(lsp_list)
+                :filter(function(spec)
+                        return spec.cmp_enabled
+                    end)
+                :each(function (spec)
+                    local cmp = require("cmp")
+
+                    local sources = cmp.get_config().sources or {}
+
+                    local group =
+                        vim.api.nvim_create_augroup("SetupCmpSources" .. string.upper(spec.name), {})
+                    vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "FileType" }, {
+                            pattern = require("lspconfig")[spec.name].config_def.filetypes,
+                            group = group,
+                            callback = function(ev)
+                                if
+                                    not vim.iter(sources):any(function(value)
+                                        return value.name == "nvim_lsp"
+                                    end)
+                                then
+                                    sources[#sources + 1] = { name = "nvim_lsp" }
+                                end
+
+                                cmp.setup.buffer({ sources = sources })
+                            end,
+                        }
+                    )
+                end)
 
             vim.api.nvim_exec_autocmds("FileType", {})
         end,
@@ -76,7 +127,6 @@ return {
                 "<cmd>Trouble diagnostics toggle<cr>",
                 desc = "Diagnostics (Trouble)",
             },
-
             {
                 "<leader>xX",
                 "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
@@ -88,31 +138,34 @@ return {
                 "<cmd>Trouble symbols toggle focus=false<cr>",
                 desc = "Symbols (Trouble)",
             },
-            {
-                "<leader>cl",
-                "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-                desc = "LSP Definitions / references / ... (Trouble)",
-            },
-            {
-                "<leader>xL",
-                "<cmd>Trouble loclist toggle<cr>",
-                desc = "Location List (Trouble)",
-            },
-            {
-
-                "<leader>xQ",
-                "<cmd>Trouble qflist toggle<cr>",
-                desc = "Quickfix List (Trouble)",
-            },
         },
     },
     {
         "dnlhc/glance.nvim",
         keys = {
-            {"gR", "<cmd>Glance references<cr>", "Glance references"},
-            {"gD", "<cmd>Glance definitions<cr>", "Glance definitions"},
-            {"gY", "<cmd>Glance type_definitions<cr>", "Glance type definitions"},
-            {"gM", "<cmd>Glance implementations<cr>", "Glance implementations"},
-        }
-    }
+            { "gR", "<cmd>Glance references<cr>", "Glance references" },
+            { "gD", "<cmd>Glance definitions<cr>", "Glance definitions" },
+            {
+                "gY",
+                "<cmd>Glance type_definitions<cr>",
+                "Glance type definitions",
+            },
+            {
+                "gM",
+                "<cmd>Glance implementations<cr>",
+                "Glance implementations",
+            },
+        },
+    },
+    {
+        "stevearc/aerial.nvim",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons",
+        },
+        keys = {
+            { "<leader>a", "<cmd>AerialToggle!<cr>", desc = "Open Aerial" },
+        },
+        opts = {},
+    },
 }

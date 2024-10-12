@@ -2,7 +2,6 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         name = "treesitter",
-        event = "UIEnter",
         build = ":TSUpdate",
         dependencies = {
             { "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -11,6 +10,7 @@ return {
             ensure_installed = {
                 "zig",
                 "rust",
+                "go",
 
                 "comment",
 

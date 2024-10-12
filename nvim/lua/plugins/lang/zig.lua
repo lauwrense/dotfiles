@@ -2,7 +2,8 @@
 return {
     spec = {},
     lsp = {
-        ["zls"] = {
+        {
+            name = "zls",
             setup = function(server_name)
                 vim.g.zig_fmt_autosave = 0
                 require("lspconfig").zls.setup({
