@@ -4,7 +4,7 @@ if status is-interactive
 
     bind --erase -a
 
-    if test -z "$NVIM"; and not set -q TMUX
+    if test -z "$NVIM"; and test -z "$TMUX"
         cd ~;
     end
 end
