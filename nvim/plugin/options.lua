@@ -31,8 +31,6 @@ vim.opt.splitbelow = true
 
 vim.opt.autochdir = false
 vim.opt.hidden = true
-vim.opt.fileencoding = "utf-8"
-vim.opt.cmdheight = 1
 vim.opt.completeopt = { "menu", "menuone", "preview", "noselect", "noinsert" }
 
 vim.opt.pumheight = 10
@@ -55,9 +53,6 @@ vim.opt.foldenable = true
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.opt.laststatus = 3
 
-vim.keymap.set("", "<Space>", "<Nop>", { silent = true, remap = true })
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 vim.g.exrc = true
 vim.g.shortmess = "ltToOCFI"
