@@ -7,9 +7,8 @@ return {
             {
                 "<leader>F",
                 function()
-                    require("conform").format({ async = true })
+                    require("conform").format({ async = true})
                 end,
-                mode = "",
                 desc = "Format buffer",
             },
         },
@@ -42,8 +41,7 @@ return {
                             }
                         end)
                         return acc
-                    end
-                )
+                    end)
 
             --- formatters installed by mason
             local installed_by_mason = vim.iter(fmt_list)

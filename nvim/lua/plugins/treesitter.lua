@@ -10,7 +10,11 @@ return {
             ensure_installed = {
                 "zig",
                 "rust",
+                -- Go
                 "go",
+                "gosum",
+                "gomod",
+                "gowork",
 
                 "comment",
 
