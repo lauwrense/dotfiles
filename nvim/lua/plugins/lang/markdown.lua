@@ -4,7 +4,8 @@ return {
     lsp = {
         {
             name = "marksman",
-            setup = function(server_name)
+            cmp_enabled = true,
+            setup = function()
                 require("lspconfig")["marksman"].setup({
                     capabilities = require("plugins.lang.default").make_capabilities(),
                 })

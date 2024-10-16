@@ -70,7 +70,7 @@ return {
             --- setup autocommand for attaching cmp sources
             vim.iter(lsp_list)
                 :filter(function(lsp)
-                        return lsp.cmp_enabled
+                        return lsp.cmp_enabled or false
                     end)
                 :each(function (lsp)
                     local cmp = require("cmp")
@@ -80,7 +80,7 @@ return {
                     local group =
                         vim.api.nvim_create_augroup("SetupCmpSources" .. string.upper(lsp.name), {})
                     vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "FileType" }, {
-                            pattern = lspconfig[lsp.name].config_def.filetypes,
+                            pattern = lspconfig[lsp.name].filetypes,
                             group = group,
                             callback = function(ev)
                                 if
@@ -88,7 +88,9 @@ return {
                                         return value.name == "nvim_lsp"
                                     end)
                                 then
-                                    sources[#sources + 1] = { name = "nvim_lsp" }
+                                    local new_sources = {{name = "nvim_lsp"}}
+                                    vim.list_extend(new_sources, sources)
+                                    sources = new_sources
                                 end
 
                                 cmp.setup.buffer({ sources = sources })
@@ -115,31 +117,6 @@ return {
         },
     },
     {
-        "folke/trouble.nvim",
-        opts = {
-            auto_close = true,
-        },
-        cmd = "Trouble",
-        keys = {
-            {
-                "<leader>xx",
-                "<cmd>Trouble diagnostics toggle<cr>",
-                desc = "Diagnostics (Trouble)",
-            },
-            {
-                "<leader>xX",
-                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-                desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-
-                "<leader>cs",
-                "<cmd>Trouble symbols toggle focus=false<cr>",
-                desc = "Symbols (Trouble)",
-            },
-        },
-    },
-    {
         "dnlhc/glance.nvim",
         keys = {
             { "gR", "<cmd>Glance references<cr>", "Glance references" },
@@ -155,16 +132,5 @@ return {
                 "Glance implementations",
             },
         },
-    },
-    {
-        "stevearc/aerial.nvim",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-tree/nvim-web-devicons",
-        },
-        keys = {
-            { "<leader>a", "<cmd>AerialToggle!<cr>", desc = "Open Aerial" },
-        },
-        opts = {},
     },
 }

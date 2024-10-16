@@ -6,19 +6,17 @@ return {
             ft = "lua",
             opts = {
                 library = {
-                    "luvit-meta/library",
-                    "~/projects/navy",
+                    { path = "luvit-meta/library", words = { "vim%.uv" } },
                 },
             },
         },
         { "Bilal2453/luvit-meta", lazy = true },
-        { "hrsh7th/cmp-nvim-lsp", ft = "lua" },
     },
     lsp = {
         {
             name = "lua_ls",
             cmp_enabled = true,
-            setup = function(_)
+            setup = function()
                 require("lspconfig")["lua_ls"].setup({
                     settings = {
                         Lua = {
@@ -32,5 +30,5 @@ return {
             end,
         },
     },
-    fmt = {"stylua"},
+    fmt = { "stylua" },
 }
