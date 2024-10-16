@@ -1,8 +1,9 @@
 return {
     {
         "stevearc/oil.nvim",
+        name = "oil",
         keys = {
-            { "<leader>O", "<cmd>Oil<cr>", desc = "Oiling up" },
+            { "<leader>O", "<cmd>Oil<cr>", desc = "Oil" },
         },
         config = function()
             require("oil").setup({
