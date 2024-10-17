@@ -28,6 +28,7 @@ local lazy_config = {
                 -- "tarPlugin",
                 "tohtml",
                 "tutor",
+                "fzf",
                 -- "zipPlugin",
             },
         },

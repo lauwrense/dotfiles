@@ -1,13 +1,9 @@
 return {
     {
-        "JoosepAlviste/nvim-ts-context-commentstring",
-        event = "VeryLazy",
-        opts = {
-            enable_autocmd = false,
-        },
-    },
-    {
         "numToStr/Comment.nvim",
+        dependencies = {
+            { "JoosepAlviste/nvim-ts-context-commentstring" },
+        },
         event = "VeryLazy",
         config = function()
             ---@diagnostic disable-next-line:missing-fields
