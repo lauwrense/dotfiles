@@ -20,6 +20,7 @@ return {
                 "gosum",
                 "gomod",
                 "gowork",
+
                 -- Scripting
                 "lua",
                 "luap",
@@ -32,10 +33,12 @@ return {
                 "cpp",
                 "make",
                 "cmake",
+
                 -- MD
                 "markdown",
                 "markdown_inline",
 
+                -- Latex
                 "latex",
 
                 -- Git
@@ -44,9 +47,9 @@ return {
                 "gitattributes",
                 "gitignore",
                 "git_rebase",
-
                 "git_config",
             },
+            auto_install = true,
             highlight = {
                 enable = true,
                 disable = function(_, buf)
@@ -59,6 +62,9 @@ return {
                     end
                 end,
                 additional_vim_regex_highlighting = false,
+            },
+            ident = {
+                enable = true
             },
         },
         config = function(self, opts)
