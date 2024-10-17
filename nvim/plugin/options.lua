@@ -31,7 +31,6 @@ vim.opt.splitbelow = true
 
 vim.opt.autochdir = false
 vim.opt.hidden = true
-vim.opt.completeopt = { "menu", "menuone", "preview", "noselect", "noinsert" }
 
 vim.opt.pumheight = 10
 vim.opt.showtabline = 1

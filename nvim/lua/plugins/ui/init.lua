@@ -1,5 +1,5 @@
 return {
-    { "nvim-tree/nvim-web-devicons" },
+    { "nvim-tree/nvim-web-devicons", lazy = true },
     -- Colorschemes
     {
         "catppuccin/nvim",
@@ -32,9 +32,6 @@ return {
     {
         "HiPhish/rainbow-delimiters.nvim",
         event = { "BufNew", "BufRead" },
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
     },
     {
         "RRethy/vim-illuminate",
@@ -60,7 +57,7 @@ return {
                 },
             },
         },
-        config = function(self, opts)
+        config = function(_, opts)
             local fidget = require("fidget")
             fidget.setup(opts)
 

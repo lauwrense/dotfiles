@@ -1,10 +1,9 @@
 return {
     {
         "williamboman/mason-lspconfig.nvim",
-        -- event = { "BufEnter", "BufNewFile" },
+        event = { "BufEnter", "BufNewFile" },
         dependencies = {
             { "williamboman/mason.nvim" },
-            { "hrsh7th/cmp-nvim-lsp" },
             { "neovim/nvim-lspconfig" },
         },
         config = function(_, opts)
@@ -19,21 +18,25 @@ return {
             ---@type LanguagePluginLSP[]
             local lsp_list = vim
                 .iter(langs)
-                ---@param spec LanguagePlugin
-                :filter(function(_, spec)
+                :filter(
+                    function(_, spec)
                         return spec.lsp ~= nil
-                    end)
-                ---@param spec LanguagePlugin
-                :map(function(_, spec)
+                    end
+                )
+                :map(
+                    function(_, spec)
                         return spec.lsp
-                    end)
-                ---@param spec LanguagePlugin
-                :fold({}, function(acc, spec)
-                    vim.iter(spec):each(function(lsp)
-                        acc[#acc + 1] = lsp
-                    end)
-                    return acc
-                end)
+                    end
+                )
+                :fold(
+                    {},
+                    function(acc, spec)
+                        vim.iter(spec):each(function(lsp)
+                            acc[#acc + 1] = lsp
+                        end)
+                        return acc
+                    end
+                )
 
             -- lsp installed by mason
             local installed_by_mason = vim.iter(lsp_list)
@@ -44,7 +47,7 @@ return {
                             :is_installed()
                         and lsp["autoinstall"] ~= false
                 end)
-                :map(function (lsp)
+                :map(function(lsp)
                     local pkg = registry.get_package(mapping[lsp.name])
                     pkg:install()
                     pkg:on(
@@ -59,7 +62,7 @@ return {
                 :totable()
 
             --- setup the servers
-            vim.iter(lsp_list):each(function (lsp)
+            vim.iter(lsp_list):each(function(lsp)
                 if lsp.setup ~= nil then
                     lsp.setup()
                 else
@@ -68,27 +71,31 @@ return {
             end)
 
             --- setup autocommand for attaching cmp sources
+            local cmp = require("cmp")
+            local sources = cmp.get_config().sources or {}
+
             vim.iter(lsp_list)
                 :filter(function(lsp)
-                        return lsp.cmp_enabled or false
-                    end)
-                :each(function (lsp)
-                    local cmp = require("cmp")
-
-                    local sources = cmp.get_config().sources or {}
-
-                    local group =
-                        vim.api.nvim_create_augroup("SetupCmpSources" .. string.upper(lsp.name), {})
-                    vim.api.nvim_create_autocmd({ "BufRead", "BufNew", "FileType" }, {
+                    return lsp.cmp_enabled or false
+                end)
+                :each(function(lsp)
+                    local group = vim.api.nvim_create_augroup(
+                        "SetupCmpSources" .. string.upper(lsp.name),
+                        {}
+                    )
+                    vim.api.nvim_create_autocmd(
+                        { "BufRead", "BufNew", "FileType" },
+                        {
                             pattern = lspconfig[lsp.name].filetypes,
                             group = group,
-                            callback = function(ev)
+                            callback = function()
                                 if
                                     not vim.iter(sources):any(function(value)
                                         return value.name == "nvim_lsp"
                                     end)
                                 then
-                                    local new_sources = {{name = "nvim_lsp"}}
+                                    local new_sources =
+                                        { { name = "nvim_lsp" } }
                                     vim.list_extend(new_sources, sources)
                                     sources = new_sources
                                 end

@@ -13,6 +13,7 @@ return {
                 build = "make install_jsregexp",
             },
             { "nvim-lua/plenary.nvim" },
+            { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
             local cmp = require("cmp")
@@ -31,7 +32,7 @@ return {
 
             local config = {
                 completion = {
-                    completeopt = vim.o.completeopt,
+                    completeopt = "menu,menuone,preview,noselect,noinsert",
                 },
                 preselect = {
                     cmp.PreselectMode.None,
@@ -96,10 +97,11 @@ return {
                         neorg = "[Norg]",
                         git = "[Git]",
                         buffer = "[Buf]",
-                    })[entry.source.name]
+                    })[entry.source.name] or "[Else]"
                     return vim_item
                 end,
             }
+
 
             -- Keybindings
             config.mapping = cmp.mapping.preset.insert({
@@ -199,26 +201,24 @@ return {
             })
 
             -- Load snippets
-            require("luasnip.loaders.from_lua").load()
+            -- require("luasnip.loaders.from_lua").load()
         end,
     },
     {
         "windwp/nvim-autopairs",
+        name = "autopairs",
         event = "InsertEnter",
         config = function()
             local cmp = require("cmp")
             local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-            local npair_config = {
-                disable_filetype = { "TelescopePrompt" },
-                disable_in_macro = false,
-                fast_wrap = {},
-            }
-
             cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
             -- Autopairs
-            require("nvim-autopairs").setup(npair_config)
+            require("nvim-autopairs").setup({
+                disable_in_macro = false,
+                check_ts = true,
+            })
         end,
     },
 }
