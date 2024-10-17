@@ -34,7 +34,11 @@ return {
                 "S",
                 mode = { "n", "x", "o" },
                 function()
-                    require("flash").treesitter()
+                    require("flash").treesitter({
+                        highlight = {
+                            backdrop = true
+                        }
+                    })
                 end,
                 desc = "Flash Treesitter",
             },
