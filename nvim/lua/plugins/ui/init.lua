@@ -9,9 +9,6 @@ return {
         opts = {
             flavour = "frappe",
             integrations = {
-                telescope = {
-                    style = "nvchad"
-                },
                 fidget = true,
                 mason = true,
                 notify = true,

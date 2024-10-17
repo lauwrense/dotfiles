@@ -1,16 +1,14 @@
 return {
     "nvim-telescope/telescope.nvim",
-    name = "Telescope",
+    name = "telescope",
     dependencies = {
         { "nvim-lua/plenary.nvim" },
         {
             "nvim-telescope/telescope-fzf-native.nvim",
-            build = "make",
+            build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
         },
     },
-    cmd = {
-        "Telescope",
-    },
+    cmd = { "Telescope" },
     keys = {
         {
             "<leader>ff",
@@ -99,6 +97,8 @@ return {
                         ["<M-p>"] = action_layout.toggle_preview,
                     },
                     i = {
+                        ["<C-k>"] = action.move_selection_previous,
+                        ["<C-j>"] = action.move_selection_next,
                         ["<Up>"] = action.nop,
                         ["<Down>"] = action.nop,
                         ["<Left>"] = action.nop,
@@ -178,6 +178,5 @@ return {
         update_color({})
         require("telescope").setup(telescope_config)
         require("telescope").load_extension("fzf")
-        require("telescope").load_extension("notify")
     end,
 }
