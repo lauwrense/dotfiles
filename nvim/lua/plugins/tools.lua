@@ -7,7 +7,10 @@ return {
             {
                 "<leader>F",
                 function()
-                    require("conform").format({ async = true})
+                    require("conform").format({
+                        async = true,
+                        lsp_format = "fallback",
+                    })
                 end,
                 desc = "Format buffer",
             },
@@ -17,12 +20,23 @@ return {
         end,
         opts = {
             formatters_by_ft = {
-                lua = {"stylua"},
-            }
+                lua = { "stylua" },
+                go = { "goimports", "gofmt" },
+            },
         },
     },
     {
         "mfussenegger/nvim-lint",
-        event = "VeryLazy",
-    }
+        lazy = true,
+    },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua", -- only load on lua files
+        opts = {
+            library = {
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta", lazy = true },
 }

@@ -2,7 +2,7 @@ return {
     {
         "hrsh7th/nvim-cmp",
         name = "cmp",
-        event = "VeryLazy",
+        event = "InsertEnter",
         dependencies = {
             { "hrsh7th/cmp-buffer" },
             { "saadparwaiz1/cmp_luasnip" },

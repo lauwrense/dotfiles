@@ -5,7 +5,7 @@ return {
     },
     {
         "williamboman/mason.nvim",
-        event = { "BufEnter", "BufNewFile" },
+        cmd = "Mason",
         build = ":MasonUpdate",
         opts = {
             ui = {

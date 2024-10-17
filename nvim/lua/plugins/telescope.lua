@@ -122,7 +122,7 @@ return {
             },
         }
 
-        local update_color = function(opts)
+        local update_color = function()
             local TelescopePrompt = {
                 TelescopePromptNormal = {
                     bg = vim.api.nvim_get_hl(0, { name = "CursorLine" }).bg,
@@ -170,8 +170,8 @@ return {
             })
         vim.api.nvim_create_autocmd("Colorscheme", {
             group = update_color_group,
-            callback = function(opts)
-                update_color(opts)
+            callback = function()
+                update_color()
             end,
         })
 

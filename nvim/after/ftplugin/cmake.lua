@@ -3,6 +3,7 @@ local lsp = {
     -- this is the mason name
     bin = "neocmakelsp",
 }
+local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local sources = cmp.get_config().sources or {}
 
@@ -10,7 +11,14 @@ local registry = require("mason-registry")
 local pkg = registry.get_package(lsp.bin)
 pkg:install()
 
-require("lspconfig")[lsp.name].setup({})
+if not pkg:is_installed() and vim.fn.exepath(lsp.bin) == "" then
+    pkg:install()
+    pkg:on("install:success", function ()
+        lspconfig[lsp.name].setup({})
+    end)
+else
+    lspconfig[lsp.name].setup({})
+end
 
 if
     not vim.iter(sources):any(function(value)

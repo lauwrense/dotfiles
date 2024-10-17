@@ -6,7 +6,6 @@ return {
                 open = "alternate",
             },
         },
-        config = true,
         lazy = false,
         priority = 1001,
     },
