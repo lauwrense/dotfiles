@@ -36,7 +36,7 @@ function t -d "tmux into a new or existing session"
 
 
     if test "$(ps -e | rg -q tmux | count)" -le 0
-        and test -z "$(tmux has -t $name)"
+        and not tmux has -t $name &> /dev/null
         tmux new -d -c $z_query -s $name
     end
 
