@@ -9,7 +9,6 @@ local sources = cmp.get_config().sources or {}
 
 local registry = require("mason-registry")
 local pkg = registry.get_package(lsp.bin)
-pkg:install()
 
 if not pkg:is_installed() and vim.fn.exepath(lsp.bin) == "" then
     pkg:install()

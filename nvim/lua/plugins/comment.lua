@@ -4,7 +4,10 @@ return {
         dependencies = {
             { "JoosepAlviste/nvim-ts-context-commentstring" },
         },
-        event = "VeryLazy",
+        keys = {
+            "gc",
+            "gb",
+        },
         config = function()
             ---@diagnostic disable-next-line:missing-fields
             require("Comment").setup({
