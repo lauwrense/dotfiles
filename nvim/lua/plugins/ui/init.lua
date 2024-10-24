@@ -19,34 +19,8 @@ return {
         },
     },
     {
-        "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
-        event = "VeryLazy",
-        opts = {
-            whitespace = { remove_blankline_trail = false },
-            scope = {
-                enabled = false,
-            },
-        },
-    },
-    {
         "HiPhish/rainbow-delimiters.nvim",
         event = { "BufNew", "BufRead" },
-    },
-    {
-        "RRethy/vim-illuminate",
-        event = "VeryLazy",
-        enabled = false,
-        config = function()
-            require("illuminate").configure({
-                filetypes_denylist = {
-                    "dirvish",
-                    "fugitive",
-                    "NvimTree",
-                    "TelescopePrompt",
-                },
-            })
-        end,
     },
     {
         "j-hui/fidget.nvim",
@@ -64,5 +38,9 @@ return {
 
             vim.notify = fidget.notify
         end,
+    },
+    {
+        dir = "~/projects/luip.nvim",
+        opts = {},
     },
 }

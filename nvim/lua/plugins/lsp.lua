@@ -17,21 +17,4 @@ return {
             },
         },
     },
-    {
-        "dnlhc/glance.nvim",
-        keys = {
-            { "gR", "<cmd>Glance references<cr>", "Glance references" },
-            { "gD", "<cmd>Glance definitions<cr>", "Glance definitions" },
-            {
-                "gY",
-                "<cmd>Glance type_definitions<cr>",
-                "Glance type definitions",
-            },
-            {
-                "gM",
-                "<cmd>Glance implementations<cr>",
-                "Glance implementations",
-            },
-        },
-    },
 }
