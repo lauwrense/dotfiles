@@ -1,14 +1,14 @@
 return {
-    {
-        "willothy/flatten.nvim",
-        opts = {
-            window = {
-                open = "alternate",
-            },
-        },
-        lazy = false,
-        priority = 1001,
-    },
+    -- {
+    --     "willothy/flatten.nvim",
+    --     opts = {
+    --         window = {
+    --             open = "alternate",
+    --         },
+    --     },
+    --     lazy = false,
+    --     priority = 1001,
+    -- },
     -- {
     --     "akinsho/toggleterm.nvim",
     --     version = "*",

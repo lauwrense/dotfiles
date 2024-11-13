@@ -57,6 +57,5 @@ vim.opt.foldenable = true
 vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 vim.opt.laststatus = 3
 
-
 vim.g.exrc = true
 vim.g.shortmess = "ltToOCFI"

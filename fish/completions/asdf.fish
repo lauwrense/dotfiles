@@ -1,0 +1,1 @@
+/home/lauw/.asdf/completions/asdf.fish

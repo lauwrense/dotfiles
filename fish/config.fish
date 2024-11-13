@@ -1,4 +1,3 @@
-
 if status is-interactive
     if test -n "$NVIM"
         set -g fish_key_bindings fish_default_key_bindings
@@ -7,7 +6,6 @@ if status is-interactive
     end
 
     bind --erase -a
-
 
     if test -z "$NVIM"; and test -z "$TMUX"
         cd ~;
@@ -18,7 +16,7 @@ set os (uname)
 set fish_color_valid_path
 set -g fish_autosuggestion_enabled 0
 
-abbr -a ls eza -la --icons --git -s type
+abbr -a ls eza -la --icons --git --git-ignore -s type
 abbr -a ll eza -la --icons --git --git-ignore -s type -T
 
 zoxide init fish | source
@@ -34,3 +32,11 @@ set -Ux FZF_DEFAULT_OPTS "\
 --color=marker:#babbf1,fg+:#c6d0f5,prompt:#ca9ee6,hl+:#e78284 \
 --color=selected-bg:#51576d \
 --multi"
+
+fish_add_path ~/go/bin
+
+set -q GHCUP_INSTALL_BASE_PREFIX[1]
+or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin $PATH /home/lauw/.ghcup/bin
+source ~/.asdf/asdf.fish
+eval $(opam env)

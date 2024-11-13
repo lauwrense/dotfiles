@@ -66,20 +66,20 @@ vim.api.nvim_create_autocmd({ "Filetype" }, {
 })
 
 --- Markdown
-vim.api.nvim_create_autocmd({ "Filetype" }, {
-    pattern = { "markdown", "markdown.mdx" },
-    callback = function()
-        assert(vim.fn.exepath("marksman") ~= nil, "marksman not found in path")
-        vim.lsp.start({
-            name = "marksman",
-            cmd = { "marksman", "server" },
-            root_dir = vim.fs.root(0, {
-                ".marksman.toml",
-                ".git",
-            }),
-        })
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "Filetype" }, {
+--     pattern = { "markdown", "markdown.mdx" },
+--     callback = function()
+--         assert(vim.fn.exepath("marksman") ~= nil, "marksman not found in path")
+--         vim.lsp.start({
+--             name = "marksman",
+--             cmd = { "marksman", "server" },
+--             root_dir = vim.fs.root(0, {
+--                 ".marksman.toml",
+--                 ".git",
+--             }),
+--         })
+--     end,
+-- })
 
 --- Cmake
 vim.api.nvim_create_autocmd({ "Filetype" }, {
