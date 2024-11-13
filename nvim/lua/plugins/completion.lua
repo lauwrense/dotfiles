@@ -2,12 +2,11 @@ return {
     {
         "hrsh7th/nvim-cmp",
         name = "cmp",
-        event = "InsertEnter",
+        event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             { "hrsh7th/cmp-buffer" },
             { "saadparwaiz1/cmp_luasnip" },
             { "FelipeLema/cmp-async-path" },
-            { "petertriho/cmp-git" },
             {
                 "L3MON4D3/LuaSnip",
                 version = "v2.*",
@@ -20,23 +19,9 @@ return {
             local cmp = require("cmp")
             local luasnip = require("luasnip")
 
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0
-                    and vim.api
-                            .nvim_buf_get_lines(0, line - 1, line, true)[1]
-                            :sub(col, col)
-                            :match("%s")
-                        == nil
-            end
-
             local config = {
                 completion = {
                     completeopt = "menu,menuone,preview,noselect,noinsert",
-                },
-                preselect = {
-                    cmp.PreselectMode.None,
                 },
             }
 
@@ -93,7 +78,6 @@ return {
                     vim_item.menu = ({
                         nvim_lsp = "[LSP]",
                         luasnip = "[Snip]",
-                        nvim_lua = "[Lua]",
                         async_path = "[Path]",
                         neorg = "[Norg]",
                         git = "[Git]",
@@ -102,7 +86,6 @@ return {
                     return vim_item
                 end,
             }
-
 
             -- Keybindings
             config.mapping = cmp.mapping.preset.insert({
@@ -122,24 +105,16 @@ return {
                         end
                     end,
                     s = cmp.mapping.confirm({ select = true }),
-                    c = function(fallback)
-                        if cmp.visible() and cmp.get_active_entry() then
-                            cmp.confirm({
-                                behavior = cmp.ConfirmBehavior.Replace,
-                                select = false,
-                            })
-                        else
-                            fallback()
-                        end
-                    end,
+                    c = cmp.confirm({
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = false,
+                    }),
                 }),
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
                     elseif luasnip.expand_or_locally_jumpable() then
                         luasnip.expand_or_jump()
-                    elseif has_words_before() then
-                        cmp.complete()
                     else
                         fallback()
                     end
@@ -157,14 +132,7 @@ return {
 
             -- Cmp sources
             config.sources = cmp.config.sources({
-                { name = "git" },
-                {
-                    name = "luasnip",
-                    option = {
-                        show_autosnippets = true,
-                        use_show_condition = false,
-                    },
-                },
+                { name = "luasnip" },
                 { name = "async_path" },
                 { name = "buffer" },
             })
@@ -176,7 +144,6 @@ return {
                 end,
             }
 
-            -- Function to determine whether cmp should be enabled or not
             config.enabled = function()
                 local context = require("cmp.config.context")
                 local buftype =
@@ -195,13 +162,6 @@ return {
 
             -- Setup up cmp
             cmp.setup(config)
-
-            require("cmp_git").setup({
-                filetypes = { "gitcommit", "octo", "neogitcommitmessage" },
-            })
-
-            -- Load snippets
-            -- require("luasnip.loaders.from_lua").load()
         end,
     },
     {

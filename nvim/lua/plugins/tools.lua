@@ -1,7 +1,7 @@
 return {
+    {"neovim/nvim-lspconfig"},
     {
         "stevearc/conform.nvim",
-        event = { "BufWritePre" },
         cmd = { "ConformInfo" },
         keys = {
             {
@@ -22,6 +22,7 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 go = { "goimports", "gofmt" },
+                zig = {"zigfmt"}
             },
         },
     },

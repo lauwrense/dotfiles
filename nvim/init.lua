@@ -18,6 +18,9 @@ local lazy_config = {
     install = {
         colorscheme = { "catppuccin-frappe" },
     },
+    rocks = {
+        enabled = false,
+    },
     performance = {
         rtp = {
             disabled_plugins = {
@@ -35,7 +38,7 @@ local lazy_config = {
     },
 }
 
---Dont load everything
+--Done load everything
 if os.getenv("NVIM") ~= nil then
     require("lazy").setup({
         { "willothy/flatten.nvim", config = true },

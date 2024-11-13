@@ -19,7 +19,12 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.list = true
-vim.opt.listchars = "tab:> ,trail:•,extends:›,precedes:‹"
+vim.opt.listchars = {
+    tab = "> ",
+    trail = "•",
+    extends = "›",
+    precedes = "‹",
+}
 vim.opt.spell = false
 
 vim.opt.mouse = "a"

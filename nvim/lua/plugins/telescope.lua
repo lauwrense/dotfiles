@@ -95,6 +95,8 @@ return {
                         ["<Left>"] = action.nop,
                         ["<Right>"] = action.nop,
                         ["<M-p>"] = action_layout.toggle_preview,
+                        ["q"] = action.close,
+                        ["f"] = action.add_selected_to_qflist,
                     },
                     i = {
                         ["<C-k>"] = action.move_selection_previous,
@@ -175,7 +177,7 @@ return {
             end,
         })
 
-        update_color({})
+        update_color()
         require("telescope").setup(telescope_config)
         require("telescope").load_extension("fzf")
     end,

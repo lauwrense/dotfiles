@@ -1,16 +1,5 @@
 return {
     {
-        "m4xshen/hardtime.nvim",
-        event = {"BufEnter", "BufNew"},
-        dependencies = { 
-            -- "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim" 
-        },
-        opts = {
-            max_count = 1,
-        }
-    },
-    {
         "folke/flash.nvim",
         opts = {
             modes = {
@@ -39,8 +28,8 @@ return {
                 function()
                     require("flash").treesitter({
                         highlight = {
-                            backdrop = true
-                        }
+                            backdrop = true,
+                        },
                     })
                 end,
                 desc = "Flash Treesitter",

@@ -1,20 +1,15 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "VeryLazy",
         name = "treesitter",
         build = ":TSUpdate",
         opts = {
             ensure_installed = {
                 "zig",
-                "rust",
+                "haskell",
+                "ocaml",
 
                 "comment",
-
-                "toml",
-                "yaml",
-
-                "rst",
                 -- Go
                 "go",
                 "gosum",
