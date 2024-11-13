@@ -41,6 +41,11 @@ function t -d "tmux into a new or existing session"
     end
 
 
+    if not test -d "$z_query"
+        echo "$argv is not a directory"
+        return
+    end
+
     cd $z_query
 
     if not git rev-parse -q --is-inside-work-tree &> /dev/null
