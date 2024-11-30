@@ -1,5 +1,4 @@
 return {
-    {"neovim/nvim-lspconfig"},
     {
         "stevearc/conform.nvim",
         cmd = { "ConformInfo" },
@@ -22,18 +21,8 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 go = { "goimports", "gofmt" },
-                zig = {"zigfmt"}
+                zig = { "zigfmt" },
             },
         },
     },
-    {
-        "folke/lazydev.nvim",
-        ft = "lua", -- only load on lua files
-        opts = {
-            library = {
-                { path = "luvit-meta/library", words = { "vim%.uv" } },
-            },
-        },
-    },
-    { "Bilal2453/luvit-meta", lazy = true },
 }

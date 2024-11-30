@@ -134,7 +134,7 @@ return {
             config.sources = cmp.config.sources({
                 { name = "luasnip" },
                 { name = "async_path" },
-                { name = "buffer" },
+                -- { name = "buffer" },
             })
 
             -- Setup snippets

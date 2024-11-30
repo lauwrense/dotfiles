@@ -38,7 +38,7 @@ local lazy_config = {
     },
 }
 
---Done load everything
+--Dont load everything
 if os.getenv("NVIM") ~= nil then
     require("lazy").setup({
         { "willothy/flatten.nvim", config = true },
