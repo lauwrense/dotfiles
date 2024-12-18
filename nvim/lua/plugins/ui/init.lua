@@ -10,17 +10,13 @@ return {
             flavour = "frappe",
             integrations = {
                 fidget = true,
-                mason = true,
-                notify = true,
                 neotest = true,
-                lsp_trouble = true,
-                which_key = true,
             },
         },
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
-        event = { "BufNew", "BufRead" },
+        event = { "BufNew", "BufRead", "BufEnter" },
     },
     {
         "j-hui/fidget.nvim",
@@ -32,9 +28,10 @@ return {
                 },
             },
         },
-    },
-    {
-        dir = "~/projects/luip.nvim",
-        opts = {},
+        config = function(_, opts)
+            local fidget = require("fidget")
+            fidget.setup(opts)
+            vim.notify = fidget.notify
+        end,
     },
 }

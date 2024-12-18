@@ -6,8 +6,6 @@ return {
         opts = {
             ensure_installed = {
                 "zig",
-                "haskell",
-                "ocaml",
 
                 "comment",
                 -- Go

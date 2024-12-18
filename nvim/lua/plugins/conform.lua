@@ -22,6 +22,7 @@ return {
                 lua = { "stylua" },
                 go = { "goimports", "gofmt" },
                 zig = { "zigfmt" },
+                markdown = { "mdformat" },
             },
         },
     },

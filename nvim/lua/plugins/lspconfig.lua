@@ -2,10 +2,13 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            require("lspconfig")["gopls"].setup({})
-            require("lspconfig")["marksman"].setup({})
-            require("lspconfig")["lua_ls"].setup({})
-            require("lspconfig")["zls"].setup({})
+            local lspconfig = require("lspconfig")
+
+            lspconfig["gopls"].setup({})
+            lspconfig["marksman"].setup({})
+            lspconfig["lua_ls"].setup({})
+            lspconfig["zls"].setup({})
+            lspconfig["clangd"].setup({})
         end,
     },
     {

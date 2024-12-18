@@ -1,7 +1,7 @@
 return {
     {
         "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         opts = {
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
@@ -93,4 +93,5 @@ return {
             disable_builtin_notifications = true,
         },
     },
+    { "sindrets/diffview.nvim" },
 }
