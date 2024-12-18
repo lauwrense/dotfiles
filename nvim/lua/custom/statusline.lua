@@ -58,7 +58,7 @@ local function git_head()
         return ""
     end
 
-    local str = highlight(status.head, "DiffBranch")
+    local str = highlight(status.head, "StatusLineDiffBranch")
 
     return str
 end
@@ -159,7 +159,7 @@ local function filetype()
         not (
             vim.list_contains(disable, vim.bo.filetype)
             or vim.list_contains(disable, vim.bo.buftype)
-        ) and vim.bo.buftype ~= ""
+        ) and vim.bo.buftype == ""
     then
         return bracket_wrap(highlight(vim.bo.filetype, "StatusLineGreen"))
     end

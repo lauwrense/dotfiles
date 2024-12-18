@@ -31,21 +31,21 @@ vim.api.nvim_set_hl(0, "StatusLineDiffBranch", {
 })
 
 vim.api.nvim_set_hl(0, "StatusLineDiffAdded", {
-    fg = vim.api.nvim_get_hl(0, { name = "Green" }).fg,
+    fg = vim.api.nvim_get_hl(0, { name = "diffAdded" }).fg,
     bg = vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg,
 })
 
 vim.api.nvim_set_hl(0, "StatusLineDiffChanged", {
-    fg = vim.api.nvim_get_hl(0, { name = "Yellow" }).fg,
+    fg = vim.api.nvim_get_hl(0, { name = "diffOldFile" }).fg,
     bg = vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg,
 })
 
 vim.api.nvim_set_hl(0, "StatusLineDiffRemoved", {
-    fg = vim.api.nvim_get_hl(0, { name = "Red" }).fg,
+    fg = vim.api.nvim_get_hl(0, { name = "diffRemoved" }).fg,
     bg = vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg,
 })
 
 vim.api.nvim_set_hl(0, "StatusLineText", {
-    fg = vim.api.nvim_get_hl(0, {name = "StatusLine"}).fg,
-    bg = vim.api.nvim_get_hl(0, {name = "StatusLine"}).bg,
+    fg = vim.api.nvim_get_hl(0, { name = "StatusLine" }).fg,
+    bg = vim.api.nvim_get_hl(0, { name = "StatusLine" }).bg,
 })
