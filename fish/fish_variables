@@ -47,10 +47,4 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-<<<<<<< HEAD
 SETUVAR fish_user_paths:/home/lauw/go/bin\x1e/home/lauw/\x2elocal/bin\x1e/home/lauw/\x2ecargo/bin
-||||||| cabcaeb
-SETUVAR fish_user_paths:/home/lauw/\x2ecargo/bin
-=======
-SETUVAR fish_user_paths:/home/lauw/\x2elocal/bin\x1e/home/lauw/\x2ecargo/bin
->>>>>>> origin/master
