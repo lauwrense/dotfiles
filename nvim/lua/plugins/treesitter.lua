@@ -2,12 +2,12 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         name = "treesitter",
+        event = {"BufReadPre"},
         build = ":TSUpdate",
         opts = {
             ensure_installed = {
                 "zig",
 
-                "comment",
                 -- Go
                 "go",
                 "gosum",

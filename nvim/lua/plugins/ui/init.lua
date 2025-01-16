@@ -20,7 +20,7 @@ return {
     },
     {
         "j-hui/fidget.nvim",
-        event = { "VeryLazy" },
+        event = { "UIEnter" },
         opts = {
             notification = {
                 window = {

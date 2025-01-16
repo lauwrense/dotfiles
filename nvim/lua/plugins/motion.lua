@@ -58,4 +58,9 @@ return {
         event = "VeryLazy",
         config = true,
     },
+    {
+        "chentoast/marks.nvim",
+        opts = {},
+        event = "VimEnter",
+    },
 }

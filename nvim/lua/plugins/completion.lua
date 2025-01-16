@@ -4,7 +4,6 @@ return {
         name = "cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
-            { "hrsh7th/cmp-buffer" },
             { "saadparwaiz1/cmp_luasnip" },
             { "FelipeLema/cmp-async-path" },
             {

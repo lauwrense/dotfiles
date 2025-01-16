@@ -10,7 +10,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 4
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "auto:1-2"
 vim.opt.termguicolors = true
 vim.opt.guifont = "JetBrainsMono Nerd Font:h17"
 
