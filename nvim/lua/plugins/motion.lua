@@ -55,12 +55,23 @@ return {
     {
         "kylechui/nvim-surround",
         version = "*",
-        event = "VeryLazy",
+        event = { "InsertEnter" },
+        keys = {
+            {"ys"},
+            {"yss"},
+            {"yS"},
+            {"ySS"},
+            {"S", mode = "v"},
+            {"gS", mode = "v"},
+            {"ds"},
+            {"cs"},
+            {"cS"},
+        },
         config = true,
     },
     {
         "chentoast/marks.nvim",
         opts = {},
-        event = "VimEnter",
+        event = "VeryLazy",
     },
 }

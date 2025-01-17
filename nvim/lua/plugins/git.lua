@@ -93,5 +93,15 @@ return {
             disable_builtin_notifications = true,
         },
     },
-    { "sindrets/diffview.nvim" },
+    {
+        "sindrets/diffview.nvim",
+        cmd = {
+            "DiffviewOpen",
+            "DiffviewClose",
+            "DiffviewToggleFiles",
+            "DiffviewFocusFiles",
+            "DiffviewRefresh",
+            "DiffviewFileHistory",
+        },
+    },
 }
