@@ -19,17 +19,6 @@ return {
         end
     },
     {
-        "nvim-java/nvim-java",
-        ft = "java",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-        },
-        config = function ()
-            require('java').setup()
-            require('lspconfig').jdtls.setup({})
-        end
-    },
-    {
         "folke/lazydev.nvim",
         ft = "lua", -- only load on lua files
         opts = {
