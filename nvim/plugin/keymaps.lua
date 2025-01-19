@@ -5,3 +5,5 @@ vim.keymap.set("n", "<M-.>", "<c-w>-")
 
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>")
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>")
+
+vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")

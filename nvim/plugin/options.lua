@@ -14,7 +14,7 @@ vim.opt.signcolumn = "auto:1-2"
 vim.opt.termguicolors = true
 vim.opt.guifont = "JetBrainsMono Nerd Font:h17"
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
@@ -27,8 +27,8 @@ vim.opt.listchars = {
 }
 vim.opt.spell = false
 
-vim.opt.mouse = "a"
-vim.opt.scrolloff = 8
+vim.opt.mouse = ""
+vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
 vim.opt.splitright = true
@@ -41,7 +41,7 @@ vim.opt.pumheight = 10
 vim.opt.showtabline = 1
 
 vim.opt.showmode = false
-vim.opt.updatetime = 200
+vim.opt.updatetime = 250
 vim.opt.timeout = true
 vim.opt.timeoutlen = 1000
 
