@@ -1,14 +1,7 @@
 return {
     {
-        "williamboman/mason-lspconfig.nvim",
-        event = {"VeryLazy"},
-        dependencies = {
-            "williamboman/mason.nvim",
-            "neovim/nvim-lspconfig",
-        },
-        config = function ()
-            require("mason").setup()
-            require("mason-lspconfig").setup()
+        "neovim/nvim-lspconfig",
+        config = function()
             local lspconfig = require("lspconfig")
 
             lspconfig["gopls"].setup({})
@@ -16,7 +9,7 @@ return {
             lspconfig["lua_ls"].setup({})
             lspconfig["zls"].setup({})
             lspconfig["clangd"].setup({})
-        end
+        end,
     },
     {
         "folke/lazydev.nvim",
