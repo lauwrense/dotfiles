@@ -20,9 +20,8 @@ abbr -a ls eza -la --icons --git --git-ignore -s type
 abbr -a ll eza -la --icons --git --git-ignore -s type -T
 
 zoxide init fish | source
-starship init fish | source
+#starship init fish | source
 fzf --fish | source
-eval $(opam env)
 
 fish_config theme choose Catppuccin\ Frappe
 
@@ -35,8 +34,3 @@ set -Ux FZF_DEFAULT_OPTS "\
 --multi"
 
 fish_add_path ~/go/bin
-
-set -q GHCUP_INSTALL_BASE_PREFIX[1]
-or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin $PATH /home/lauw/.ghcup/bin
-source ~/.asdf/asdf.fish
