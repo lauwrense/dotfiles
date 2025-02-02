@@ -9,7 +9,7 @@ preexec_prompt() {
 }
 
 preexec_functions+=(preexec_prompt)
-precmd_functions=(set_prompt)
+precmd_functions+=(set_prompt)
 
 function set_prompt {
 
@@ -62,7 +62,7 @@ function _prompt_widget-zle-line-finish {
         sysopen -r -o cloexec -u _prompt_fd /dev/null
         zle -F $_prompt_fd _prompt_restore_prompt
     }
-    zle && PROMPT=$TRANSIENT_PROMPT RPROMPT=$TRANSIENT_RPROMPT zle reset-prompt && zle -R
+    zle && PROMPT=$TRANSIENT_PROMPT RPROMPT=$TRANSIENT_RPROMPT && zle -R
 }
 
 function _prompt_restore_prompt {
