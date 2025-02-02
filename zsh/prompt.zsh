@@ -41,8 +41,8 @@ function set_prompt {
     fi
 
     # Git Integration
-    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        local head=`git rev-parse --abbrev-ref HEAD`
+    if git rev-parse --is-inside-work-tree &> /dev/null ; then
+        local head=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
         PROMPT+=" %F{magenta}${head}%f"
     fi
 
