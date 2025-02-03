@@ -9,6 +9,7 @@ return {
             lspconfig["lua_ls"].setup({})
             lspconfig["zls"].setup({})
             lspconfig["clangd"].setup({})
+            lspconfig["texlab"].setup({})
         end,
     },
     {
