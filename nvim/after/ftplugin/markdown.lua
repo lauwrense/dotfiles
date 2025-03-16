@@ -1,1 +1,1 @@
-require("custom.lsp").enable_lsp_cmp()
+require("custom.cmp").enable_lsp_cmp()
