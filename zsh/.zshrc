@@ -17,6 +17,10 @@ zinit light zsh-users/zsh-completions
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 
+## Fzf integrations
+zinit ice lucid wait
+zinit snippet OMZP::fzf
+
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -57,15 +61,36 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+# BINDINGS
+
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
 # PROMPT
 
 source $DOTFILES/zsh/prompt.zsh
 
 # ALIASES
 
-alias ls="eza -la --icons --git --git-ignore -s type"
-alias ll="eza -Tla --icons --git --git-ignore -s type"
+alias ls="eza -la --icons --git -s type --git-ignore"
+alias lsni="eza -la --icons --git -s type"
+alias ll="eza -Tla --icons --git -s type --git-ignore"
+alias llni="eza -Tla --icons --git -s type"
 
 # INTEGRATIONS
 
 eval "$(zoxide init zsh)"
+
+# bun completions
+[ -s "/home/lauw/.bun/_bun" ] && source "/home/lauw/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/home/lauw/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
