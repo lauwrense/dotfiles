@@ -5,7 +5,7 @@ return {
         event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             { "saadparwaiz1/cmp_luasnip" },
-            { "FelipeLema/cmp-async-path" },
+            -- { "FelipeLema/cmp-async-path" },
             {
                 "L3MON4D3/LuaSnip",
                 version = "v2.*",
@@ -132,7 +132,7 @@ return {
             -- Cmp sources
             config.sources = cmp.config.sources({
                 { name = "luasnip" },
-                { name = "async_path" },
+                -- { name = "async_path" },
                 -- { name = "buffer" },
             })
 
