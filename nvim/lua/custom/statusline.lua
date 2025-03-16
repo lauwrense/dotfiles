@@ -81,14 +81,20 @@ local function git_status()
     if status.changed ~= nil and status.changed > 0 then
         table.insert(
             str,
-            highlight(string.format("~%d", status.changed), "StatusLineDiffChanged")
+            highlight(
+                string.format("~%d", status.changed),
+                "StatusLineDiffChanged"
+            )
         )
     end
 
     if status.removed ~= nil and status.removed > 0 then
         table.insert(
             str,
-            highlight(string.format("-%d", status.removed), "StatusLineDiffRemoved")
+            highlight(
+                string.format("-%d", status.removed),
+                "StatusLineDiffRemoved"
+            )
         )
     end
 
@@ -159,7 +165,9 @@ local function filetype()
         not (
             vim.list_contains(disable, vim.bo.filetype)
             or vim.list_contains(disable, vim.bo.buftype)
-        ) and vim.bo.buftype == ""
+        )
+        and vim.bo.buftype == ""
+        and #vim.bo.filetype > 0
     then
         return bracket_wrap(highlight(vim.bo.filetype, "StatusLineGreen"))
     end

@@ -11,12 +11,30 @@ return {
             integrations = {
                 fidget = true,
                 neotest = true,
+                native_lsp = {
+                    enabled = true,
+                    underlines = {
+                        errors = { "undercurl" },
+                        hints = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
+                        ok = { "undercurl" },
+                    },
+                },
             },
         },
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
         event = { "BufNew", "BufRead", "BufEnter" },
+        opts = {
+            blacklist = {
+                "comment",
+            },
+        },
+        config = function(self, opts)
+            require("rainbow-delimiters.setup").setup(opts)
+        end,
     },
     {
         "j-hui/fidget.nvim",
