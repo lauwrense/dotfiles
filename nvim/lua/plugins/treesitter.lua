@@ -19,6 +19,7 @@ return {
                 "luadoc",
 
                 "python",
+
                 -- C
                 "doxygen",
                 "c",
@@ -29,9 +30,6 @@ return {
                 -- MD
                 "markdown",
                 "markdown_inline",
-
-                -- Latex
-                "latex",
 
                 -- Git
                 "diff",
