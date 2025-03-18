@@ -3,9 +3,6 @@ vim.keymap.set("n", "<M-m>", "<c-w>5<")
 vim.keymap.set("n", "<M-,>", "<c-w>+")
 vim.keymap.set("n", "<M-.>", "<c-w>-")
 
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>")
-vim.keymap.set("n", "[q", "<cmd>cprev<cr>")
-
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
 vim.keymap.set("n", "K", function()
     local size = vim.wo.colorcolumn or 80
