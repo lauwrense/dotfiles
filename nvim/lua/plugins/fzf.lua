@@ -47,6 +47,7 @@ return {
             },
             { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
         },
+        cmd = { "FzfLua" },
         init = function()
             vim.api.nvim_create_autocmd("Colorscheme", {
                 group = vim.api.nvim_create_augroup("RefresgFzfColors", {}),
