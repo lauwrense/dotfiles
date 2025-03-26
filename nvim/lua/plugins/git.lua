@@ -86,6 +86,7 @@ return {
     {
         "NeogitOrg/neogit",
         cmd = "Neogit",
+        dependencies = {"nvim-lua/plenary.nvim"},
         keys = {
             { "<leader>hU", "<cmd>Neogit<cr>", desc = "Open Neogit" },
         },

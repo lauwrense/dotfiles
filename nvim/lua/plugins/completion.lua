@@ -77,6 +77,7 @@ return {
                         score_offset = 100,
                     },
                 },
+                min_keyword_length = 1,
             },
             fuzzy = { implementation = "prefer_rust_with_warning" },
         },
