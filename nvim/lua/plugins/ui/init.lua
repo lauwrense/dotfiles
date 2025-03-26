@@ -11,6 +11,7 @@ return {
             integrations = {
                 fidget = true,
                 neotest = true,
+                blink_cmp = true,
                 native_lsp = {
                     enabled = true,
                     underlines = {
