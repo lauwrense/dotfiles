@@ -33,7 +33,7 @@ return {
                 "comment",
             },
         },
-        config = function(self, opts)
+        config = function(_, opts)
             require("rainbow-delimiters.setup").setup(opts)
         end,
     },
