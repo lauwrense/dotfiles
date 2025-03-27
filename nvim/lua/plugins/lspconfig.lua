@@ -1,15 +1,19 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "saghen/blink.cmp",
+        },
         config = function()
             local lspconfig = require("lspconfig")
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-            lspconfig["gopls"].setup({})
-            lspconfig["marksman"].setup({})
-            lspconfig["lua_ls"].setup({})
-            lspconfig["zls"].setup({})
-            lspconfig["clangd"].setup({})
-            lspconfig["texlab"].setup({})
+            lspconfig["gopls"].setup({capabilities = capabilities})
+            lspconfig["marksman"].setup({capabilities = capabilities})
+            lspconfig["lua_ls"].setup({capabilities = capabilities})
+            lspconfig["zls"].setup({capabilities = capabilities})
+            lspconfig["clangd"].setup({capabilities = capabilities})
+            lspconfig["texlab"].setup({capabilities = capabilities})
         end,
     },
     {

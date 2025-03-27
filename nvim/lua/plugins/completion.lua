@@ -13,8 +13,9 @@ return {
                 version = "v2.*",
                 build = "make install_jsregexp",
             },
-            { "xzbdmw/colorful-menu.nvim" },
         },
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
         opts = {
             keymap = {
                 preset = "default",
@@ -24,31 +25,24 @@ return {
                 list = { selection = { preselect = false, auto_insert = true } },
                 documentation = {
                     auto_show = true,
+                     auto_show_delay_ms = 200,
                 },
+
                 menu = {
                     draw = {
-                        components = {
-                            label = {
-                                text = function(ctx)
-                                    return require("colorful-menu").blink_components_text(
-                                        ctx
-                                    )
-                                end,
-                                highlight = function(ctx)
-                                    return require("colorful-menu").blink_components_highlight(
-                                        ctx
-                                    )
-                                end,
-                            },
+                        columns = {
+                            { "label", gap = 1 },
+                            { "kind_icon", "kind", gap = 1 },
                         },
                     },
                 },
             },
             snippets = { preset = "luasnip" },
             sources = {
-                default = function(ctx)
+                default = function()
                     local success, node = pcall(vim.treesitter.get_node)
                     local source = {}
+
                     if
                         success
                         and node
@@ -58,14 +52,16 @@ return {
                         )
                     then
                         return { "buffer" }
-                    elseif vim.bo.filetype == "lua" then
-                        vim.list_extend(source, { "lazydev", "path" })
                     else
-                        vim.list_extend(source, { "snippets" })
-                    end
+                        if vim.b.completion_lsp ~= false then
+                            vim.list_extend(source, { "lsp" })
+                        end
 
-                    if vim.b.completion_lsp ~= false then
-                        vim.list_extend(source, { "lsp" })
+                        if vim.bo.filetype == "lua" then
+                            vim.list_extend(source, { "lazydev" })
+                        else
+                            vim.list_extend(source, { "snippets" })
+                        end
                     end
 
                     return source
