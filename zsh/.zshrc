@@ -67,7 +67,11 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 
 # PROMPT
 
-source $DOTFILES/zsh/prompt.zsh
+if [ -n "$DOTFILES" ]; then 
+    source $DOTFILES/zsh/prompt.zsh
+else
+    source $HOME/dotfiles/zsh/prompt.zsh
+fi
 
 # ALIASES
 
