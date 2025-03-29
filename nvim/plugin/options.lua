@@ -59,4 +59,3 @@ vim.opt.laststatus = 3
 
 vim.g.exrc = true
 vim.g.shortmess = "ltToOCFI"
--- vim.opt.clipboard = "unnamedplus"
