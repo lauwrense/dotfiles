@@ -7,6 +7,7 @@ return {
     {
         "saghen/blink.cmp",
         version = "1.*",
+        event = { "InsertEnter", "CmdlineEnter" },
         dependencies = {
             {
                 "L3MON4D3/LuaSnip",
@@ -25,7 +26,7 @@ return {
                 list = { selection = { preselect = false, auto_insert = true } },
                 documentation = {
                     auto_show = true,
-                     auto_show_delay_ms = 200,
+                    auto_show_delay_ms = 200,
                 },
 
                 menu = {
@@ -73,7 +74,7 @@ return {
                         score_offset = 100,
                     },
                 },
-                min_keyword_length = 1,
+                -- min_keyword_length = 1,
             },
             fuzzy = { implementation = "prefer_rust_with_warning" },
         },
