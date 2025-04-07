@@ -20,7 +20,6 @@ abbr -a ls eza -la --icons --git --git-ignore -s type
 abbr -a ll eza -la --icons --git --git-ignore -s type -T
 
 zoxide init fish | source
-#starship init fish | source
 fzf --fish | source
 
 fish_config theme choose Catppuccin\ Frappe
