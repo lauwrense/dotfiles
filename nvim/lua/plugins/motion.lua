@@ -69,9 +69,4 @@ return {
         },
         config = true,
     },
-    {
-        "chentoast/marks.nvim",
-        opts = {},
-        event = "VeryLazy",
-    },
 }
