@@ -82,19 +82,11 @@ alias llni="eza -Tla --icons --git -s type"
 
 # INTEGRATIONS
 
-eval "$(zoxide init zsh)"
+if type "zoxide" &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
 
-# bun completions
-[ -s "/home/lauw/.bun/_bun" ] && source "/home/lauw/.bun/_bun"
+if type "opam" &> /dev/null; then
+    eval "$(opam env --switch=default)"
+fi
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="/home/lauw/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
