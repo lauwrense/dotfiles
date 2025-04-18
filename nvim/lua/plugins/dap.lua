@@ -8,6 +8,7 @@ return {
         },
         config = function()
             local dap = require("dap")
+            local dapui = require("dapui")
 
             local lldb_dap = vim.fn.exepath("lldb-dap")
             if lldb_dap ~= "" then
@@ -47,6 +48,38 @@ return {
                         args = {},
                     },
                 }
+            end
+
+            vim.keymap.set("n", "<F1>", function()
+                dap.continue()
+            end)
+            vim.keymap.set("n", "<F2>", function()
+                dap.step_over()
+            end)
+
+            vim.keymap.set("n", "<F3>", function()
+                dap.step_into()
+            end)
+            vim.keymap.set("n", "<F4>", function()
+                dap.step_out()
+            end)
+            vim.keymap.set("n", "<M-b>", function()
+                dap.toggle_breakpoint()
+            end)
+
+            dapui.setup()
+
+            dap.listeners.before.attach.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.launch.dapui_config = function()
+                dapui.open()
+            end
+            dap.listeners.before.event_terminated.dapui_config = function()
+                dapui.close()
+            end
+            dap.listeners.before.event_exited.dapui_config = function()
+                dapui.close()
             end
         end,
     },
