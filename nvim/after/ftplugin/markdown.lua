@@ -1,1 +1,1 @@
-require("custom.cmp").enable_lsp()
+vim.b.completion_lsp = true
