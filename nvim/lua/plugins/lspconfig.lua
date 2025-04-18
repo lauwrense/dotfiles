@@ -2,15 +2,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require("lspconfig")
-
-            lspconfig["gopls"].setup({})
-            lspconfig["marksman"].setup({})
-            lspconfig["lua_ls"].setup({})
-            lspconfig["zls"].setup({})
-            lspconfig["clangd"].setup({})
-            lspconfig["texlab"].setup({})
-            lspconfig["tinymist"].setup({})
+            vim.lsp.enable({"gopls", "marksman", "lua_ls", "zls", "clangd", "texlab", "tinymist"})
         end,
     },
     {
