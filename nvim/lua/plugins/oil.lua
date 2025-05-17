@@ -2,6 +2,9 @@ return {
     {
         "stevearc/oil.nvim",
         name = "oil",
+        cmd = {
+            "Oil",
+        },
         keys = {
             { "<leader>O", "<cmd>Oil<cr>", desc = "Oil" },
         },
