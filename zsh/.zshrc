@@ -82,6 +82,8 @@ alias llni="eza -Tla --icons --git -s type"
 
 # INTEGRATIONS
 
+export PATH=$HOME/.local/bin:$PATH
+
 if type "zoxide" &> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
