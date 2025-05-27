@@ -27,7 +27,7 @@ return {
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
-        event = { "BufNew", "BufRead", "BufEnter" },
+        event = { "BufNew", "BufRead", "BufEnter", "FileType" },
         submodules = false,
         opts = {
             blacklist = {
