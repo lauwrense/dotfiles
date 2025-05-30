@@ -25,9 +25,20 @@ vim.api.nvim_create_autocmd("FileType", {
             return
         end
 
-        if vim.treesitter.language.add(vim.bo.filetype) then
-            vim.treesitter.start()
-            ts_shutdown_on_max_size(buf, fname, max_size)
+        local exists, lang =
+            pcall(vim.treesitter.language.get_lang, vim.bo.filetype)
+
+        if not exists then
+            return
+        elseif package.loaded["nvim-treesitter"] then
+            require("nvim-treesitter").install(lang)
         end
+
+        if lang and not vim.treesitter.language.add(lang) then
+            return
+        end
+
+        vim.treesitter.start()
+        ts_shutdown_on_max_size(buf, fname, max_size)
     end,
 })
