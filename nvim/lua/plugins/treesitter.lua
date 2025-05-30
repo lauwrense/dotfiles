@@ -9,7 +9,7 @@ return {
             vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end,
         config = function()
-            require("nvim-treesitter").install({
+            local ensure_installed = {
                 "zig",
 
                 -- Go
@@ -43,7 +43,12 @@ return {
                 "gitignore",
                 "git_rebase",
                 "git_config",
-            })
+            }
+            for _, lang in ipairs(ensure_installed) do
+                if vim.treesitter.language.add(lang) ~= true then
+                    require("nvim-treesitter").install(lang)
+                end
+            end
         end,
     },
 }
