@@ -34,11 +34,9 @@ vim.api.nvim_create_autocmd("FileType", {
             require("nvim-treesitter").install(lang)
         end
 
-        if lang and not vim.treesitter.language.add(lang) then
-            return
+        if lang and vim.treesitter.language.add(lang) then
+            vim.treesitter.start()
+            ts_shutdown_on_max_size(buf, fname, max_size)
         end
-
-        vim.treesitter.start()
-        ts_shutdown_on_max_size(buf, fname, max_size)
     end,
 })
