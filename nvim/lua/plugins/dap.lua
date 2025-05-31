@@ -6,11 +6,12 @@ return {
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
         },
+        ft = { "c", "cpp", "zig" },
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
 
-            local lldb_dap = vim.fn.exepath("lldb-dap")
+            local lldb_dap = vim.uv.exepath("lldb-dap") -- PERF: WSL is slow
             if lldb_dap ~= "" then
                 dap.adapters.lldb = {
                     type = "executable",
