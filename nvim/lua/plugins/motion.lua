@@ -35,7 +35,7 @@ return {
                 desc = "Flash Treesitter",
             },
             {
-                "R",
+                "r",
                 mode = "o",
                 function()
                     require("flash").remote()
@@ -57,15 +57,15 @@ return {
         version = "*",
         event = { "InsertEnter" },
         keys = {
-            {"ys"},
-            {"yss"},
-            {"yS"},
-            {"ySS"},
-            {"S", mode = "v"},
-            {"gS", mode = "v"},
-            {"ds"},
-            {"cs"},
-            {"cS"},
+            { "ys" },
+            { "yss" },
+            { "yS" },
+            { "ySS" },
+            { "S", mode = "v" },
+            { "gS", mode = "v" },
+            { "ds" },
+            { "cs" },
+            { "cS" },
         },
         config = true,
     },
