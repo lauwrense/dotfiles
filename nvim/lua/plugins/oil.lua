@@ -19,6 +19,9 @@ return {
                         return name == ".." or name == ".git"
                     end,
                 },
+                confirmation = {
+                    border = "none",
+                },
                 columns = {
                     "icon",
                     "permissions",
