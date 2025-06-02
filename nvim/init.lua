@@ -18,9 +18,6 @@ local lazy_config = {
     install = {
         colorscheme = { "catppuccin-frappe" },
     },
-    rocks = {
-        enabled = false,
-    },
     performance = {
         rtp = {
             disabled_plugins = {
