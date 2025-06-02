@@ -5,9 +5,6 @@ return {
         branch = "main",
         build = ":TSUpdate",
         lazy = false,
-        init = function()
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end,
         config = function()
             require("nvim-treesitter").install({
                 "zig",

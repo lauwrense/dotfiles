@@ -53,8 +53,10 @@ vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+vim.opt.foldmethod = "expr"
+vim.opt.foldtext = ""
 
-vim.opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.opt.fillchars = [[eob: ,fold: ]]
 vim.opt.laststatus = 3
 
 vim.g.exrc = true

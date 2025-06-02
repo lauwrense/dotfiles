@@ -36,6 +36,11 @@ vim.api.nvim_create_autocmd("FileType", {
 
         if lang and vim.treesitter.language.add(lang) then
             vim.treesitter.start()
+
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            vim.wo.foldtext = ""
+
             ts_shutdown_on_max_size(buf, fname, max_size)
         end
     end,
