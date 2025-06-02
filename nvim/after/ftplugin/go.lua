@@ -5,3 +5,5 @@ vim.opt.listchars = {
     extends = "›",
     precedes = "‹",
 }
+
+require("dap-go").setup()

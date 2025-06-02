@@ -5,13 +5,14 @@ return {
             "nvim-neotest/nvim-nio",
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
+            "leoluz/nvim-dap-go",
         },
-        ft = { "c", "cpp", "zig" },
+        ft = { "c", "cpp" },
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
 
-            local lldb_dap = vim.uv.exepath("lldb-dap") -- PERF: WSL is slow
+            local lldb_dap = vim.fn.exepath("lldb-dap") -- PERF: WSL is slow
             if lldb_dap ~= "" then
                 dap.adapters.lldb = {
                     type = "executable",
@@ -38,17 +39,6 @@ return {
                 }
 
                 dap.configurations.c = dap.configurations.cpp
-                dap.configurations.zig = {
-                    {
-                        name = "Launch",
-                        type = "lldb",
-                        request = "launch",
-                        program = "${workspaceFolder}/zig-out/bin/${workspaceFolderBasename}",
-                        cwd = "${workspaceFolder}",
-                        stopOnEntry = false,
-                        args = {},
-                    },
-                }
             end
 
             vim.keymap.set("n", "<F1>", function()
