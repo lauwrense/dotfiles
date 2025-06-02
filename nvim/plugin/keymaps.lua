@@ -20,7 +20,6 @@ vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references)
 vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation)
 vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition)
 vim.keymap.set("n", "<leader>lo", vim.lsp.buf.document_symbol)
-vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition)
 
 vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
 vim.keymap.set("n", "gr", "gr", { nowait = true, noremap = true })
