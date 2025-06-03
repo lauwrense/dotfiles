@@ -1,3 +1,5 @@
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
 local function ts_shutdown_on_max_size(buffer, fname, max_fsize)
     local augroup = vim.api.nvim_create_augroup("TSShutdownOnMaxFile", {})
     vim.api.nvim_create_autocmd("BufWrite", {
@@ -15,11 +17,9 @@ end
 
 --- Highlight
 vim.api.nvim_create_autocmd("FileType", {
-    callback = function()
+    callback = function(args)
         local max_size = 100
-        local buf = vim.api.nvim_get_current_buf()
-        local fname = vim.api.nvim_buf_get_name(buf)
-        local ok, stat = pcall(vim.uv.fs_stat, fname)
+        local ok, stat = pcall(vim.uv.fs_stat, args.file)
 
         if ok and stat and stat.size > 1024 * max_size then
             return
@@ -37,11 +37,9 @@ vim.api.nvim_create_autocmd("FileType", {
         if lang and vim.treesitter.language.add(lang) then
             vim.treesitter.start()
 
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-            vim.wo.foldtext = ""
 
-            ts_shutdown_on_max_size(buf, fname, max_size)
+            ts_shutdown_on_max_size(args.buf, args.file, max_size)
         end
     end,
 })
+
