@@ -1,19 +1,17 @@
-local M = {}
-
-local function bracket_wrap(str, do_hl)
-    if do_hl ~= false then
-        return string.format("%%#StatusLineText#[%s]", str)
-    else
-        return string.format("[%s]", str)
-    end
-end
-
-local function highlight(str, hi)
-    return string.format("%%#%s#%s%%#StatusLineText#", hi, str)
-end
-
-local function vimode()
-    local modes = {
+local M = {
+    colors = {
+        red = "%#StatusLineRed#",
+        blue = "%#StatusLineBlue#",
+        yellow = "%#StatusLineYellow#",
+        orange = "%#StatusLineOrange#",
+        purple = "%#StatusLinePurple#",
+        green = "%#StatusLineGreen#",
+        diff_branch = "%#StatusLineDiffBranch#",
+        diff_add = "%#StatusLineDiffAdded#",
+        diff_change = "%#StatusLineDiffChanged#",
+        diff_removed = "%#StatusLineDiffRemoved#",
+    },
+    modes = {
         n = "N",
         i = "I",
         v = "V",
@@ -28,73 +26,57 @@ local function vimode()
         r = "M",
         ["!"] = "!",
         t = "T",
-    }
+    },
+}
 
+local function mode()
     local mode_colors = {
-        n = "StatusLineRed",
-        i = "StatusLineYellow",
-        v = "StatusLinePurple",
-        V = "StatusLinePurple",
-        ["\22"] = "StatusLinePurple",
-        c = "StatusLineBlue",
-        s = "StatusLineGreen",
-        S = "StatusLineGreen",
-        ["\19"] = "StatusLineGreen",
-        R = "StatusLineOrange",
-        r = "StatusLineOrange",
-        ["!"] = "StatusLineRed",
-        t = "StatusLineRed",
+        n = M.colors.red,
+        i = M.colors.yellow,
+        v = M.colors.purple,
+        V = M.colors.purple,
+        ["\22"] = M.colors.purple,
+        c = M.colors.blue,
+        s = M.colors.green,
+        S = M.colors.green,
+        ["\19"] = M.colors.green,
+        R = M.colors.orange,
+        r = M.colors.orange,
+        ["!"] = M.colors.red,
+        t = M.colors.red,
     }
 
-    local color = mode_colors[vim.fn.mode():sub(1, 1)] or "NonText"
+    local current_mode = vim.api.nvim_get_mode().mode
+    local color = mode_colors[current_mode] or "%#NonText#"
+    local mode_char = M.modes[current_mode]
 
-    return bracket_wrap(highlight(modes[vim.fn.mode():sub(1, 1)], color))
+    return string.format("[%s%s%%*]", color, mode_char)
 end
 
-local function git_head()
-    local status = vim.b.gitsigns_status_dict
-
-    if status == nil then
-        return ""
-    end
-
-    local str = highlight(status.head, "StatusLineDiffBranch")
-
-    return str
-end
-
-local function git_status()
+local function git()
     local status = vim.b.gitsigns_status_dict
     if status == nil then
         return ""
     end
 
+    local head = status.head
+    local added, changed, removed = status.added, status.changed, status.removed
     local str = {}
 
-    if status.added ~= nil and status.added > 0 then
-        table.insert(
-            str,
-            highlight(string.format("+%d", status.added), "StatusLineDiffAdded")
-        )
+    table.insert(str, string.format("%s%s", M.colors.diff_branch, head))
+
+    if added and added > 0 then
+        table.insert(str, string.format("%s+%d", M.colors.diff_add, added))
     end
 
-    if status.changed ~= nil and status.changed > 0 then
-        table.insert(
-            str,
-            highlight(
-                string.format("~%d", status.changed),
-                "StatusLineDiffChanged"
-            )
-        )
+    if changed and changed > 0 then
+        table.insert(str, string.format("%s~%d", M.colors.diff_change, changed))
     end
 
-    if status.removed ~= nil and status.removed > 0 then
+    if removed and removed > 0 then
         table.insert(
             str,
-            highlight(
-                string.format("-%d", status.removed),
-                "StatusLineDiffRemoved"
-            )
+            string.format("%s-%d", M.colors.diff_removed, removed)
         )
     end
 
@@ -110,77 +92,67 @@ local function git_status()
 end
 
 local function bufname()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+
     if vim.bo.buftype == "terminal" then
-        local cmd = vim.api.nvim_buf_get_name(0):gsub(".*/", "")
+        local cmd = buf_name:gsub(".*/", "")
         if cmd:find("toggleterm") ~= nil then
             cmd = cmd:gsub(";.*", "")
         end
-        return highlight(bracket_wrap(cmd, false), "StatusLineRed")
+        return string.format("%s[%s]", M.colors.red, cmd)
     end
 
     if vim.bo.filetype == "help" then
-        local filename = vim.api.nvim_buf_get_name(0)
-        return highlight("[Help] ", "StatusLinePurple")
-            .. vim.fn.fnamemodify(filename, ":t:r")
+        return string.format(
+            "%s[Help] %%*%s",
+            M.colors.purple,
+            vim.fs.basename(buf_name)
+        )
     end
 
     if vim.bo.buftype == "quickfix" then
-        return highlight(bracket_wrap("Quickfix", false), "StatusLineBlue")
+        return string.format("%s[Quickfix]", M.colors.blue)
     end
 
     if vim.bo.buftype == "nofile" then
-        return highlight(
-            bracket_wrap(vim.bo.filetype, false),
-            "StatusLineGreen"
-        )
+        return string.format("%s[%s]", M.colors.green, vim.bo.filetype)
     end
 
     if vim.bo.buftype == "prompt" then
-        return highlight(
-            bracket_wrap(vim.bo.filetype, false),
-            "StatusLinePurple"
-        )
+        return string.format("%s[Prompt]", M.colors.purple)
     end
 
-    local fn = { vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.") }
-    if fn[1] == "" then
-        return "[No Name]"
-    end
+    local fname = {
+        "%*",
+        vim.fs.relpath(vim.fn.getcwd(), buf_name) or "[No Name]",
+    }
 
     if vim.bo.modified then
-        table.insert(fn, "[+]")
+        table.insert(fname, "[+]")
     end
 
     if not vim.bo.modifiable or vim.bo.readonly then
-        table.insert(fn, "[RO]")
+        table.insert(fname, "[RO]")
     end
 
-    return table.concat(fn, " ")
+    return table.concat(fname, " ")
 end
 
 local function filetype()
-    local disable =
-        { "toggleterm", "terminal", "nofile", "prompt", "help", "quickfix" }
-    if
-        not (
-            vim.list_contains(disable, vim.bo.filetype)
-            or vim.list_contains(disable, vim.bo.buftype)
-        )
-        and vim.bo.buftype == ""
-        and #vim.bo.filetype > 0
-    then
-        return bracket_wrap(highlight(vim.bo.filetype, "StatusLineGreen"))
+    local ft = vim.bo.filetype
+    local buftype = vim.bo.buftype
+
+    if buftype ~= "" or #ft < 1 then
+        return ""
     end
-    return ""
+
+    return string.format("[%s%s%%*]", M.colors.green, ft)
 end
 
 M.render = function()
-    local sl = {}
-
     local left = table.concat({
-        vimode(),
-        git_head(),
-        git_status(),
+        mode(),
+        git(),
     }, " ")
 
     local center = table.concat({
@@ -189,23 +161,24 @@ M.render = function()
 
     local right = table.concat({
         filetype(),
-        "%l / %L : %2c   ",
+        "%*%l / %L : %2c   ",
     }, " ")
 
-    local left_pad = math.floor(vim.o.columns / 2)
-        - vim.api.nvim_eval_statusline(left, {}).width
-        - math.floor(vim.api.nvim_eval_statusline(center, {}).width / 2)
+    local left_width = vim.api.nvim_eval_statusline(left, {}).width
+    local right_width = vim.api.nvim_eval_statusline(right, {}).width
+    local center_width = vim.api.nvim_eval_statusline(center, {}).width
+    local cols = vim.o.columns
 
-    local right_pad = math.floor(vim.o.columns / 2)
-        - vim.api.nvim_eval_statusline(right, {}).width
-        - math.floor(vim.api.nvim_eval_statusline(center, {}).width / 2)
+    local left_pad = math.floor((cols - center_width) / 2) - left_width
+    local right_pad = math.ceil((cols - center_width) / 2) - right_width
 
-    table.insert(sl, 1, left)
-    table.insert(sl, 2, string.rep(" ", left_pad))
-    table.insert(sl, 3, center)
-    table.insert(sl, 4, string.rep(" ", right_pad))
-    table.insert(sl, 5, right)
-    return table.concat(sl, "")
+    local sl = {}
+    table.insert(sl, left)
+    table.insert(sl, string.rep(" ", left_pad))
+    table.insert(sl, center)
+    table.insert(sl, string.rep(" ", right_pad))
+    table.insert(sl, right)
+    return table.concat(sl)
 end
 
 return M
