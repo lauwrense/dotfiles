@@ -4,9 +4,9 @@ local shutdown_group = vim.api.nvim_create_augroup("user.bigfile.shutdown", {})
 vim.api.nvim_create_autocmd({ "BufReadPost", "UIEnter" }, {
     group = shutdown_group,
     callback = function(args)
-        local ok, stat = pcall(vim.uv.fs_stat, args.file)
+        local size = vim.fn.getfsize(args.file)
 
-        if not ok or not stat or (stat.size < max_fsize) then
+        if size < max_fsize then
             return
         end
 
