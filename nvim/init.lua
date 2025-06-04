@@ -35,12 +35,9 @@ local lazy_config = {
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---Dont load everything
-if os.getenv("NVIM") ~= nil then
-    require("lazy").setup({
-        { "willothy/flatten.nvim", config = true },
-    })
-else
+-- Dont load everything if env var 'NVIM' exist
+if not vim.env.NVIM then
     require("lazy").setup("plugins", lazy_config)
     vim.cmd.colorscheme("catppuccin-frappe")
+    vim.cmd.packadd("cfilter")
 end
