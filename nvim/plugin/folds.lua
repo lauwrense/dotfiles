@@ -11,14 +11,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 -- Fallback
 vim.api.nvim_create_autocmd("FileType", {
-    callback = function(args)
-        local max_size = 100
-        local ok, stat = pcall(vim.uv.fs_stat, args.file)
-
-        if ok and stat and stat.size > 1024 * max_size then
-            return
-        end
-
+    callback = function()
         local exists, lang =
             pcall(vim.treesitter.language.get_lang, vim.bo.filetype)
 
