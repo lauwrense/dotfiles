@@ -4,7 +4,6 @@ return {
         name = "treesitter",
         branch = "main",
         build = ":TSUpdate",
-        lazy = false,
         config = function()
             require("nvim-treesitter").install({
                 "zig",
