@@ -6,7 +6,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UIEnter" }, {
     callback = function(args)
         local ok, stat = pcall(vim.uv.fs_stat, args.file)
 
-        if not ok or not stat or stat.size < max_fsize then
+        if not ok or not stat or (stat.size < max_fsize) then
             return
         end
 
