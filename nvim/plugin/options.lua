@@ -7,6 +7,14 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.colorcolumn = "80"
 
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    callback = function (args)
+        if vim.bo[args.buf].buftype == 'nofile' then
+            vim.opt.colorcolumn = ""
+        end
+    end
+})
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 4
