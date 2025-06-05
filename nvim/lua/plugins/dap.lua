@@ -54,7 +54,7 @@ return {
                                 vim.ui.input(
                                     { prompt = "zig build " },
                                     function(args)
-                                        vim.cmd("make " .. args)
+                                        vim.cmd.make(args)
                                     end
                                 )
                             end
