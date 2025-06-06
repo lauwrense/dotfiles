@@ -1,5 +1,5 @@
 local M = {}
-local ns = vim.api.nvim_create_namespace("UserCustom")
+local ns = vim.api.nvim_create_namespace("user.quickfix.highlight.ns")
 
 M.quickfixtextfunc = function(info)
     local items

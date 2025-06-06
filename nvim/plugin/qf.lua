@@ -1,4 +1,4 @@
-local qf_group = vim.api.nvim_create_augroup("QuickFixGroup", {})
+local qf_group = vim.api.nvim_create_augroup("user.quickfix", {})
 vim.api.nvim_create_autocmd({ "BufRead" }, {
     group = qf_group,
     pattern = "quickfix",
@@ -23,4 +23,4 @@ vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
     end,
 })
 
-vim.o.quickfixtextfunc = "v:lua.require'custom.qf'.quickfixtextfunc"
+vim.o.quickfixtextfunc = "v:lua.require'user.qf'.quickfixtextfunc"

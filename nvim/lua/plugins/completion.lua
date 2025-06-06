@@ -10,7 +10,7 @@ return {
         event = { "InsertEnter", "CmdlineEnter" },
         init = function()
             vim.api.nvim_create_autocmd({ "LspAttach" }, {
-                group = vim.api.nvim_create_augroup("LspAttachKeyMaps", {}),
+                group = vim.api.nvim_create_augroup("user.lsp.on.attach", {}),
                 callback = function(args)
                     local bufnr = args.buf
 

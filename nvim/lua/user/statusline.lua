@@ -82,7 +82,7 @@ local function git()
 
     vim.api.nvim_create_autocmd("User", {
         pattern = "GitSignsUpdate",
-        group = vim.api.nvim_create_augroup("UpdateStatusLineGit", {}),
+        group = vim.api.nvim_create_augroup("user.statusline.git", {}),
         callback = function()
             vim.cmd.redrawstatus()
         end,
