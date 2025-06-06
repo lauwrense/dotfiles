@@ -1,8 +1,18 @@
 return {
     {
         "neovim/nvim-lspconfig",
+        event = "VeryLazy",
         config = function()
-            vim.lsp.enable({"gopls", "marksman", "lua_ls", "zls", "clangd", "texlab", "tinymist"})
+            vim.lsp.enable ({
+                "clangd",
+                "gopls",
+                "lua_ls",
+                "marksman",
+                "neocmake",
+                "texlab",
+                "tinymist",
+                "zls",
+            })
         end,
     },
     {
