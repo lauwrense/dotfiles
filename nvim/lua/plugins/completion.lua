@@ -15,14 +15,22 @@ return {
                 build = "make install_jsregexp",
             },
         },
-        init = function ()
-            vim.api.nvim_create_autocmd({"LspAttach"}, {
+        init = function()
+            vim.api.nvim_create_autocmd({ "LspAttach" }, {
                 group = vim.api.nvim_create_augroup("LspAttachKeyMaps", {}),
-                callback = function()
-                    vim.api.nvim_buf_create_user_command(0, "CompletionToggleLsp", function ()
-                        vim.b.completion_lsp = not vim.b.completion_lsp
-                    end, {})
-                end
+                callback = function(args)
+                    local bufnr = args.buf
+
+                    vim.api.nvim_buf_create_user_command(
+                        bufnr,
+                        "CompletionToggleLsp",
+                        function()
+                            vim.b[bufnr].completion_lsp =
+                                not vim.b[bufnr].completion_lsp
+                        end,
+                        {}
+                    )
+                end,
             })
         end,
         ---@module 'blink.cmp'
@@ -68,15 +76,16 @@ return {
                             vim.list_extend(source, { "lsp" })
                         end
 
-                        if vim.bo.filetype == "lua" then
-                            vim.list_extend(source, { "lazydev" })
-                        else
+                        if vim.bo.filetype ~= "lua" then
                             vim.list_extend(source, { "snippets" })
                         end
                     end
 
                     return source
                 end,
+                per_filetype = {
+                    lua = { inherit_defaults = true, "lazydev" },
+                },
                 providers = {
                     lazydev = {
                         name = "LazyDev",
