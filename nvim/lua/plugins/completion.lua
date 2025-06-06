@@ -8,13 +8,6 @@ return {
         "saghen/blink.cmp",
         version = "1.*",
         event = { "InsertEnter", "CmdlineEnter" },
-        dependencies = {
-            {
-                "L3MON4D3/LuaSnip",
-                version = "v2.*",
-                build = "make install_jsregexp",
-            },
-        },
         init = function()
             vim.api.nvim_create_autocmd({ "LspAttach" }, {
                 group = vim.api.nvim_create_augroup("LspAttachKeyMaps", {}),
@@ -56,7 +49,6 @@ return {
                     },
                 },
             },
-            snippets = { preset = "luasnip" },
             sources = {
                 default = function()
                     local success, node = pcall(vim.treesitter.get_node)
@@ -74,10 +66,6 @@ return {
                     else
                         if vim.b.completion_lsp then
                             vim.list_extend(source, { "lsp" })
-                        end
-
-                        if vim.bo.filetype ~= "lua" then
-                            vim.list_extend(source, { "snippets" })
                         end
                     end
 
