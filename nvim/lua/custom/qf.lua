@@ -21,6 +21,9 @@ M.quickfixtextfunc = function(info)
 
     local final = {}
 
+    vim.schedule(function ()
+    vim.api.nvim_buf_clear_namespace(qfbufnr, ns, 0, -1)
+    end)
     for i, item in ipairs(items) do
         local str
         if item.valid == 1 then
@@ -92,6 +95,14 @@ M.quickfixtextfunc = function(info)
                 })
 
                 offset = offset + 3
+
+                --- File
+                vim.api.nvim_buf_set_extmark(qfbufnr, ns, i - 1, offset, {
+                    hl_group = "@comment",
+                    end_col = offset + #item.text,
+                    strict = false,
+                })
+
             end)
         else
             str = item.text
