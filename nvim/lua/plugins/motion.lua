@@ -55,7 +55,7 @@ return {
     {
         "kylechui/nvim-surround",
         version = "*",
-        event = { "InsertEnter" },
+        event = { "VeryLazy" },
         keys = {
             { "ys" },
             { "yss" },

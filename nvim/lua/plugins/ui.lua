@@ -13,7 +13,6 @@ return {
                 neotest = true,
                 blink_cmp = true,
                 native_lsp = {
-                    enabled = true,
                     underlines = {
                         errors = { "undercurl" },
                         hints = { "undercurl" },
