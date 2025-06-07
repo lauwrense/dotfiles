@@ -15,18 +15,23 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UIEnter" }, {
             vim.treesitter.stop(args.buf)
         end
 
-        -- LSP
-        vim.api.nvim_create_autocmd("LspAttach", {
-            callback = function(a)
-                local client = vim.lsp.get_client_by_id(a.data.client_id)
-
-                if client then
-                    client:stop(true)
-                end
-            end,
-        })
-
         -- Rainbow Delimeters
         require("rainbow-delimiters").disable(args.buf)
+    end,
+})
+
+-- LSP
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local size = vim.fn.getfsize(args.file)
+
+        if size < max_fsize then
+            return
+        end
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+        if client then
+            client:stop(true)
+        end
     end,
 })
