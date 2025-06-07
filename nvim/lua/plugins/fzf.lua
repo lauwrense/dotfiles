@@ -18,13 +18,6 @@ return {
                 desc = "Grep String",
             },
             {
-                "<leader>fg",
-                function()
-                    require("fzf-lua").live_grep()
-                end,
-                desc = "Live Grep",
-            },
-            {
 
                 "<leader>fh",
                 function()
@@ -32,7 +25,6 @@ return {
                 end,
                 desc = "Help Tags",
             },
-
             {
                 "<leader>fm",
                 function()
