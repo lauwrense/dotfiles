@@ -8,24 +8,6 @@ return {
         "saghen/blink.cmp",
         version = "1.*",
         event = { "InsertEnter", "CmdlineEnter" },
-        init = function()
-            vim.api.nvim_create_autocmd({ "LspAttach" }, {
-                group = vim.api.nvim_create_augroup("user.lsp.on.attach", {}),
-                callback = function(args)
-                    local bufnr = args.buf
-
-                    vim.api.nvim_buf_create_user_command(
-                        bufnr,
-                        "CompletionToggleLsp",
-                        function()
-                            vim.b[bufnr].completion_lsp =
-                                not vim.b[bufnr].completion_lsp
-                        end,
-                        {}
-                    )
-                end,
-            })
-        end,
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
