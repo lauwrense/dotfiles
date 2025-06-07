@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
             return #vim.api.nvim_buf_get_name(a.bufnr)
                 > #vim.api.nvim_buf_get_name(b.bufnr)
         end)
-        vim.fn.setqflist(qflist)
+        vim.fn.setqflist(qflist, "r")
     end,
 })
 
