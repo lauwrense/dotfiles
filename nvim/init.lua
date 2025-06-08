@@ -11,6 +11,7 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+---@type LazyConfig
 local lazy_config = {
     install = {
         colorscheme = { "catppuccin-frappe" },
@@ -42,5 +43,4 @@ vim.g.maplocalleader = " "
 if not vim.env.NVIM then
     require("lazy").setup("plugins", lazy_config)
     vim.cmd.colorscheme("catppuccin-frappe")
-    vim.cmd.packadd("cfilter")
 end
