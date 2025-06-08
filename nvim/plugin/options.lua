@@ -6,10 +6,12 @@ vim.opt.smartindent = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
+vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
     callback = function()
         if vim.bo.buftype == "" then
             vim.opt_local.colorcolumn = "80"
+        else
+            vim.opt_local.colorcolumn = ""
         end
     end,
 })
