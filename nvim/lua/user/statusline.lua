@@ -1,15 +1,16 @@
 local M = {
     colors = {
-        red = "%#StatusLineRed#",
-        blue = "%#StatusLineBlue#",
-        yellow = "%#StatusLineYellow#",
-        orange = "%#StatusLineOrange#",
-        purple = "%#StatusLinePurple#",
-        green = "%#StatusLineGreen#",
-        diff_branch = "%#StatusLineDiffBranch#",
-        diff_add = "%#StatusLineDiffAdded#",
-        diff_change = "%#StatusLineDiffChanged#",
-        diff_removed = "%#StatusLineDiffRemoved#",
+        red = "%#@error#",
+        blue = "%#@function#",
+        yellow = "%#@type#",
+        orange = "%#@boolean#",
+        purple = "%#@conditional#",
+        green = "%#@string#",
+        diff_branch = "%#@comment#",
+        diff_add = "%#@diff.plus#",
+        diff_change = "%#@type#",
+        diff_removed = "%#@diff.minus#",
+        text = "%#@text#",
     },
     modes = {
         n = "N",
@@ -47,7 +48,7 @@ local function mode()
     }
 
     local current_mode = vim.api.nvim_get_mode().mode
-    local color = mode_colors[current_mode] or "%#NonText#"
+    local color = mode_colors[current_mode] or M.colors.text
     local mode_char = M.modes[current_mode]
 
     return string.format("[%s%s%%*]", color, mode_char)
