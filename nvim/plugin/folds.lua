@@ -12,18 +12,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Fallback
 vim.api.nvim_create_autocmd("FileType", {
     callback = function()
-        local exists, lang =
-            pcall(vim.treesitter.language.get_lang, vim.bo.filetype)
-
-        if not exists then
-            return
-        end
-
-        if lang and vim.treesitter.language.add(lang) then
-            vim.wo.foldexpr = vim.wo.foldexpr or "v:lua.vim.treesitter.foldexpr()"
-        else
-            vim.wo.foldexpr = vim.wo.foldexpr or "indent"
-        end
+        vim.wo.foldexpr = vim.wo.foldexpr or "indent"
     end,
 })
 
