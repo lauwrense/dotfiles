@@ -4,9 +4,9 @@ local shutdown_group = vim.api.nvim_create_augroup("user.bigfile.shutdown", {})
 vim.api.nvim_create_autocmd({ "BufReadPost", "UIEnter" }, {
     group = shutdown_group,
     callback = function(args)
-        local size = vim.fn.getfsize(args.file)
+        local ok, file = pcall(vim.uv.fs_stat,args.file)
 
-        if size < max_fsize then
+        if not ok or file and file.size < max_fsize then
             return
         end
 
@@ -22,10 +22,11 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UIEnter" }, {
 
 -- LSP
 vim.api.nvim_create_autocmd("LspAttach", {
+    group = shutdown_group,
     callback = function(args)
-        local size = vim.fn.getfsize(args.file)
+        local ok, file = pcall(vim.uv.fs_stat,args.file)
 
-        if size < max_fsize then
+        if not ok or file and file.size < max_fsize then
             return
         end
         local client = vim.lsp.get_client_by_id(args.data.client_id)
