@@ -49,22 +49,28 @@ return {
             local treesitter_group =
                 vim.api.nvim_create_augroup("user.treesitter", {})
             local ts = require("nvim-treesitter")
+            local avalable = ts.get_available()
+            local installed = ts.get_installed()
+
+            local function setup_treesitter()
+                vim.bo.indentexpr =
+                    "v:lua.require'nvim-treesitter'.indentexpr()"
+                vim.wo.foldexpr = vim.wo.foldexpr
+                    or "v:lua.vim.treesitter.foldexpr()"
+                vim.treesitter.start()
+            end
 
             vim.api.nvim_create_autocmd("FileType", {
                 group = treesitter_group,
                 callback = function(args)
                     local ft = args.match
                     local lang = vim.treesitter.language.get_lang(ft)
-                    local avalable = ts.get_available()
 
-                    if vim.tbl_contains(avalable, lang) then
-                        ts.install(lang):await(function()
-                            vim.bo.indentexpr =
-                                "v:lua.require'nvim-treesitter'.indentexpr()"
-                            vim.wo.foldexpr = vim.wo.foldexpr
-                                or "v:lua.vim.treesitter.foldexpr()"
-                            vim.treesitter.start()
-                        end)
+                    if vim.tbl_contains(installed, lang) then
+                        setup_treesitter()
+                    elseif vim.tbl_contains(avalable, lang) then
+                        ts.install(lang):await(setup_treesitter)
+                        installed = ts.get_installed()
                     end
                 end,
             })
