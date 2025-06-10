@@ -9,7 +9,7 @@ vim.opt.tabstop = 4
 vim.api.nvim_create_autocmd({"BufWinEnter", "FileType"}, {
     callback = function()
         if vim.bo.buftype == "" then
-            vim.opt_local.colorcolumn = "80"
+            vim.opt_local.colorcolumn = tostring(vim.b.textwidth or 80)
         else
             vim.opt_local.colorcolumn = ""
         end
