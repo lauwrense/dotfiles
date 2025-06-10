@@ -34,7 +34,7 @@ return {
             sources = {
                 default = function()
                     local success, node = pcall(vim.treesitter.get_node)
-                    local source = {}
+                    local source = { "path" }
 
                     if
                         success
@@ -47,7 +47,7 @@ return {
                         return { "buffer" }
                     else
                         if vim.b.completion_lsp then
-                            vim.list_extend(source, { "lsp" })
+                            source = vim.list_extend({ "lsp" }, source)
                         end
                     end
 
