@@ -47,7 +47,7 @@ local function mode()
         t = M.colors.red,
     }
 
-    local current_mode = vim.api.nvim_get_mode().mode
+    local current_mode = vim.api.nvim_get_mode().mode:sub(1,1)
     local color = mode_colors[current_mode] or M.colors.text
     local mode_char = M.modes[current_mode]
 
