@@ -4,49 +4,46 @@ return {
         lazy = false,
         name = "treesitter",
         branch = "main",
-        build = {
-            function()
-                local parser_installed = {
-                    "zig",
+        build = function()
+            local parser_installed = {
+                "zig",
 
-                    -- Go
-                    "go",
-                    "gosum",
-                    "gomod",
-                    "gowork",
+                -- Go
+                "go",
+                "gosum",
+                "gomod",
+                "gowork",
 
-                    -- Scripting
-                    "lua",
-                    "luap",
-                    "luadoc",
+                -- Scripting
+                "lua",
+                "luap",
+                "luadoc",
 
-                    "python",
+                "python",
 
-                    -- C
-                    "doxygen",
-                    "c",
-                    "cpp",
-                    "make",
-                    "cmake",
+                -- C
+                "doxygen",
+                "c",
+                "cpp",
+                "make",
+                "cmake",
 
-                    -- MD
-                    "markdown",
-                    "markdown_inline",
+                -- MD
+                "markdown",
+                "markdown_inline",
 
-                    -- Git
-                    "diff",
-                    "gitcommit",
-                    "gitattributes",
-                    "gitignore",
-                    "git_rebase",
-                    "git_config",
-                }
+                -- Git
+                "diff",
+                "gitcommit",
+                "gitattributes",
+                "gitignore",
+                "git_rebase",
+                "git_config",
+            }
 
-                require("nvim-treesitter").install(parser_installed)
-                require("nvim-treesitter").update()
-            end,
-            ":TSUpdate",
-        },
+            require("nvim-treesitter").install(parser_installed)
+            require("nvim-treesitter").update()
+        end,
         init = function()
             -- Highlight
             local treesitter_group =
