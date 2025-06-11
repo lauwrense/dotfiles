@@ -72,3 +72,6 @@ vim.keymap.set(
     toggle_virtual_current_lines,
     { remap = true }
 )
+
+vim.keymap.set("n", "<leader>dd", vim.diagnostic.setqflist, {})
+vim.keymap.set("n", "<leader>dl", vim.diagnostic.setloclist, {})
