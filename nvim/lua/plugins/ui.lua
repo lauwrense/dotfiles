@@ -26,16 +26,12 @@ return {
     },
     {
         "HiPhish/rainbow-delimiters.nvim",
-        event = { "BufNew", "BufRead", "BufEnter", "FileType" },
-        submodules = false,
+        main = "rainbow-delimiters.setup",
         opts = {
             blacklist = {
                 "comment",
             },
         },
-        config = function(_, opts)
-            require("rainbow-delimiters.setup").setup(opts)
-        end,
     },
     {
         "j-hui/fidget.nvim",
