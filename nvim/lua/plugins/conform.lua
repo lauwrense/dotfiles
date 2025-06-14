@@ -19,11 +19,14 @@ return {
         end,
         opts = {
             formatters_by_ft = {
-                lua = { "stylua" },
+                c = { "clang-format" },
+                cpp = { "clang-format" },
                 go = { "goimports", "gofmt" },
-                zig = { "zigfmt" },
-                sh = { "shfmt" },
+                lua = { "stylua" },
                 markdown = { "mdformat" },
+                ocaml = {"ocamlformat"},
+                sh = { "shfmt" },
+                zig = { "zigfmt" },
             },
         },
     },
