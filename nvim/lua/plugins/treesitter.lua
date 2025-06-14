@@ -60,7 +60,7 @@ return {
                 vim.treesitter.start()
             end
 
-            vim.api.nvim_create_autocmd("FileType", {
+            vim.api.nvim_create_autocmd({ "FileType", "BufNewFile" }, {
                 group = treesitter_group,
                 callback = function(args)
                     local ft = args.match
