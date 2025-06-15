@@ -12,8 +12,10 @@ M.quickfixtextfunc = function(info)
         items = qflist.items
         qfbufnr = qflist.qfbufnr
     else
-        local loclist =
-            vim.fn.getqflist({ id = info.id, items = 0, qfbufnr = 0 })
+        local loclist = vim.fn.getloclist(
+            info.winid,
+            { id = info.id, items = 0, qfbufnr = 0 }
+        )
 
         items = loclist.items
         qfbufnr = loclist.qfbufnr
@@ -21,8 +23,8 @@ M.quickfixtextfunc = function(info)
 
     local final = {}
 
-    vim.schedule(function ()
-    vim.api.nvim_buf_clear_namespace(qfbufnr, ns, 0, -1)
+    vim.schedule(function()
+        vim.api.nvim_buf_clear_namespace(qfbufnr, ns, 0, -1)
     end)
     for i, item in ipairs(items) do
         local str
@@ -38,7 +40,7 @@ M.quickfixtextfunc = function(info)
                 name,
                 item.lnum,
                 item.col,
-                item.text
+                vim.trim(item.text)
             )
 
             vim.schedule(function()
@@ -102,7 +104,6 @@ M.quickfixtextfunc = function(info)
                     end_col = offset + #item.text,
                     strict = false,
                 })
-
             end)
         else
             str = item.text
