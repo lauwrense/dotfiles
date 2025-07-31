@@ -36,13 +36,6 @@ return {
     {
         "j-hui/fidget.nvim",
         event = { "UIEnter" },
-        opts = {
-            notification = {
-                window = {
-                    winblend = 0,
-                },
-            },
-        },
         config = function(_, opts)
             local fidget = require("fidget")
             fidget.setup(opts)
