@@ -40,20 +40,13 @@ return {
             { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers" },
         },
         cmd = { "FzfLua" },
-        init = function()
-            vim.api.nvim_create_autocmd("Colorscheme", {
-                group = vim.api.nvim_create_augroup("user.fzf.colorscheme", {}),
-                callback = function()
-                    vim.api.nvim_set_hl(0, "FzfLuaBorder", {
-                        fg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg,
-                        bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg,
-                    })
-                end,
-            })
-        end,
         config = function()
             require("fzf-lua").setup({
                 fzf_colors = true,
+                winopts = {
+                    border = { " " },
+                    preview = { border = { " " } },
+                },
                 files = {
                     cwd_prompt = false,
                 },
