@@ -6,7 +6,13 @@ return {
             "Oil",
         },
         keys = {
-            { "<leader>O", "<cmd>Oil<cr>", desc = "Oil" },
+            { "<leader>O", function ()
+                require("oil").open_float(nil, {
+                    preview = {
+                        vertical = true,
+                    }
+                })
+            end, desc = "Oil" },
         },
         config = function()
             require("oil").setup({
@@ -18,6 +24,12 @@ return {
                     is_always_hidden = function(name, _)
                         return name == ".." or name == ".git"
                     end,
+                },
+                float = {
+                    border = {" "},
+                    max_height = 0.85,
+                    max_width = 0.80,
+
                 },
                 confirmation = {
                     border = "none",
