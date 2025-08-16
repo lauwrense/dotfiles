@@ -8,8 +8,6 @@ return {
                 "gopls",
                 "lua_ls",
                 "marksman",
-                "neocmake",
-                "texlab",
                 "tinymist",
                 "zls",
             })
