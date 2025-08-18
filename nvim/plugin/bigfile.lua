@@ -14,9 +14,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "UIEnter" }, {
         if vim.treesitter.highlighter.active[args.buf] then
             vim.treesitter.stop(args.buf)
         end
-
-        -- Rainbow Delimeters
-        require("rainbow-delimiters").disable(args.buf)
     end,
 })
 

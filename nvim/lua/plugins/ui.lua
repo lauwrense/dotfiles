@@ -24,15 +24,15 @@ return {
             },
         },
     },
-    {
-        "HiPhish/rainbow-delimiters.nvim",
-        main = "rainbow-delimiters.setup",
-        opts = {
-            blacklist = {
-                "comment",
-            },
-        },
-    },
+    -- {
+    --     "HiPhish/rainbow-delimiters.nvim",
+    --     main = "rainbow-delimiters.setup",
+    --     opts = {
+    --         blacklist = {
+    --             "comment",
+    --         },
+    --     },
+    -- },
     {
         "j-hui/fidget.nvim",
         event = { "UIEnter" },
