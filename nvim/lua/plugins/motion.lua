@@ -45,17 +45,6 @@ return {
         "kylechui/nvim-surround",
         version = "*",
         event = { "VeryLazy" },
-        keys = {
-            { "ys" },
-            { "yss" },
-            { "yS" },
-            { "ySS" },
-            { "S", mode = "v" },
-            { "gS", mode = "v" },
-            { "ds" },
-            { "cs" },
-            { "cS" },
-        },
-        config = true,
+        opts = {},
     },
 }
