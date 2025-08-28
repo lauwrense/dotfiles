@@ -57,7 +57,7 @@ return {
                     "v:lua.require'nvim-treesitter'.indentexpr()"
                 vim.wo.foldexpr = vim.wo.foldexpr
                     or "v:lua.vim.treesitter.foldexpr()"
-                vim.schedule(function ()
+                vim.schedule(function()
                     vim.treesitter.start()
                 end)
             end

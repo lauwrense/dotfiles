@@ -1,12 +1,11 @@
 return {
     {
         "mfussenegger/nvim-dap",
+        lazy = true,
         dependencies = {
             "nvim-neotest/nvim-nio",
             "rcarriga/nvim-dap-ui",
-            "leoluz/nvim-dap-go",
         },
-        ft = { "c", "cpp", "zig" },
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
@@ -40,32 +39,6 @@ return {
                 }
 
                 dap.configurations.c = dap.configurations.cpp
-                dap.configurations.zig = {
-                    {
-                        name = "Launch",
-                        type = "lldb",
-                        request = "launch",
-                        program = function()
-                            local path = vim.fn.getcwd()
-                                .. "/zig-out/bin/"
-                                .. vim.fs.basename(vim.fn.getcwd())
-                            if not vim.uv.fs_stat(path) then
-                                vim.ui.input(
-                                    { prompt = "zig build " },
-                                    function(args)
-                                        vim.cmd.make(args)
-                                    end
-                                )
-                            end
-
-                            return not vim.uv.fs_stat(path) and dap.ABORT
-                                or path
-                        end,
-                        cwd = "${workspaceFolder}",
-                        stopOnEntry = false,
-                        args = {},
-                    },
-                }
             end
 
             vim.keymap.set("n", "<F1>", function()
