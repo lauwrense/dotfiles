@@ -84,17 +84,6 @@ return {
         },
     },
     {
-        "NeogitOrg/neogit",
-        cmd = "Neogit",
-        dependencies = {"nvim-lua/plenary.nvim"},
-        keys = {
-            { "<leader>hU", "<cmd>Neogit<cr>", desc = "Open Neogit" },
-        },
-        opts = {
-            disable_builtin_notifications = true,
-        },
-    },
-    {
         "sindrets/diffview.nvim",
         cmd = {
             "DiffviewOpen",
