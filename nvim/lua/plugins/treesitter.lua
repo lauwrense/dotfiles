@@ -62,20 +62,24 @@ return {
                 end)
             end
 
-            vim.api.nvim_create_autocmd({ "FileType", "BufNewFile" }, {
-                group = treesitter_group,
-                callback = function()
-                    local ft = vim.bo.filetype
-                    local lang = vim.treesitter.language.get_lang(ft)
+            vim.api.nvim_create_autocmd(
+                { "BufReadPost", "BufNewFile", "FileType" },
+                {
+                    group = treesitter_group,
+                    buffer = 0,
+                    callback = function(args)
+                        local ft = vim.bo[args.buf].filetype
+                        local lang = vim.treesitter.language.get_lang(ft)
 
-                    if vim.tbl_contains(installed, lang) then
-                        setup_treesitter()
-                    elseif vim.tbl_contains(avalable, lang) then
-                        ts.install(lang):await(setup_treesitter)
-                        installed = ts.get_installed()
-                    end
-                end,
-            })
+                        if vim.list_contains(installed, lang) then
+                            setup_treesitter()
+                        elseif vim.list_contains(avalable, lang) then
+                            ts.install(lang):await(setup_treesitter)
+                            installed = ts.get_installed()
+                        end
+                    end,
+                }
+            )
         end,
     },
 }
