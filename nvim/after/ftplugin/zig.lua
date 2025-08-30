@@ -3,6 +3,12 @@ vim.opt_local.colorcolumn = "100"
 local dap = require("dap")
 local lldb_dap = vim.fn.exepath("lldb-dap")
 if lldb_dap ~= "" then
+    dap.adapters.lldb = {
+        type = "executable",
+        name = "lldb",
+        command = lldb_dap,
+    }
+
     dap.configurations.zig = {
         {
             name = "Launch",
