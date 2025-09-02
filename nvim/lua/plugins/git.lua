@@ -1,8 +1,8 @@
 return {
     {
         "lewis6991/gitsigns.nvim",
-        event = "VeryLazy",
         opts = {
+            attach_to_untracked = true,
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns
                 local function map(mode, l, r, opts)
@@ -14,8 +14,9 @@ return {
                 map("n", "]c", function()
                     if vim.wo.diff then
                         vim.cmd.normal({ "]c", bang = true })
+                    else
+                        gs.nav_hunk("next")
                     end
-                    gs.nav_hunk("next")
                 end, {
                     desc = "Next Hunk",
                 })
@@ -52,7 +53,7 @@ return {
                     "n",
                     "<leader>hR",
                     gs.reset_buffer,
-                    { desc = "Reseet Buffer" }
+                    { desc = "Reset Buffer" }
                 )
                 map(
                     "n",
@@ -92,6 +93,9 @@ return {
             "DiffviewFocusFiles",
             "DiffviewRefresh",
             "DiffviewFileHistory",
+        },
+        opts = {
+            use_icons = false,
         },
     },
 }

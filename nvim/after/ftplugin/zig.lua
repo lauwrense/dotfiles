@@ -1,12 +1,19 @@
 vim.opt_local.colorcolumn = "100"
 
 local dap = require("dap")
-local lldb_dap = vim.fn.exepath("lldb-dap")
-if lldb_dap ~= "" then
+
+if not vim.env.MASON then
+    return
+end
+
+local mason = require("mason-registry")
+local ok,codelldb = pcall(mason.get_package, "codelldb")
+
+if ok and codelldb:is_installed() then
     dap.adapters.lldb = {
         type = "executable",
         name = "lldb",
-        command = lldb_dap,
+        command = vim.fn.expand("$MASON/bin/codelldb"),
     }
 
     dap.configurations.zig = {
@@ -18,11 +25,17 @@ if lldb_dap ~= "" then
                 local path = vim.fn.getcwd()
                     .. "/zig-out/bin/"
                     .. vim.fs.basename(vim.fn.getcwd())
-                if not vim.uv.fs_stat(path) then
-                    vim.ui.input({ prompt = "zig build " }, function(args)
-                        vim.cmd.make(args)
-                    end)
-                end
+
+                vim.ui.input({ prompt = "zig build " }, function(args)
+                    if tostring(args):find("^test") then
+                        path = vim.fs.find("test", {
+                            limit = 1,
+                            type = "file",
+                            path = "./.zig-cache",
+                        })[1]
+                    end
+                    vim.cmd.make(args)
+                end)
 
                 return not vim.uv.fs_stat(path) and dap.ABORT or path
             end,
