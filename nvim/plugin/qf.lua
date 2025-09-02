@@ -27,14 +27,18 @@ end
 vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
     group = qf_group,
     callback = function()
-        -- TODO: seperate this
-        local loclist = vim.fn.getloclist(0)
-        table.sort(loclist, cmp_item)
-        vim.fn.setloclist(0, loclist, "r")
-
-        local qflist = vim.fn.getqflist()
-        table.sort(qflist, cmp_item)
-        vim.fn.setqflist(qflist, "r")
+        local winid = vim.api.nvim_get_current_win()
+        local is_loclist = vim.fn.getwininfo(winid)[1]["loclist"]
+            == 1
+        if is_loclist then
+            local loclist = vim.fn.getloclist(0)
+            table.sort(loclist, cmp_item)
+            vim.fn.setloclist(0, loclist, "r")
+        else
+            local qflist = vim.fn.getqflist()
+            table.sort(qflist, cmp_item)
+            vim.fn.setqflist(qflist, "r")
+        end
     end,
 })
 

@@ -1,7 +1,6 @@
 vim.opt.expandtab = true
-vim.opt.smarttab = true
-vim.opt.autoindent = true
 vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
@@ -17,12 +16,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "FileType" }, {
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.numberwidth = 4
 vim.opt.signcolumn = "yes:1"
-vim.opt.termguicolors = true
 vim.opt.guifont = "JetBrainsMono Nerd Font:h17"
 
-vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
@@ -42,30 +38,13 @@ vim.opt.wrap = false
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
-vim.opt.autochdir = false
-vim.opt.hidden = true
-
 vim.opt.pumheight = 10
-vim.opt.showtabline = 1
 
 vim.opt.showmode = false
-vim.opt.updatetime = 250
-vim.opt.timeout = true
-vim.opt.timeoutlen = 1000
 
-vim.opt.undofile = true
-vim.opt.swapfile = true
-vim.opt.backup = false
-
-vim.opt.foldcolumn = "0"
-vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 99
-vim.opt.foldenable = true
-vim.opt.foldmethod = "expr"
-vim.opt.foldtext = ""
+vim.opt.swapfile = false
+vim.opt.updatetime = 200
+vim.opt.path:append("**")
 
 vim.opt.fillchars = [[eob: ,fold: ]]
 vim.opt.laststatus = 3
-
-vim.g.exrc = true
-vim.g.shortmess = "ltToOCFI"

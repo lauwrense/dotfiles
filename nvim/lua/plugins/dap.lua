@@ -3,12 +3,11 @@ return {
         "mfussenegger/nvim-dap",
         lazy = true,
         dependencies = {
-            "nvim-neotest/nvim-nio",
-            "rcarriga/nvim-dap-ui",
+            "Jorenar/nvim-dap-disasm",
+            "igorlfs/nvim-dap-view",
         },
         config = function()
             local dap = require("dap")
-            local dapui = require("dapui")
 
             vim.keymap.set("n", "<F1>", function()
                 dap.continue()
@@ -24,26 +23,40 @@ return {
                 dap.step_out()
             end)
             vim.keymap.set("n", "<F5>", function()
-                dapui.toggle()
+                require("dap-view").toggle()
             end)
             vim.keymap.set("n", "<M-b>", function()
                 dap.toggle_breakpoint()
             end)
-
-            dapui.setup()
-
-            dap.listeners.before.attach.dapui_config = function()
-                dapui.open()
-            end
-            dap.listeners.before.launch.dapui_config = function()
-                dapui.open()
-            end
-            dap.listeners.before.event_terminated.dapui_config = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited.dapui_config = function()
-                dapui.close()
-            end
         end,
+    },
+    {
+        "Jorenar/nvim-dap-disasm",
+        lazy = true,
+        dependencies = { "igorlfs/nvim-dap-view" },
+        config = true,
+    },
+    {
+        "igorlfs/nvim-dap-view",
+        lazy = true,
+        opts = {
+            winbar = {
+                sections = {
+                    "watches",
+                    "scopes",
+                    "exceptions",
+                    "breakpoints",
+                    "threads",
+                    "repl",
+                    "disassembly",
+                },
+            },
+            windows = {
+                position = "right",
+                terminal = {
+                    position = "below"
+                }
+            }
+        },
     },
 }
