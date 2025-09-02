@@ -43,6 +43,8 @@ vim.opt.pumheight = 10
 vim.opt.showmode = false
 
 vim.opt.swapfile = false
+vim.opt.undofile = true
+
 vim.opt.updatetime = 200
 vim.opt.path:append("**")
 

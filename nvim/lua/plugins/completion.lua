@@ -19,7 +19,7 @@ return {
         opts = {
             completion = {
                 list = {
-                    selection = { preselect = false },
+                    selection = { preselect = false, auto_insert = false },
                 },
                 documentation = {
                     auto_show = true,
