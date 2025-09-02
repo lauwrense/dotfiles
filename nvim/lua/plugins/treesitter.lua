@@ -2,17 +2,10 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         lazy = false,
-        name = "treesitter",
         branch = "main",
         build = function()
             local parser_installed = {
                 "zig",
-
-                -- Go
-                "go",
-                "gosum",
-                "gomod",
-                "gowork",
 
                 -- Scripting
                 "lua",
@@ -53,8 +46,6 @@ return {
             local installed = ts.get_installed()
 
             local function setup_treesitter()
-                vim.bo.indentexpr =
-                    "v:lua.require'nvim-treesitter'.indentexpr()"
                 vim.wo.foldexpr = vim.wo.foldexpr
                     or "v:lua.vim.treesitter.foldexpr()"
                 vim.schedule(function()

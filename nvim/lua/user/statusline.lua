@@ -47,7 +47,7 @@ local function mode()
         t = M.colors.red,
     }
 
-    local current_mode = vim.api.nvim_get_mode().mode:sub(1,1)
+    local current_mode = vim.api.nvim_get_mode().mode:sub(1, 1)
     local color = mode_colors[current_mode] or M.colors.text
     local mode_char = M.modes[current_mode]
 
@@ -94,49 +94,41 @@ end
 
 local function bufname()
     local buf_name = vim.api.nvim_buf_get_name(0)
+    local buftype = vim.bo.buftype
 
-    if vim.bo.buftype == "terminal" then
+    if buftype == "" then
+        local path = vim.fs.relpath(vim.fn.getcwd(), buf_name)
+        local fname = {
+            "%*",
+            path or "[No Name]",
+        }
+
+        if vim.bo.modified then
+            table.insert(fname, "[+]")
+        end
+
+        if not vim.bo.modifiable or vim.bo.readonly then
+            table.insert(fname, "[RO]")
+        end
+
+        return table.concat(fname, " ")
+    elseif buftype == "terminal" then
         local cmd = buf_name:gsub(".*/", "")
         if cmd:find("toggleterm") ~= nil then
             cmd = cmd:gsub(";.*", "")
         end
         return string.format("%s[%s]", M.colors.red, cmd)
-    end
+    elseif buftype == "help" then
+        local name = vim.fs.basename(buf_name)
 
-    if vim.bo.filetype == "help" then
-        return string.format(
-            "%s[Help] %%*%s",
-            M.colors.purple,
-            vim.fs.basename(buf_name)
-        )
-    end
-
-    if vim.bo.buftype == "quickfix" then
+        return string.format("%s[Help] %%*%s", M.colors.purple, name)
+    elseif buftype == "quickfix" then
         return string.format("%s[Quickfix]", M.colors.blue)
-    end
-
-    if vim.bo.buftype == "nofile" then
+    elseif buftype == "prompt" then
+        return string.format("%s[Prompt]", M.colors.purple)
+    elseif buftype == "nofile" then
         return string.format("%s[%s]", M.colors.green, vim.bo.filetype)
     end
-
-    if vim.bo.buftype == "prompt" then
-        return string.format("%s[Prompt]", M.colors.purple)
-    end
-
-    local fname = {
-        "%*",
-        vim.fs.relpath(vim.fn.getcwd(), buf_name) or "[No Name]",
-    }
-
-    if vim.bo.modified then
-        table.insert(fname, "[+]")
-    end
-
-    if not vim.bo.modifiable or vim.bo.readonly then
-        table.insert(fname, "[RO]")
-    end
-
-    return table.concat(fname, " ")
 end
 
 local function filetype()

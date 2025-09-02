@@ -4,7 +4,6 @@ vim.keymap.set("n", "<M-,>", "<c-w>+")
 vim.keymap.set("n", "<M-.>", "<c-w>-")
 
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>")
-
 vim.keymap.set("n", "K", function()
     local size = tonumber(vim.wo.colorcolumn) or 80
 
@@ -14,12 +13,17 @@ vim.keymap.set("n", "K", function()
     })
 end)
 
-vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename)
-vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action)
-vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references)
-vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation)
-vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition)
-vim.keymap.set("n", "<leader>lo", vim.lsp.buf.document_symbol)
+-- Use neovim as a fuzzy finder
+vim.keymap.set("n", "<leader>ff", function()
+    vim.ui.input({
+        prompt = "Find: ",
+        completion = "file_in_path",
+    }, function(input)
+        if input ~= nil then
+            vim.cmd("find " .. input)
+        end
+    end)
+end)
 
-vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
-vim.keymap.set("n", "gr", "gr", { nowait = true, noremap = true })
+-- 'al' motion
+vim.keymap.set({"o"}, "al", ":norm ggVG<cr>:norm <C-o><cr>")

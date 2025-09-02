@@ -1,5 +1,4 @@
 return {
-    { "nvim-tree/nvim-web-devicons", lazy = true },
     -- Colorschemes
     {
         "catppuccin/nvim",
@@ -23,23 +22,5 @@ return {
                 },
             },
         },
-    },
-    -- {
-    --     "HiPhish/rainbow-delimiters.nvim",
-    --     main = "rainbow-delimiters.setup",
-    --     opts = {
-    --         blacklist = {
-    --             "comment",
-    --         },
-    --     },
-    -- },
-    {
-        "j-hui/fidget.nvim",
-        event = { "UIEnter" },
-        config = function(_, opts)
-            local fidget = require("fidget")
-            fidget.setup(opts)
-            vim.notify = fidget.notify
-        end,
     },
 }
