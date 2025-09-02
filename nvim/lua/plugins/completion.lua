@@ -7,21 +7,28 @@ return {
     {
         "saghen/blink.cmp",
         version = "1.*",
-        event = { "InsertEnter", "CmdlineEnter" },
+        init = function()
+            vim.keymap.set("i", "<C-x><C-o>", function()
+                require("blink.cmp").show()
+                require("blink.cmp").show_documentation()
+                require("blink.cmp").hide_documentation()
+            end, { silent = false })
+        end,
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            keymap = {
-                preset = "default",
-                ["<CR>"] = { "accept", "fallback" },
-            },
             completion = {
-                list = { selection = { preselect = false, auto_insert = true } },
+                list = {
+                    selection = { preselect = false, auto_insert = false },
+                },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 200,
                 },
-
+                trigger = {
+                    show_on_keyword = false,
+                    show_on_trigger_character = false,
+                },
                 menu = {
                     draw = {
                         columns = {
@@ -31,41 +38,6 @@ return {
                     },
                 },
             },
-            sources = {
-                default = function()
-                    local success, node = pcall(vim.treesitter.get_node)
-                    local source = { "path" }
-
-                    if
-                        success
-                        and node
-                        and vim.tbl_contains(
-                            { "comment", "line_comment", "block_comment" },
-                            node:type()
-                        )
-                    then
-                        return { "buffer" }
-                    else
-                        if vim.b.completion_lsp then
-                            source = vim.list_extend({ "lsp" }, source)
-                        end
-                    end
-
-                    return source
-                end,
-                per_filetype = {
-                    lua = { inherit_defaults = true, "lazydev" },
-                },
-                providers = {
-                    lazydev = {
-                        name = "LazyDev",
-                        module = "lazydev.integrations.blink",
-                        score_offset = 100,
-                    },
-                },
-                -- min_keyword_length = 1,
-            },
-            fuzzy = { implementation = "prefer_rust_with_warning" },
         },
         opts_extend = { "sources.default" },
     },

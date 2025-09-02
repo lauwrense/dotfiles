@@ -22,18 +22,10 @@ local lazy_config = {
     performance = {
         rtp = {
             disabled_plugins = {
-                -- "gzip",
-                "matchit",
-                -- "matchparen",
                 "netrwPlugin",
-                -- "tarPlugin",
-                "tohtml",
-                "tutor",
-                "fzf",
-                -- "zipPlugin",
-            },
-        },
-    },
+            }
+        }
+    }
 }
 
 vim.g.mapleader = " "
