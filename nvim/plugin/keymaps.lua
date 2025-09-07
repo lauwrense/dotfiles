@@ -20,9 +20,7 @@ vim.keymap.set("n", "<leader>ff", function()
         completion = "file_in_path",
     }, function(input)
         if input ~= nil then
-            if #vim.fs.find({ input }) > 0 then
-                vim.cmd.find(input)
-            end
+            vim.cmd("find " .. input)
         end
     end)
 end)
