@@ -16,14 +16,36 @@ end)
 -- Use neovim as a fuzzy finder
 vim.keymap.set("n", "<leader>ff", function()
     vim.ui.input({
-        prompt = "Find: ",
+        prompt = ":find ",
         completion = "file_in_path",
     }, function(input)
         if input ~= nil then
-            vim.cmd("find " .. input)
+            if #vim.fs.find({ input }) > 0 then
+                vim.cmd.find(input)
+            end
+        end
+    end)
+end)
+
+vim.keymap.set("n", "<leader>fss", function()
+    vim.ui.input({
+        prompt = ":grep! ",
+    }, function(input)
+        if #input > 0 then
+            vim.cmd("silent grep! " .. input)
+        end
+    end)
+end)
+
+vim.keymap.set("n", "<leader>fsa", function()
+    vim.ui.input({
+        prompt = ":grepadd! ",
+    }, function(input)
+        if #input > 0 then
+            vim.cmd("silent grepadd! " .. input)
         end
     end)
 end)
 
 -- 'al' motion
-vim.keymap.set({"o"}, "al", ":norm ggVG<cr>:norm <C-o><cr>")
+vim.keymap.set({ "o" }, "al", ":norm ggVG<cr>:norm <C-o><cr>")
