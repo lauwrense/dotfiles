@@ -1,19 +1,7 @@
 return {
     {
         "stevearc/conform.nvim",
-        cmd = { "ConformInfo" },
-        keys = {
-            {
-                "<leader>F",
-                function()
-                    require("conform").format({
-                        async = true,
-                        lsp_format = "fallback",
-                    })
-                end,
-                desc = "Format buffer",
-            },
-        },
+        event = {"BufWritePre"},
         init = function()
             vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
         end,
