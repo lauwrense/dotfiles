@@ -1,10 +1,10 @@
 vim.opt_local.colorcolumn = "100"
 
-local dap = require("dap")
-
 if not vim.env.MASON then
     return
 end
+
+local dap = require("dap")
 
 local mason = require("mason-registry")
 local ok,codelldb = pcall(mason.get_package, "codelldb")

@@ -1,9 +1,9 @@
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.signcolumn = "yes:1"
 
 vim.opt.smartindent = true
 vim.opt.autoindent = true
@@ -11,8 +11,6 @@ vim.opt.autoindent = true
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-
-vim.opt.signcolumn = "yes:1"
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -26,60 +24,39 @@ vim.opt.listchars = {
 }
 
 vim.opt.mouse = ""
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
-vim.opt.splitright = true
-vim.opt.splitbelow = true
 
 vim.opt.pumheight = 10
-
-vim.opt.showmode = false
-
 vim.opt.swapfile = false
 vim.opt.undofile = true
-
 vim.opt.updatetime = 200
 vim.opt.path:append("**")
-
-vim.opt.fillchars = [[eob: ,fold: ]]
 vim.opt.laststatus = 3
-
-vim.wo.foldtext = ""
 
 vim.lsp.enable({ "clangd", "lua_ls", "zls" })
 
---- Lazy plugins
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+vim.pack.add({
+    { src = "https://github.com/stevearc/conform.nvim" },
+    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/kylechui/nvim-surround"},
+}, { confirm = false })
+
+vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+require("mason").setup()
+require("nvim-surround").setup()
+
+vim.cmd.colorscheme("habamax")
+
+---@diagnostic disable-next-line: duplicate-set-field
+require("editorconfig").properties.max_line_length = function (_, val)
+    vim.wo.colorcolumn = val
 end
-vim.opt.rtp:prepend(lazypath)
 
----@type LazyConfig
-local lazy_config = {
-    install = {
-        colorscheme = { "catppuccin-frappe" },
-    },
-    change_detection = {
-        notify = false,
-    },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "netrwPlugin",
-            },
-        },
-    },
-}
-
-require("lazy").setup("plugins", lazy_config)
-vim.cmd.colorscheme("catppuccin-frappe")
-
+-- Deprecation guard
+-- Some plugins might not fully support nightly
+if vim.version().prerelease == "dev" then
+    ---@diagnostic disable-next-line: duplicate-set-field
+    vim.deprecate = function() end
+else
+    vim.deprecate("deprecate the deprecate guard for non dev builds")
+end
