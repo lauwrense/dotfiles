@@ -1,8 +1,8 @@
 --- TODO: add diffview
----     notes, seems to not load its plugin/ dir
 vim.pack.add({
     { src = "https://github.com/lewis6991/gitsigns.nvim" },
-}, {confirm = false})
+    {src = "https://github.com/sindrets/diffview.nvim"}
+}, {confirm = false, load = true})
 
 require("gitsigns").setup({
     attach_to_untracked = true,
