@@ -7,7 +7,7 @@ end
 local dap = require("dap")
 
 local mason = require("mason-registry")
-local ok,codelldb = pcall(mason.get_package, "codelldb")
+local ok, codelldb = pcall(mason.get_package, "codelldb")
 
 if ok and codelldb:is_installed() then
     dap.adapters.lldb = {

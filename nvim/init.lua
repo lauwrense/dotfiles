@@ -41,27 +41,30 @@ vim.opt.laststatus = 3
 vim.lsp.enable({ "clangd", "lua_ls", "zls" })
 
 vim.pack.add({
+    {
+        src = "https://github.com/catppuccin/nvim",
+        name = "catppuccin",
+    },
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/mason-org/mason.nvim" },
-    { src = "https://github.com/kylechui/nvim-surround"},
+    { src = "https://github.com/kylechui/nvim-surround" },
 }, { confirm = false })
+
+require("catppuccin").setup({
+    integrations = {
+        native_lsp = {
+            underlines = {
+                errors = { "undercurl" },
+                hints = { "undercurl" },
+                warnings = { "undercurl" },
+                information = { "undercurl" },
+                ok = { "undercurl" },
+            },
+        },
+    },
+})
+vim.cmd.colorscheme("catppuccin-frappe")
 
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 require("mason").setup()
 require("nvim-surround").setup()
-
-vim.cmd.colorscheme("habamax")
-
----@diagnostic disable-next-line: duplicate-set-field
-require("editorconfig").properties.max_line_length = function (_, val)
-    vim.wo.colorcolumn = val
-end
-
--- Deprecation guard
--- Some plugins might not fully support nightly
-if vim.version().prerelease == "dev" then
-    ---@diagnostic disable-next-line: duplicate-set-field
-    vim.deprecate = function() end
-else
-    vim.deprecate("deprecate the deprecate guard for non dev builds")
-end
