@@ -29,7 +29,7 @@ vim.keymap.set("n", "<leader>fss", function()
     vim.ui.input({
         prompt = ":grep! ",
     }, function(input)
-        if #input > 0 then
+        if input ~= nil and #input > 0 then
             vim.cmd("silent grep! " .. input)
         end
     end)
@@ -39,7 +39,7 @@ vim.keymap.set("n", "<leader>fsa", function()
     vim.ui.input({
         prompt = ":grepadd! ",
     }, function(input)
-        if #input > 0 then
+        if input ~= nil and #input > 0 then
             vim.cmd("silent grepadd! " .. input)
         end
     end)

@@ -23,6 +23,11 @@ vim.opt.listchars = {
     precedes = "‹",
 }
 
+vim.opt.fillchars = {
+    eob = " ",
+    fold = " ",
+}
+
 vim.opt.mouse = ""
 vim.opt.wrap = false
 

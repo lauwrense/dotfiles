@@ -2,7 +2,7 @@ vim.pack.add({
     { src = "https://codeberg.org/mfussenegger/nvim-dap" },
     { src = "https://github.com/Jorenar/nvim-dap-disasm" },
     { src = "https://github.com/igorlfs/nvim-dap-view" },
-}, { confirm = false, load = true })
+}, { confirm = false })
 
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -10,7 +10,6 @@ vim.api.nvim_create_autocmd("FileType", {
         if not package.loaded.dap then
             return
         end
-
 
         local dap = require("dap")
 
@@ -36,22 +35,16 @@ vim.api.nvim_create_autocmd("FileType", {
 
         require("dap-view").setup({
             winbar = {
-            sections = {
-                "watches",
-                "scopes",
-                "exceptions",
-                "breakpoints",
-                "threads",
-                "repl",
-                "disassembly",
+                sections = {
+                    "watches",
+                    "scopes",
+                    "exceptions",
+                    "breakpoints",
+                    "threads",
+                    "repl",
+                    "disassembly",
+                },
             },
-            },
-            windows = {
-                position = "right",
-                terminal = {
-                    position = "below"
-                }
-            }
         })
         require("dap-disasm").setup()
     end
