@@ -35,10 +35,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local ok, file = pcall(vim.uv.fs_stat, args.file)
 
-        if not ok or file and file.size < max_fsize then
+        if not ok or file and file.size > max_fsize then
+            vim.lsp.buf_detach_client(args.buf, args.data.client_id)
             return
         end
 
-        vim.lsp.buf_detach_client(args.buf, args.data.client_id)
+        vim.lsp.completion.enable(true, args.data.client_id, args.buf)
     end,
 })
