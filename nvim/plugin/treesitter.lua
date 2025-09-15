@@ -1,10 +1,3 @@
-vim.pack.add({
-    {
-        src = "https://github.com/nvim-treesitter/nvim-treesitter",
-        version = "main",
-    },
-}, { confirm = false, load = true })
-
 local ts = require("nvim-treesitter")
 local ensure_installed = {
     "zig",

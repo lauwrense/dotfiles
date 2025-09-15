@@ -1,9 +1,3 @@
---- TODO: add diffview
-vim.pack.add({
-    { src = "https://github.com/lewis6991/gitsigns.nvim" },
-    { src = "https://github.com/sindrets/diffview.nvim" },
-}, { confirm = false, load = true })
-
 require("gitsigns").setup({
     attach_to_untracked = true,
     on_attach = function(bufnr)

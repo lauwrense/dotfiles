@@ -48,6 +48,15 @@ vim.pack.add({
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/mason-org/mason.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
+    {
+        src = "https://github.com/nvim-treesitter/nvim-treesitter",
+        version = "main",
+    },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
+    { src = "https://github.com/sindrets/diffview.nvim" },
+    { src = "https://codeberg.org/mfussenegger/nvim-dap" },
+    { src = "https://github.com/Jorenar/nvim-dap-disasm" },
+    { src = "https://github.com/igorlfs/nvim-dap-view" },
 }, { confirm = false })
 
 require("catppuccin").setup({

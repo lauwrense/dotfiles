@@ -1,9 +1,3 @@
-vim.pack.add({
-    { src = "https://codeberg.org/mfussenegger/nvim-dap" },
-    { src = "https://github.com/Jorenar/nvim-dap-disasm" },
-    { src = "https://github.com/igorlfs/nvim-dap-view" },
-}, { confirm = false, load = false })
-
 local dap = require("dap")
 
 vim.keymap.set("n", "<F1>", function()
