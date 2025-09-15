@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
-local left = "%f %h%m%r"
+local left = "%{expand('%:.')} %h%m%r"
 local center = "%#@comment#%{get(b:,'gitsigns_status_dict','')['head'] }"
 local right = "%*%y %2l / %2L : %2c   "
 
