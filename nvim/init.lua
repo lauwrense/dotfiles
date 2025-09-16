@@ -77,3 +77,46 @@ vim.cmd.colorscheme("catppuccin-frappe")
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 require("mason").setup()
 require("nvim-surround").setup()
+
+local ts = require("nvim-treesitter")
+ts.install({
+    "zig",
+
+    -- Git
+    "diff",
+    "gitcommit",
+    "gitattributes",
+    "gitignore",
+    "git_rebase",
+    "git_config",
+})
+ts.update()
+
+local avalable = ts.get_available()
+local installed = ts.get_installed()
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "FileType" }, {
+    group = vim.api.nvim_create_augroup("user.treesitter", {}),
+    buffer = 0,
+    callback = function(args)
+        local ft = vim.bo[args.buf].filetype
+        local lang = vim.treesitter.language.get_lang(ft)
+
+        if lang == nil then
+            return
+        end
+
+        local function setup_treesitter()
+            vim.wo.foldexpr = vim.wo.foldexpr or "v:lua.vim.treesitter.foldexpr()"
+            vim.schedule(function()
+                vim.treesitter.start()
+            end)
+        end
+        if vim.list_contains(installed, lang) then
+            setup_treesitter()
+        elseif vim.list_contains(avalable, lang) then
+            ts.install(lang):await(setup_treesitter)
+            installed = ts.get_installed()
+        end
+    end,
+})
