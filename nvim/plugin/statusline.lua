@@ -7,11 +7,25 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
-local left = "%{expand('%:.')} %h%m%r"
-local center = "%#@comment#%{get(b:,'gitsigns_status_dict','')['head'] }"
-local right = "%*%y %2l / %2L : %2c   "
+local function bufname()
+    local buf_name = vim.api.nvim_buf_get_name(0)
+    local buftype = vim.bo.buftype
+
+    if buftype == "help" then
+        return vim.fs.basename(buf_name)
+    end
+
+    local path = vim.fs.relpath(vim.fn.getcwd(), buf_name)
+    local fname = path or "[No Name]"
+    return fname
+end
+
 
 function _G.render_statusline()
+    local left = table.concat({ bufname(), "%h%m%r" }, " ")
+    local center = "%#@comment#%{get(b:,'gitsigns_status_dict','')['head'] }"
+    local right = "%*%y %2l / %2L : %2c   "
+
     local column = vim.o.columns
     local lwidth = vim.api.nvim_eval_statusline(left, {}).width
     local cwidth = vim.api.nvim_eval_statusline(center, {}).width
