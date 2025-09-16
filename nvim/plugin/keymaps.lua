@@ -44,6 +44,3 @@ vim.keymap.set("n", "<leader>fsa", function()
         end
     end)
 end)
-
--- 'al' motion
-vim.keymap.set({ "o" }, "al", ":norm ggVG<cr>:norm <C-o><cr>")
