@@ -42,6 +42,9 @@ export FZF_DEFAULT_OPTS=" \
     --color=selected-bg:#51576d \
     --multi"
 
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 export LS_COLORS=`vivid generate catppuccin-frappe`
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -79,6 +82,9 @@ alias ls="eza -la --icons --git -s type --git-ignore"
 alias lsni="eza -la --icons --git -s type"
 alias ll="eza -Tla --icons --git -s type --git-ignore"
 alias llni="eza -Tla --icons --git -s type"
+alias fzn="fzf --multi --bind 'enter:become(nvim {+})'"
+
+bindkey -s "^e" "fzf --multi --bind 'enter:become(nvim {+})'\n"
 
 # INTEGRATIONS
 
