@@ -84,8 +84,6 @@ alias ll="eza -Tla --icons --git -s type --git-ignore"
 alias llni="eza -Tla --icons --git -s type"
 alias fzn="fzf --multi --bind 'enter:become(nvim {+})'"
 
-bindkey -s "^e" "fzf --multi --bind 'enter:become(nvim {+})'\n"
-
 # INTEGRATIONS
 
 export PATH=$HOME/.local/bin:$PATH
