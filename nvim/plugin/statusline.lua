@@ -29,7 +29,7 @@ end
 
 function _G.render_statusline()
     local left = table.concat({ bufname(), "%h%m%r" }, " ")
-    local center = "%#@comment#%{get(b:,'gitsigns_status_dict','')['head'] }"
+    local center = ""
     local right = "%*%y %2l / %2L : %2c   "
 
     local column = vim.o.columns
@@ -50,10 +50,3 @@ function _G.render_statusline()
 end
 
 vim.o.statusline = "%{%v:lua._G.render_statusline()%}"
-vim.api.nvim_create_autocmd("User", {
-    pattern = "GitSignsUpdate",
-    group = vim.api.nvim_create_augroup("user.statusline.git", {}),
-    callback = function()
-        vim.cmd.redrawstatus()
-    end,
-})
