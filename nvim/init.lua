@@ -47,7 +47,7 @@ vim.pack.add({
     },
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
-    { src = "https://github.com/mason-org/mason.nvim" },
+    { src = "https://github.com/neovim/nvim-lspconfig" },
     {
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
         version = "main",
@@ -73,7 +73,6 @@ vim.cmd.colorscheme("catppuccin-frappe")
 
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 require("nvim-surround").setup()
-require("mason").setup()
 
 local dap = require("dap")
 
