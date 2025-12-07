@@ -1,9 +1,10 @@
-vim.opt_local.colorcolumn = "100"
+vim.opt.colorcolumn = "100"
 
 if not vim.env.MASON then
     return
 end
 
+-- TODO: properly configure this
 local dap = require("dap")
 
 dap.adapters.lldb = {

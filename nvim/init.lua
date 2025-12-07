@@ -16,17 +16,6 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 vim.opt.list = true
-vim.opt.listchars = {
-    tab = "> ",
-    trail = "•",
-    extends = "›",
-    precedes = "‹",
-}
-
-vim.opt.fillchars = {
-    eob = " ",
-    fold = " ",
-}
 
 vim.opt.mouse = ""
 vim.opt.wrap = false

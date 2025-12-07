@@ -42,10 +42,11 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "FileType" }, {
         local function setup_treesitter()
             vim.wo.foldexpr = vim.wo.foldexpr or "v:lua.vim.treesitter.foldexpr()"
             vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-           vim.schedule(function()
+            vim.schedule(function()
                 vim.treesitter.start()
             end)
         end
+
         if vim.list_contains(installed_ts, lang) then
             setup_treesitter()
         elseif vim.list_contains(available_ts, lang) then

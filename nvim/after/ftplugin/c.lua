@@ -1,7 +1,9 @@
 vim.opt.colorcolumn = "80"
 
 local dap = require("dap")
+
 local lldb_dap = vim.fn.exepath("lldb-dap") -- PERF: WSL is slow
+
 if lldb_dap ~= "" then
     dap.adapters.lldb = {
         type = "executable",
