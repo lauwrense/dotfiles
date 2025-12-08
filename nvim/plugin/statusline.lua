@@ -29,24 +29,19 @@ end
 
 function _G.render_statusline()
     local left = table.concat({ bufname(), "%h%m%r" }, " ")
-    local center = ""
     local right = "%*%y %2l / %2L : %2c   "
 
     local column = vim.o.columns
     local lwidth = vim.api.nvim_eval_statusline(left, {}).width
-    local cwidth = vim.api.nvim_eval_statusline(center, {}).width
     local rwidth = vim.api.nvim_eval_statusline(right, {}).width
 
-    local left_pad = math.floor((column - cwidth) / 2) - lwidth
-    local right_pad = math.ceil((column - cwidth) / 2) - rwidth
+    local center_pad = column - (lwidth + rwidth)
 
     return table.concat({
         left,
-        string.rep(" ", left_pad),
-        center,
-        string.rep(" ", right_pad),
+        string.rep(" ", center_pad),
         right,
     }, "")
 end
 
-vim.o.statusline = "%{%v:lua._G.render_statusline()%}"
+vim.opt.statusline = "%{%v:lua._G.render_statusline()%}"

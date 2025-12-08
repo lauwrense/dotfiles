@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>ff", function()
         prompt = ":find ",
         completion = "file_in_path",
     }, function(input)
-        if input ~= nil then
+        if input ~= nil and #input > 0 then
             vim.cmd("find " .. input)
         end
     end)
