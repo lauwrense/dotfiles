@@ -10,7 +10,9 @@ vim.opt.autoindent = true
 
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
+vim.opt.softtabstop = -1
+
+vim.opt.completeopt = "menu,popup,noinsert,noselect"
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -23,17 +25,18 @@ vim.opt.wrap = false
 vim.opt.pumheight = 10
 vim.opt.swapfile = false
 vim.opt.undofile = true
-vim.opt.updatetime = 200
 vim.opt.path:append("**")
 vim.opt.laststatus = 3
 
-vim.lsp.enable({ "clangd", "lua_ls", "zls" })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineOk", { undercurl = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true })
+
+vim.lsp.enable({ "lua_ls", "zls" })
 
 vim.pack.add({
-    {
-        src = "https://github.com/catppuccin/nvim",
-        name = "catppuccin",
-    },
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
@@ -47,20 +50,17 @@ vim.pack.add({
     { src = "https://github.com/igorlfs/nvim-dap-view" },
 }, { confirm = false })
 
-require("catppuccin").setup({
-    lsp_styles = {
-        underlines = {
-            errors = { "undercurl" },
-            hints = { "undercurl" },
-            warnings = { "undercurl" },
-            information = { "undercurl" },
-            ok = { "undercurl" },
-        },
+require("conform").setup({
+    formatters_by_ft = {
+        lua = { "stylua" },
+        zig = { "zigfmt" },
+    },
+    default_format_opts = {
+        lsp_format = "fallback",
     },
 })
-vim.cmd.colorscheme("catppuccin-frappe")
-
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+
 require("nvim-surround").setup()
 
 local dap = require("dap")
