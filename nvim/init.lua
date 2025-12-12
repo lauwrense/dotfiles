@@ -13,6 +13,7 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = -1
 
 vim.opt.completeopt = "menu,popup,noinsert,noselect"
+vim.opt.wildmode = "longest,noselect"
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -44,7 +45,6 @@ vim.pack.add({
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
         version = "main",
     },
-    { src = "https://github.com/sindrets/diffview.nvim" },
     { src = "https://codeberg.org/mfussenegger/nvim-dap" },
     { src = "https://github.com/Jorenar/nvim-dap-disasm" },
     { src = "https://github.com/igorlfs/nvim-dap-view" },
@@ -52,6 +52,7 @@ vim.pack.add({
 
 require("conform").setup({
     formatters_by_ft = {
+        markdown = { "mdformat" },
         lua = { "stylua" },
         zig = { "zigfmt" },
     },

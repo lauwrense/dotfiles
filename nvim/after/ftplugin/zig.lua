@@ -1,5 +1,3 @@
-vim.opt.colorcolumn = "100"
-
 if not vim.env.MASON then
     return
 end
