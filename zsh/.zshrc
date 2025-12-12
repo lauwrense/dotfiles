@@ -87,6 +87,7 @@ alias fzn="fzf --multi --bind 'enter:become(nvim {+})'"
 # INTEGRATIONS
 
 export PATH=$HOME/.local/bin:$PATH
+export MANPATH=$HOME/.local/share/man:$MANPATH
 
 if type "zoxide" &> /dev/null; then
     eval "$(zoxide init zsh)"
