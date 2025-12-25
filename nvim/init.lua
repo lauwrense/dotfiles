@@ -45,14 +45,11 @@ vim.pack.add({
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
     { src = "https://github.com/neovim/nvim-lspconfig" },
-    {
-        src = "https://github.com/nvim-treesitter/nvim-treesitter",
-        version = "main",
-    },
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
     { src = "https://codeberg.org/mfussenegger/nvim-dap" },
     { src = "https://github.com/Jorenar/nvim-dap-disasm" },
     { src = "https://github.com/igorlfs/nvim-dap-view" },
-    { src = "https://github.com/windwp/nvim-autopairs" },
+    { src = "https://github.com/Wansmer/treesj" },
 }, { confirm = false })
 
 require("conform").setup({
@@ -67,7 +64,10 @@ require("conform").setup({
 })
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-require("nvim-autopairs").setup({ map_cr = true })
+vim.keymap.set('n', '<leader>m', require('treesj').toggle)
+vim.keymap.set('n', '<leader>M', function()
+    require('treesj').toggle({ split = { recursive = true } })
+end)
 
 require("nvim-surround").setup()
 
