@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.opt.termguicolors = true
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes:1"
@@ -37,6 +39,8 @@ vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true })
 
 vim.lsp.enable({ "lua_ls", "zls" })
 
+vim.cmd.packadd("cfilter")
+
 vim.pack.add({
     { src = "https://github.com/stevearc/conform.nvim" },
     { src = "https://github.com/kylechui/nvim-surround" },
@@ -48,6 +52,7 @@ vim.pack.add({
     { src = "https://codeberg.org/mfussenegger/nvim-dap" },
     { src = "https://github.com/Jorenar/nvim-dap-disasm" },
     { src = "https://github.com/igorlfs/nvim-dap-view" },
+    { src = "https://github.com/windwp/nvim-autopairs" },
 }, { confirm = false })
 
 require("conform").setup({
@@ -61,6 +66,8 @@ require("conform").setup({
     },
 })
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+require("nvim-autopairs").setup({ map_cr = true })
 
 require("nvim-surround").setup()
 
