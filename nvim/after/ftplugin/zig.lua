@@ -1,14 +1,9 @@
-if not vim.env.MASON then
-    return
-end
-
--- TODO: properly configure this
 local dap = require("dap")
 
 dap.adapters.lldb = {
     type = "executable",
     name = "lldb",
-    command = vim.fn.expand("$MASON/bin/codelldb"),
+    command = vim.fn.expand("$HOME/.local/bin/codelldb"),
 }
 
 dap.configurations.zig = {
@@ -26,7 +21,7 @@ dap.configurations.zig = {
                     path = vim.fs.find("test", {
                         limit = 1,
                         type = "file",
-                        path = "./.zig-cache",
+                        path = "./zig-out",
                     })[1]
                 end
                 vim.cmd.make(args)

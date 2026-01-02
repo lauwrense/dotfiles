@@ -17,6 +17,7 @@ vim.opt.softtabstop = -1
 vim.opt.completeopt = "menu,popup,noinsert,noselect"
 vim.opt.wildmode = "longest,noselect"
 
+vim.opt.wildignorecase = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
@@ -31,12 +32,6 @@ vim.opt.undofile = true
 vim.opt.path:append("**")
 vim.opt.laststatus = 3
 
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineOk", { undercurl = true })
-vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true })
-
 vim.lsp.enable({ "lua_ls", "zls" })
 
 vim.cmd.packadd("cfilter")
@@ -50,6 +45,11 @@ vim.pack.add({
     { src = "https://github.com/Jorenar/nvim-dap-disasm" },
     { src = "https://github.com/igorlfs/nvim-dap-view" },
     { src = "https://github.com/Wansmer/treesj" },
+    { src = "https://github.com/stevearc/oil.nvim" },
+    {
+        src = "https://github.com/catppuccin/nvim",
+        name = "catppuccin",
+    },
 }, { confirm = false })
 
 require("conform").setup({
@@ -64,36 +64,45 @@ require("conform").setup({
 })
 vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
 
-vim.keymap.set('n', '<leader>m', require('treesj').toggle)
-vim.keymap.set('n', '<leader>M', function()
-    require('treesj').toggle({ split = { recursive = true } })
+require("catppuccin").setup({
+    lsp_styles = {
+        underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
+            ok = { "undercurl" },
+        },
+    },
+})
+vim.cmd.colorschem("catppuccin-frappe")
+
+require("oil").setup({
+    columns = { "icon", "permissions", "size", "mtime" },
+    keymaps = {
+        ["<leader>o"] = { "actions.close", mode = "n" },
+    },
+})
+vim.keymap.set("n", "<leader>o", require("oil").open)
+
+vim.keymap.set("n", "<leader>m", require("treesj").toggle)
+vim.keymap.set("n", "<leader>M", function()
+    require("treesj").toggle({ split = { recursive = true } })
 end)
 
 require("nvim-surround").setup()
 
 local dap = require("dap")
+local dap_view = require("dap-view")
 
-vim.keymap.set("n", "<F1>", function()
-    dap.continue()
-end)
-vim.keymap.set("n", "<F2>", function()
-    dap.step_over()
-end)
+vim.keymap.set("n", "<M-b>", dap.toggle_breakpoint)
+vim.keymap.set("n", "<F1>", dap.continue)
+vim.keymap.set("n", "<F2>", dap.step_over)
+vim.keymap.set("n", "<F3>", dap.step_into)
+vim.keymap.set("n", "<F4>", dap.step_out)
+vim.keymap.set("n", "<F5>", dap_view.toggle)
 
-vim.keymap.set("n", "<F3>", function()
-    dap.step_into()
-end)
-vim.keymap.set("n", "<F4>", function()
-    dap.step_out()
-end)
-vim.keymap.set("n", "<F5>", function()
-    require("dap-view").toggle()
-end)
-vim.keymap.set("n", "<M-b>", function()
-    dap.toggle_breakpoint()
-end)
-
-require("dap-view").setup({
+dap_view.setup({
     winbar = {
         sections = {
             "watches",

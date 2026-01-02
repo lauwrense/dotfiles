@@ -15,6 +15,17 @@ end)
 
 vim.keymap.set("o", "al", ":norm ggVG<cr><C-o>zz")
 
+vim.keymap.set("n", "<leader>vf", function()
+    vim.ui.input({
+        prompt = ":rightbelow vnew ",
+        completion = "dir_in_path",
+    }, function(input)
+        if input ~= nil and #input > 0 then
+            vim.cmd("rightbelow vnew " .. input)
+        end
+    end)
+end)
+
 -- Use neovim as a fuzzy finder
 vim.keymap.set("n", "<leader>ff", function()
     vim.ui.input({
@@ -23,6 +34,18 @@ vim.keymap.set("n", "<leader>ff", function()
     }, function(input)
         if input ~= nil and #input > 0 then
             vim.cmd("find " .. input)
+        end
+    end)
+end)
+
+
+vim.keymap.set("n", "<leader>fv", function()
+    vim.ui.input({
+        prompt = ":vert rightbelow sfind ",
+        completion = "file_in_path",
+    }, function(input)
+        if input ~= nil and #input > 0 then
+            vim.cmd("vertical rightbelow sfind " .. input)
         end
     end)
 end)
