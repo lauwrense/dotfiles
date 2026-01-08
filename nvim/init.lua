@@ -44,6 +44,7 @@ vim.pack.add({
     { src = "https://codeberg.org/mfussenegger/nvim-dap" },
     { src = "https://github.com/Jorenar/nvim-dap-disasm" },
     { src = "https://github.com/igorlfs/nvim-dap-view" },
+    { src = "https://github.com/lewis6991/gitsigns.nvim" },
     { src = "https://github.com/Wansmer/treesj" },
     { src = "https://github.com/stevearc/oil.nvim" },
     {
